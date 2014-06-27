@@ -75,6 +75,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataAccess\DBConstants.cs" />
     <Compile Include="IModelEntity.cs" />
     <Compile Include="IReportsContext.cs" />
     <Compile Include="IUserContext.cs" />

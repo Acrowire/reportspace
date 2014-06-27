@@ -1,4 +1,5 @@
-﻿using WebMatrix.WebData;
+﻿using ReportSpace.CustomerDashboard.Core.DataAccess;
+using WebMatrix.WebData;
 
 namespace ReportSpace.CustomerDashboard.Web
 {
@@ -8,8 +9,10 @@ namespace ReportSpace.CustomerDashboard.Web
         {
             if (!WebSecurity.Initialized)
             {
-                WebSecurity.InitializeDatabaseConnection(
-                    "DefaultConnection", "UserProfile", "UserId", "UserName", autoCreateTables: true);
+                /*WebSecurity.InitializeDatabaseConnection(
+                    "DefaultConnection", "UserProfile", "UserId", "UserName", autoCreateTables: true);*/
+
+                WebSecurity.InitializeDatabaseConnection(DBConstants.GetConnectionString(), DBConstants.ProviderName, "UserProfile", "UserId", "UserName", true);
             }
             // To let users of this site log in using their accounts from other sites such as Microsoft, Facebook, and Twitter,
             // you must update this site. For more information visit http://go.microsoft.com/fwlink/?LinkID=252166

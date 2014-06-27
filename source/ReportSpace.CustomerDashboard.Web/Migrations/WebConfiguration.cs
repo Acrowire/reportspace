@@ -1,3 +1,5 @@
+using ReportSpace.CustomerDashboard.Core.DataAccess;
+
 namespace ReportSpace.CustomerDashboard.Web.Migrations
 {
     using System.Data.Entity.Migrations;
@@ -24,12 +26,8 @@ namespace ReportSpace.CustomerDashboard.Web.Migrations
         protected override void Seed(UsersContext context)
         {
             //  This method will be called after migrating to the latest version.
-            WebSecurity.InitializeDatabaseConnection(
-                    "DefaultConnection", 
-                    "UserProfile", 
-                    "UserId", 
-                    "UserName", 
-                    autoCreateTables: true);
+            //WebSecurity.InitializeDatabaseConnection("DefaultConnection", "UserProfile", "UserId", "UserName", autoCreateTables: true);
+            WebSecurity.InitializeDatabaseConnection(DBConstants.GetConnectionString(), DBConstants.ProviderName, "UserProfile", "UserId", "UserName", true);
 
             SeedAdminRole();
             SeedAdminUsername();

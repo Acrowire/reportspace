@@ -1,4 +1,6 @@
-﻿namespace ReportSpace.CustomerDashboard.Core
+﻿using ReportSpace.CustomerDashboard.Core.DataAccess;
+
+namespace ReportSpace.CustomerDashboard.Core
 {
     using System.Data.Entity;
     using System.Linq;
@@ -9,7 +11,8 @@
     public class ReportsContext : DbContext, IReportsContext
     {
         public ReportsContext()
-            : base("DefaultConnection")
+            //: base("DefaultConnection")
+            : base(DBConstants.GetDBConnection(), true)
         {
         }
 
