@@ -347,3 +347,4 @@ G:\_ReportSpace\source\ReportSpace.CustomerDashboard.Web\obj\Release\ReportSpace
 G:\_ReportSpace\source\ReportSpace.CustomerDashboard.Web\obj\Release\ReportSpace.CustomerDashboard.Web.dll
 G:\_ReportSpace\source\ReportSpace.CustomerDashboard.Web\obj\Release\ReportSpace.CustomerDashboard.Web.pdb
 G:\_ReportSpace\source\ReportSpace.CustomerDashboard.Web\obj\Release\ReportSpace.CustomerDashboard.Web.XmlSerializers.dll
+G:\reportspace\source\ReportSpace.CustomerDashboard.Web\bin\ReportSpace.CustomerDashboard.Web.dll.config
