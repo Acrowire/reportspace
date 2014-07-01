@@ -6,7 +6,6 @@ using WebMatrix.WebData;
 
 namespace ReportSpace.CustomerDashboard.Web.Controllers
 {
-    [Authorize]
     public class SiteController : Controller
     {
        #region [ Login ] 

@@ -1,4 +1,6 @@
-﻿namespace ReportSpace.CustomerDashboard.Core.QueryableExtensions
+﻿using System;
+
+namespace ReportSpace.CustomerDashboard.Core.QueryableExtensions
 {
     using System.Data.Entity;
     using System.Linq;
@@ -9,7 +11,7 @@
     {
         public static UserProfile FindById(this IQueryable<UserProfile> query, int id)
         {
-            return query.First(up => up.Id == id);
+            return query.First(up => up.UserId == id);
         }
     }
 }

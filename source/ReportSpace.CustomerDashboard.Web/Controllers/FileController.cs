@@ -8,7 +8,6 @@
     using System.Web;
     using System.Web.Mvc;
 
-    [Authorize(Roles = "Administrator")]
     public class FileController : Controller
     {
         private const string UploadsFolder = "content\\uploads";

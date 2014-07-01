@@ -60,6 +60,6 @@
     <Folder Include="Userspace" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="Userspace\userspace.sql" />
+    <None Include="Userspace\userspace.sql" />
   </ItemGroup>
 </Project>

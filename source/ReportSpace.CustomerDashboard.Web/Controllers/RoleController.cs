@@ -17,7 +17,6 @@
             _userContext = userContext;
         }
 
-        [Authorize(Roles = "Administrator")]
         public ActionResult Index(string nameFilter = "")
         {
             var roles = _userContext.Roles.Include(r => r.UserProfiles).FilterByName(nameFilter).ToList();
@@ -29,7 +28,6 @@
                     });
         }
 
-        [Authorize(Roles="Administrator")]
         public ActionResult New()
         {
             var role = _userContext.Roles.Create();
@@ -38,7 +36,6 @@
             return View("Edit", role);
         }
 
-        [Authorize(Roles = "Administrator")]
         public ActionResult Edit(int id)
         {
             Role role = _userContext.Roles.Find(id);
@@ -47,7 +44,6 @@
             return View(role);
         }
 
-        [Authorize(Roles = "Administrator")]
         public ActionResult Create(Role role)
         {
             _userContext.Roles.Add(role);
@@ -56,7 +52,6 @@
             return PartialView("_Role", role);
         }
 
-        [Authorize(Roles = "Administrator")]
         public ActionResult Update(int id, Role role)
         {
             var databaseRole = _userContext.Roles.Find(id);
@@ -71,7 +66,6 @@
             return View("Edit", databaseRole);
         }
 
-        [Authorize(Roles = "Administrator")]
         public ActionResult Destroy(int id)
         {
             var role = _userContext.Roles.Find(id);

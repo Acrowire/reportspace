@@ -9,19 +9,15 @@ using ReportSpace.CustomerDashboard.Web.Models;
 using DotNetOpenAuth.AspNet;
 using Microsoft.Web.WebPages.OAuth;
 using WebMatrix.WebData;
+using System.Net;
+using ReportSpace.CustomerDashboard.Core;
+using ReportSpace.CustomerDashboard.Core.Models;
+using System.DirectoryServices.AccountManagement;
+using System.Configuration;
 
 
 namespace ReportSpace.CustomerDashboard.Web.Controllers
 {
-    using System.Net;
-    using ReportSpace.CustomerDashboard.Core;
-    using ReportSpace.CustomerDashboard.Core.Models;
-    using System.Security;
-    using System.Security.Authentication;
-    using System.DirectoryServices;
-    using System.DirectoryServices.AccountManagement;
-    using System.DirectoryServices.ActiveDirectory;
-    using System.Configuration;
 
     public class AccountController : Controller
     {
@@ -133,7 +129,10 @@ namespace ReportSpace.CustomerDashboard.Web.Controllers
                 // Attempt to register the user
                 try
                 {
-                    WebSecurity.CreateUserAndAccount(model.UserName, model.Password, new { model.FirstName, model.LastName, model.Email }, true);
+                    WebSecurity.CreateUserAndAccount(model.UserName, model.Password, new
+                        {  model.FirstName, model.LastName, model.Email, Active = 0,
+                            Created = DateTime.Now, Updated = DateTime.Now
+                        }, false);
                     return RedirectToAction("Login", "Account");
                 }
                 catch (MembershipCreateUserException e)
@@ -294,11 +293,10 @@ namespace ReportSpace.CustomerDashboard.Web.Controllers
             }
         }
 
-        [Authorize(Roles = "Administrator")]
         public ActionResult Confirm(int id)
         {
             var success = false;
-            var userProfile = _userContext.UserProfiles.SingleOrDefault(up => up.Id == id);
+            var userProfile = _userContext.UserProfiles.SingleOrDefault(up => up.UserId == id);
 
             if (userProfile != null && !string.IsNullOrEmpty(userProfile.Membership.ConfirmationToken))
             {

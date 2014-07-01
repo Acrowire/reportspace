@@ -16,7 +16,6 @@
             _usersContext = usersContext;
         }
 
-        [Authorize(Roles = "Administrator")]
         public ActionResult Index(string nameFilter = "")
         {
             var clients = _usersContext.Clients.FilterByName(nameFilter).ToList();

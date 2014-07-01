@@ -26,8 +26,20 @@ namespace ReportSpace.CustomerDashboard.Core
 
         public IDbSet<Membership> Memberships { get; set; }
 
+        public IDbSet<ResourceType> ResourceTypes { get; set; }
+
+        public IDbSet<Resource> Resources { get; set; }
+
+        public IDbSet<UserGroup> UserGroups { get; set; }
+
+        public IDbSet<UserGroupMembership> UserGroupMemberships { get; set; }
+
+        public IDbSet<UserGroupResourcesPermission> UserGroupResourcesPermissions { get; set; }
+
         public IDbSet<Client> Clients { get; set; }
 
         public IDbSet<Role> Roles { get; set; }
+
+
     }
 }

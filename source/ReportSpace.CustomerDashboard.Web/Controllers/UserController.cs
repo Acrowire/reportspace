@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
 
 namespace ReportSpace.CustomerDashboard.Web.Controllers
 {
@@ -15,7 +16,6 @@ namespace ReportSpace.CustomerDashboard.Web.Controllers
 
     using WebMatrix.WebData;
 
-    [Authorize(Roles = "Administrator")]
     public class UserController : Controller
     {
         private IUserContext _userContext;
@@ -96,7 +96,7 @@ namespace ReportSpace.CustomerDashboard.Web.Controllers
 
         public ActionResult Delete(int id)
         {
-            var userProfile = _userContext.UserProfiles.Include(up => up.Roles).Include(up => up.Clients).First(up => up.Id == id);
+            var userProfile = _userContext.UserProfiles.Include(up => up.Roles).Include(up => up.Clients).First(up => up.UserId == id);
             _userContext.UserProfiles.Remove(userProfile);
 
             _userContext.SaveChanges();

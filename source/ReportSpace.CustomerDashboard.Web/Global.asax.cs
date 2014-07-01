@@ -28,6 +28,7 @@ namespace ReportSpace.CustomerDashboard.Web
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            DataBaseConfig.RegisterDatabase();
             AuthConfig.RegisterAuth();
             MappingConfig.RegisterMaps();
         }
