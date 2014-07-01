@@ -10,7 +10,6 @@ namespace ReportSpace.CustomerDashboard.Core.Services
         private bool m_service_intitialized = false;
         #endregion 
 
-
         #region [ Constructors ]
         public WebSecurityService()
         {
