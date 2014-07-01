@@ -1,1 +1,15 @@
 source/database/database.dbmdl
+source/database/bin
+source/database/obj
+source/ReportSpace.CustomerDashboard.BusinessLayer/bin
+source/ReportSpace.CustomerDashboard.BusinessLayer/obj
+source/ReportSpace.CustomerDashboard.Core/bin
+source/ReportSpace.CustomerDashboard.Core/obj
+source/ReportSpace.CustomerDashboard.Web/bin
+source/ReportSpace.CustomerDashboard.Web/obj
+source/ReportSpace.CustomerDashboard.Core/obj/Debug/ReportSpace.CustomerDashboard.Core.csproj.FileListAbsolute.txt
+source/ReportSpace.CustomerDashboard.Web/obj/Release/ReportSpace.CustomerDashboard.Web.csproj.FileListAbsolute.txt
+source/ReportSpace.CustomerDashboard.Core/obj/Debug/ReportSpace.CustomerDashboard.Core.csproj.FileListAbsolute.txt
+source/ReportSpace.CustomerDashboard.Core/obj/Debug/ReportSpace.CustomerDashboard.Core.csproj.FileListAbsolute.txt
+source/ReportSpace.CustomerDashboard.Web/obj/Release/ReportSpace.CustomerDashboard.Web.csproj.FileListAbsolute.txt
+source/database/database.dbmdl
