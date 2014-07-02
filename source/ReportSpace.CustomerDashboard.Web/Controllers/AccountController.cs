@@ -70,31 +70,25 @@ namespace ReportSpace.CustomerDashboard.Web.Controllers
 
             if (isActiveDirectory)
             {
-                using (PrincipalContext context = new PrincipalContext(ContextType.Domain, ConfigurationManager.AppSettings["security.domain_name"]))
+                if (manager.ValidateExternalUser(model.UserName, model.Password, ContextType.Domain, ConfigurationManager.AppSettings["security.domain_name"]))
                 {
-                    if (context.ValidateCredentials(model.UserName, model.Password))
+                    if (!WebSecurity.UserExists(model.UserName))
                     {
-                        if (!WebSecurity.UserExists(model.UserName))
-                        {
-                            WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
-                        }
-                        return RedirectToLocal(returnUrl);
+                        WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
                     }
+                    return RedirectToLocal(returnUrl);
                 }
             }
 
             if (isLocal)
             {
-                using (PrincipalContext context = new PrincipalContext(ContextType.Machine, Environment.MachineName))
+                if (manager.ValidateExternalUser(model.UserName, model.Password, ContextType.Machine, Environment.MachineName))
                 {
-                    if (context.ValidateCredentials(model.UserName, model.Password))
+                    if (!WebSecurity.UserExists(model.UserName))
                     {
-                        if (!WebSecurity.UserExists(model.UserName))
-                        {
-                            WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
-                        }
-                        return RedirectToLocal(returnUrl);
+                        WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
                     }
+                    return RedirectToLocal(returnUrl);
                 }
             }
 

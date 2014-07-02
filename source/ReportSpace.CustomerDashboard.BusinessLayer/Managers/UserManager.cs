@@ -30,10 +30,10 @@ namespace ReportSpace.CustomerDashboard.BusinessLayer.Managers
             return response;
         }
 
-        public bool ValidateExternalUser(string username, string password, string contextName)
+        public bool ValidateExternalUser(string username, string password, ContextType contexttype, string contextName)
         {
             bool response = false;
-            using (PrincipalContext context = new PrincipalContext(ContextType.Domain, contextName))
+            using (PrincipalContext context = new PrincipalContext(contexttype, contextName))
             {
                 if (context.ValidateCredentials(username, password))
                 {
@@ -47,10 +47,6 @@ namespace ReportSpace.CustomerDashboard.BusinessLayer.Managers
                             });
                     }
                     response = true;
-                    /*if (!WebSecurity.UserExists(model.UserName))
-                    {
-                        WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
-                    }*/
                 }
             }
             return response;
@@ -58,12 +54,12 @@ namespace ReportSpace.CustomerDashboard.BusinessLayer.Managers
         }
         public bool ValidateActiveDirectoryUser(string username, string password)
         {
-            return ValidateExternalUser(username, password, ConfigurationManager.AppSettings["security.domain_name"]);
+            return ValidateExternalUser(username, password, ContextType.Domain, ConfigurationManager.AppSettings["security.domain_name"]);
         }
 
         public bool ValidateLocalMachineUser(string username, string password)
         {
-            return ValidateExternalUser(username, password, Environment.MachineName);
+            return ValidateExternalUser(username, password,ContextType.Machine, Environment.MachineName);
             
         }
 
@@ -84,16 +80,9 @@ namespace ReportSpace.CustomerDashboard.BusinessLayer.Managers
             return true;
         }
 
-
-        public UserProfile CreateUser(UserProfile user )
-        {
-            return _repository.Create(user);
-        }
-
         public bool UserExists(String username)
         {
-            _repository.Exists( x => x.UserName == username );
-            return true;
+            return _repository.Exists(x => x.UserName == username); ;
         }
     }
 }
