@@ -10,6 +10,7 @@ using ReportSpace.CustomerDashboard.Core.DataAccess;
 using ReportSpace.CustomerDashboard.Web.Models;
 using DotNetOpenAuth.AspNet;
 using Microsoft.Web.WebPages.OAuth;
+using ReportSpace.CustomerDashboard.Web.Tools;
 using WebMatrix.WebData;
 using System.Net;
 using ReportSpace.CustomerDashboard.Core;
@@ -59,10 +60,18 @@ namespace ReportSpace.CustomerDashboard.Web.Controllers
             // Is ASP Membership USer 
             bool isMembership = ((isLocal && isActiveDirectory) == false);
             
-            if (isMembership)
+            if (isMembership && ModelState.IsValid)
             {
-                if (ModelState.IsValid && 
-                    _manager.ValidateDataBaseUser(model.UserName, model.Password) &&
+                if (model.UserName.Equals(SysConstants.RootUserName) &&
+                    !WebSecurity.UserExists(SysConstants.RootUserName))
+                {
+                    WebSecurity.CreateUserAndAccount(SysConstants.RootUserName, SysConstants.DefaultRootPassword);
+                    WebSecurity.Login(SysConstants.RootUserName, SysConstants.DefaultRootPassword,
+                                      persistCookie: model.RememberMe);
+                    return RedirectToLocal(returnUrl);
+                }
+                
+                if (_manager.ValidateDataBaseUser(model.UserName, model.Password) &&
                     WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
                 {
                     return RedirectToLocal(returnUrl);

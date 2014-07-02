@@ -31,6 +31,10 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "database", "database\databa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportSpace.CustomerDashboard.BusinessLayer", "ReportSpace.CustomerDashboard.BusinessLayer\ReportSpace.CustomerDashboard.BusinessLayer.csproj", "{AD4EDEF5-FF82-42A3-BFEE-6D6E75765384}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{A4988854-8C68-4689-A55A-7855B9C256CD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SystemConfigurator", "SystemConfigurator\SystemConfigurator.csproj", "{80C9F621-D78E-410C-BBE1-B63610616CC9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -65,6 +69,12 @@ Global
 		{AD4EDEF5-FF82-42A3-BFEE-6D6E75765384}.dev_acrowire|Any CPU.Build.0 = Debug|Any CPU
 		{AD4EDEF5-FF82-42A3-BFEE-6D6E75765384}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AD4EDEF5-FF82-42A3-BFEE-6D6E75765384}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80C9F621-D78E-410C-BBE1-B63610616CC9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80C9F621-D78E-410C-BBE1-B63610616CC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80C9F621-D78E-410C-BBE1-B63610616CC9}.dev_acrowire|Any CPU.ActiveCfg = Debug|Any CPU
+		{80C9F621-D78E-410C-BBE1-B63610616CC9}.dev_acrowire|Any CPU.Build.0 = Debug|Any CPU
+		{80C9F621-D78E-410C-BBE1-B63610616CC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80C9F621-D78E-410C-BBE1-B63610616CC9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -74,5 +84,6 @@ Global
 		{AD4EDEF5-FF82-42A3-BFEE-6D6E75765384} = {84BB0E3D-378B-40DE-B11D-D871DB7DE282}
 		{0B608C05-08E3-4DF9-8E6C-53C3E11BEAC0} = {58C2CEA6-1F73-4465-B112-FB5CC0A4E243}
 		{B5C98AE3-DD2C-4652-AB8F-B2FF564B16B4} = {C51C70D4-4FFF-4D14-856A-5FD00CF96A83}
+		{80C9F621-D78E-410C-BBE1-B63610616CC9} = {A4988854-8C68-4689-A55A-7855B9C256CD}
 	EndGlobalSection
 EndGlobal

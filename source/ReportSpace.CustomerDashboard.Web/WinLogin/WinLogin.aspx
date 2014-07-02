@@ -2,6 +2,7 @@
 <%
     var loggedInUsername = Request.ServerVariables["LOGON_USER"];
     
+    
     var membershipUser = Membership.Provider.GetUser(loggedInUsername, false);
     if (membershipUser != null)
     {
@@ -16,4 +17,6 @@
                                          returnUrl=Request.QueryString["ReturnUrl"]
                                      });
     }
+    
+    
 %>

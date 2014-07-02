@@ -8,6 +8,8 @@ namespace ReportSpace.CustomerDashboard.Core.Models
 {
     public class SystemInfo : BaseObject
     {
+        public string Name { get; set; }
+
         public bool IsConfigured { get; set; }
         
     }
