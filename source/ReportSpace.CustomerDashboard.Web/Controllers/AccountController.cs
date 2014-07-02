@@ -65,9 +65,10 @@ namespace ReportSpace.CustomerDashboard.Web.Controllers
                 if (model.UserName.Equals(SysConstants.RootUserName) &&
                     !WebSecurity.UserExists(SysConstants.RootUserName))
                 {
-                    WebSecurity.CreateUserAndAccount(SysConstants.RootUserName, SysConstants.DefaultRootPassword);
-                    WebSecurity.Login(SysConstants.RootUserName, SysConstants.DefaultRootPassword,
-                                      persistCookie: model.RememberMe);
+                    //this is execute only once
+                    string password = ConfigurationManager.AppSettings["defaultrootpassword"];
+                    WebSecurity.CreateUserAndAccount(SysConstants.RootUserName, password );
+                    WebSecurity.Login(SysConstants.RootUserName, password,persistCookie: model.RememberMe);
                     return RedirectToLocal(returnUrl);
                 }
                 

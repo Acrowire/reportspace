@@ -8,8 +8,5 @@ namespace ReportSpace.CustomerDashboard.Web.Tools
     public static class SysConstants
     {
         public static string RootUserName = "root";
-        public static string DefaultRootPassword = "root";
-
-
     }
 }
