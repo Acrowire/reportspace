@@ -41,11 +41,12 @@ namespace ReportSpace.CustomerDashboard.Web.Controllers
             return View();
         }
 
+        private UserManager _manager;
         [HttpPost]
         [AllowAnonymous]
         public ActionResult Login(LoginModel model, string returnUrl)
         {
-            UserManager manager = new UserManager();
+            _manager = new UserManager();
 
                // HTTP Context Infomration 
             var headers = Request.ServerVariables;
@@ -61,40 +62,56 @@ namespace ReportSpace.CustomerDashboard.Web.Controllers
             if (isMembership)
             {
                 if (ModelState.IsValid && 
-                    manager.ValidateDataBaseUser(model.UserName, model.Password) &&
+                    _manager.ValidateDataBaseUser(model.UserName, model.Password) &&
                     WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
                 {
                     return RedirectToLocal(returnUrl);
                 }
             }
 
-            if (isActiveDirectory)
+            if (isActiveDirectory && ValidateExternalUser(model.UserName, model.Password, ContextType.Domain, ConfigurationManager.AppSettings["security.domain_name"]))
             {
-                if (manager.ValidateExternalUser(model.UserName, model.Password, ContextType.Domain, ConfigurationManager.AppSettings["security.domain_name"]))
-                {
-                    if (!WebSecurity.UserExists(model.UserName))
-                    {
-                        WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
-                    }
-                    return RedirectToLocal(returnUrl);
-                }
+                return RedirectToLocal(returnUrl);
             }
 
-            if (isLocal)
+            if (isLocal && ValidateExternalUser(model.UserName, model.Password, ContextType.Machine, Environment.MachineName))
             {
-                if (manager.ValidateExternalUser(model.UserName, model.Password, ContextType.Machine, Environment.MachineName))
-                {
-                    if (!WebSecurity.UserExists(model.UserName))
-                    {
-                        WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
-                    }
-                    return RedirectToLocal(returnUrl);
-                }
+                return RedirectToLocal(returnUrl);
             }
 
             // If we got this far, something failed, redisplay form
             ModelState.AddModelError(string.Empty, "The user name or password provided is incorrect.");
             return View(model);
+        }
+
+        public bool ValidateExternalUser(string username, string password, ContextType contexttype, string contextName)
+        {
+            bool response = false;
+            using (PrincipalContext context = new PrincipalContext(contexttype, contextName))
+            {
+                if (context.ValidateCredentials(username, password))
+                {
+                    if (!_manager.UserExists(username))
+                    {   //create user
+                        Repository<UserProfile> repository = RepositoryFactory.GetRepository<UserProfile>();
+                        repository.Create(new UserProfile()
+                        {
+                            UserName = username,
+                            FirstName = "",
+                            LastName = "",
+                            Email = ""
+                        });
+                    }
+
+                    if (!WebSecurity.UserExists(username))
+                    {
+                        WebSecurity.CreateUserAndAccount(username, password);
+                    }
+                    response = true;
+                }
+            }
+            return response;
+
         }
 
         //

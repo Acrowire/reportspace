@@ -30,56 +30,6 @@ namespace ReportSpace.CustomerDashboard.BusinessLayer.Managers
             return response;
         }
 
-        public bool ValidateExternalUser(string username, string password, ContextType contexttype, string contextName)
-        {
-            bool response = false;
-            using (PrincipalContext context = new PrincipalContext(contexttype, contextName))
-            {
-                if (context.ValidateCredentials(username, password))
-                {
-                    if (!UserExists(username))
-                    {   //create user
-                        _repository.Create(new UserProfile()
-                            { UserName = username, 
-                              FirstName = "",
-                              LastName = "",
-                              Email = ""
-                            });
-                    }
-                    response = true;
-                }
-            }
-            return response;
-
-        }
-        public bool ValidateActiveDirectoryUser(string username, string password)
-        {
-            return ValidateExternalUser(username, password, ContextType.Domain, ConfigurationManager.AppSettings["security.domain_name"]);
-        }
-
-        public bool ValidateLocalMachineUser(string username, string password)
-        {
-            return ValidateExternalUser(username, password,ContextType.Machine, Environment.MachineName);
-            
-        }
-
-        public bool ValidateUser(string username, string password, ValidationProtocol protocol)
-        {
-            switch (protocol)
-            {
-                case ValidationProtocol.ActiveDirectory:
-                    ValidateActiveDirectoryUser(username, password);
-                    break;
-                case ValidationProtocol.DataBase:
-                    ValidateDataBaseUser(username, password);
-                    break;
-                case ValidationProtocol.LocalMachine:
-                    ValidateLocalMachineUser(username, password);
-                    break;
-            }
-            return true;
-        }
-
         public bool UserExists(String username)
         {
             return _repository.Exists(x => x.UserName == username); ;

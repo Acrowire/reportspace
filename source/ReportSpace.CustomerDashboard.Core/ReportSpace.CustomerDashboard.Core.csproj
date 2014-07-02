@@ -136,6 +136,7 @@
     <Compile Include="Models\Resource.cs" />
     <Compile Include="Models\ResourceType.cs" />
     <Compile Include="Models\Role.cs" />
+    <Compile Include="Models\SystemInfo.cs" />
     <Compile Include="Models\UserGroup.cs" />
     <Compile Include="Models\UserGroupMembership.cs" />
     <Compile Include="Models\UserGroupResourcesPermission.cs" />
