@@ -19,8 +19,6 @@ namespace ReportSpace.CustomerDashboard.Core.Models
 
         public string SourceSystem { get; set; }
 
-        public bool Active { get; set; }
-
         public virtual ICollection<Resource> Resources { get; set; }
 
     }

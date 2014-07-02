@@ -19,8 +19,6 @@ namespace ReportSpace.CustomerDashboard.Core.Models
 
         public string Path { get; set; }
 
-        public bool Active { get; set; }
-
     }
 
 

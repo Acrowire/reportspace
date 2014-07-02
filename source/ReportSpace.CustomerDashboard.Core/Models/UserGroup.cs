@@ -15,8 +15,6 @@ namespace ReportSpace.CustomerDashboard.Core.Models
 
         public String Name { get; set; }
 
-        public bool Active { get; set; }
-
         public virtual ICollection<UserGroupMembership> UserGroupMemberships { get; set; }
 
         public virtual ICollection<UserGroupResourcesPermission> UserGroupResourcesPermissions { get; set; }

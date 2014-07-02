@@ -27,8 +27,6 @@ namespace ReportSpace.CustomerDashboard.Core.Models
 
         public string CompanyLogoFileName { get; set; }
 
-        public bool Active { get; set; }
-
         public virtual ICollection<Role> Roles { get; set; }
 
         public virtual Membership Membership { get; set; }
@@ -36,7 +34,11 @@ namespace ReportSpace.CustomerDashboard.Core.Models
         public virtual ICollection<Client> Clients { get; set; }
 
         public virtual ICollection<UserGroupMembership> UserGroupMemberships { get; set; }
+        
+        public new DateTime? Created { get; set; }
 
+        public new DateTime? Updated { get; set; }
+        
         public UserProfile()
         {
             Roles = new Collection<Role>();

@@ -1,3 +1,5 @@
+using ReportSpace.CustomerDashboard.Core.DataAccess;
+
 [assembly: WebActivator.PreApplicationStartMethod(typeof(ReportSpace.CustomerDashboard.Web.App_Start.NinjectWebCommon), "Start")]
 [assembly: WebActivator.ApplicationShutdownMethodAttribute(typeof(ReportSpace.CustomerDashboard.Web.App_Start.NinjectWebCommon), "Stop")]
 

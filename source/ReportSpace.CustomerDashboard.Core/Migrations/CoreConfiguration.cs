@@ -1,3 +1,5 @@
+using ReportSpace.CustomerDashboard.Core.DataAccess;
+
 namespace ReportSpace.CustomerDashboard.Core.Migrations
 {
     using System.Data.Entity.Migrations;

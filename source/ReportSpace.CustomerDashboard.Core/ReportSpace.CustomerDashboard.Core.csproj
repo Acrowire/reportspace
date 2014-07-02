@@ -76,6 +76,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataAccess\DBConstants.cs" />
+    <Compile Include="DataAccess\Repository.cs" />
+    <Compile Include="DataAccess\RepositoryFactory.cs" />
     <Compile Include="IModelEntity.cs" />
     <Compile Include="IReportsContext.cs" />
     <Compile Include="IUserContext.cs" />
@@ -144,10 +146,10 @@
     <Compile Include="QueryableExtensions\RoleBasedExtensions.cs" />
     <Compile Include="QueryableExtensions\UserProfileExtensions.cs" />
     <Compile Include="QueryableExtensions\VisibilityExtensions.cs" />
-    <Compile Include="ReportsContext.cs" />
+    <Compile Include="DataAccess\ReportsContext.cs" />
     <Compile Include="Services\IWebSecurityService.cs" />
     <Compile Include="Services\WebSecurityService.cs" />
-    <Compile Include="UsersContext.cs" />
+    <Compile Include="DataAccess\UsersContext.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -15,10 +15,11 @@ namespace ReportSpace.CustomerDashboard.Core.Models
         public Guid Id { get; set; }*/
 
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        public DateTime Created { get; set; }
+        public DateTime? Created { get; set; }
 
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        public DateTime Updated { get; set; }
+        public DateTime? Updated { get; set; }
 
+        public bool Active { get; set; }
     }
 }

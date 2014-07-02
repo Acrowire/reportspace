@@ -21,7 +21,5 @@ namespace ReportSpace.CustomerDashboard.Core.Models
 
         public virtual Resource Resource { get; set; }
 
-        public bool Active { get; set; }
-
     }
 }

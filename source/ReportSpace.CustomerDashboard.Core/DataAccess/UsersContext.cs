@@ -1,12 +1,9 @@
-﻿using ReportSpace.CustomerDashboard.Core.DataAccess;
+﻿using System.Data.Entity;
+using System.Reflection;
+using ReportSpace.CustomerDashboard.Core.Models;
 
-namespace ReportSpace.CustomerDashboard.Core
+namespace ReportSpace.CustomerDashboard.Core.DataAccess
 {
-    using System.Data.Entity;
-    using System.Reflection;
-
-    using ReportSpace.CustomerDashboard.Core.Models;
-
     public class UsersContext : DbContext, IUserContext
     {
         public UsersContext()

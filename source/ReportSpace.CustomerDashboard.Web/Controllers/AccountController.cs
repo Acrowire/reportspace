@@ -4,7 +4,9 @@ using System.Linq;
 using System.Transactions;
 using System.Web.Mvc;
 using System.Web.Security;
-
+using ReportSpace.CustomerDashboard.BusinessLayer.Context;
+using ReportSpace.CustomerDashboard.BusinessLayer.Managers;
+using ReportSpace.CustomerDashboard.Core.DataAccess;
 using ReportSpace.CustomerDashboard.Web.Models;
 using DotNetOpenAuth.AspNet;
 using Microsoft.Web.WebPages.OAuth;
@@ -21,6 +23,8 @@ namespace ReportSpace.CustomerDashboard.Web.Controllers
 
     public class AccountController : Controller
     {
+        
+
         private readonly IUserContext _userContext;
 
         public AccountController(IUserContext userContext)
@@ -41,27 +45,30 @@ namespace ReportSpace.CustomerDashboard.Web.Controllers
         [AllowAnonymous]
         public ActionResult Login(LoginModel model, string returnUrl)
         {
-            // HTTP Context Infomration 
+            UserManager manager = new UserManager();
+
+               // HTTP Context Infomration 
             var headers = Request.ServerVariables;
-
-
+            
             // Eval Username input format then try to authenticate using differnet means 
             // Attempt Local 
-            bool IsLocal = (model.UserName.Contains((@"\")));
+            bool isLocal = (model.UserName.Contains((@"\")));
             // Attempt AD 
-            bool IsActiveDirectory = (model.UserName.Contains("@"));
+            bool isActiveDirectory = (model.UserName.Contains("@"));
             // Is ASP Membership USer 
-            bool IsMembership = ((IsLocal && IsActiveDirectory) == false);
-
-            if (IsMembership)
+            bool isMembership = ((isLocal && isActiveDirectory) == false);
+            
+            if (isMembership)
             {
-                if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
+                if (ModelState.IsValid && 
+                    manager.ValidateDataBaseUser(model.UserName, model.Password) &&
+                    WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
                 {
                     return RedirectToLocal(returnUrl);
                 }
             }
 
-            if (IsActiveDirectory)
+            if (isActiveDirectory)
             {
                 using (PrincipalContext context = new PrincipalContext(ContextType.Domain, ConfigurationManager.AppSettings["security.domain_name"]))
                 {
@@ -76,9 +83,9 @@ namespace ReportSpace.CustomerDashboard.Web.Controllers
                 }
             }
 
-            if (IsLocal)
+            if (isLocal)
             {
-                using (PrincipalContext context = new PrincipalContext(ContextType.Machine,Environment.MachineName))
+                using (PrincipalContext context = new PrincipalContext(ContextType.Machine, Environment.MachineName))
                 {
                     if (context.ValidateCredentials(model.UserName, model.Password))
                     {
@@ -129,15 +136,32 @@ namespace ReportSpace.CustomerDashboard.Web.Controllers
                 // Attempt to register the user
                 try
                 {
-                    WebSecurity.CreateUserAndAccount(model.UserName, model.Password, new
-                        {  model.FirstName, model.LastName, model.Email, Active = 0,
-                            Created = DateTime.Now, Updated = DateTime.Now
-                        }, false);
-                    return RedirectToAction("Login", "Account");
+                    UserManager  manager = new UserManager();
+
+                    if (!manager.UserExists(model.UserName) && !WebSecurity.UserExists(model.UserName))
+                    {
+                        Repository<UserProfile> _repository = RepositoryFactory.GetRepository<UserProfile>();
+
+                        _repository.Create(new UserProfile()
+                            {
+                                UserName = model.UserName,
+                                FirstName = model.FirstName,
+                                LastName = model.LastName,
+                                Email = model.Email
+                            });
+                        WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
+                        return RedirectToAction("Login", "Account");
+                    }
+
+                    throw new Exception(String.Format("Username [{0}] already exists",model.UserName));
                 }
                 catch (MembershipCreateUserException e)
                 {
                     ModelState.AddModelError(string.Empty, ErrorCodeToString(e.StatusCode));
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError(string.Empty, ex.Message + ", " + ex.StackTrace );
                 }
             }
 

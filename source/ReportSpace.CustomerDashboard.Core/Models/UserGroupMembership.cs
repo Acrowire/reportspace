@@ -19,7 +19,5 @@ namespace ReportSpace.CustomerDashboard.Core.Models
         public int UserProfileId { get; set; }
         public virtual UserProfile UserProfile { get; set; }
 
-        public bool Active { get; set; }
-
     }
 }
