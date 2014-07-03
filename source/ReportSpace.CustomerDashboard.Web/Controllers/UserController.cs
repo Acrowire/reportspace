@@ -94,9 +94,9 @@ namespace ReportSpace.CustomerDashboard.Web.Controllers
             return WebSecurity.ResetPassword(passwordResetToken, userProfileViewModel.Password);
         }
 
-        public ActionResult Delete(Guid id)
+        public ActionResult Delete(int id)
         {
-            var userProfile = _userContext.UserProfiles.Include(up => up.Roles).Include(up => up.Clients).First(up => up.Id == id);
+            var userProfile = _userContext.UserProfiles.Include(up => up.Roles).Include(up => up.Clients).First(up => up.UserId == id);
             _userContext.UserProfiles.Remove(userProfile);
 
             _userContext.SaveChanges();

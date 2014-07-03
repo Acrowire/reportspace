@@ -72,12 +72,9 @@ namespace ReportSpace.CustomerDashboard.Web.Controllers
                 {
                     try
                     {
-                        //var rootuser = _repository.Retrieve(use => use.UserName == SysConstants.RootUserName);
                         //this is execute only once
                         string password = ConfigurationManager.AppSettings["defaultrootpassword"];
-                        WebSecurity.CreateUserAndAccount(SysConstants.RootUserName, password
-                            //, new { UserProfileId = rootuser.Id}
-                            );
+                        WebSecurity.CreateUserAndAccount(SysConstants.RootUserName, password);
                         WebSecurity.Login(SysConstants.RootUserName, password, persistCookie: model.RememberMe);
                     }
                     catch (Exception e)
@@ -187,7 +184,7 @@ namespace ReportSpace.CustomerDashboard.Web.Controllers
                                 LastName = model.LastName,
                                 Email = model.Email
                             });
-                        WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
+                        WebSecurity.CreateUserAndAccount(model.UserName, model.Password, requireConfirmationToken:true);
                         return RedirectToAction("Login", "Account");
                     }
 
@@ -355,10 +352,10 @@ namespace ReportSpace.CustomerDashboard.Web.Controllers
             }
         }
 
-        public ActionResult Confirm(Guid id)
+        public ActionResult Confirm(int id)
         {
             var success = false;
-            var userProfile = _userContext.UserProfiles.SingleOrDefault(up => up.Id == id);
+            var userProfile = _userContext.UserProfiles.SingleOrDefault(up => up.UserId == id);
 
             if (userProfile != null && !string.IsNullOrEmpty(userProfile.Membership.ConfirmationToken))
             {

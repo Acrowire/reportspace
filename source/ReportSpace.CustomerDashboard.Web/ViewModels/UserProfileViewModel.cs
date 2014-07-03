@@ -11,7 +11,7 @@
 
     public class UserProfileViewModel
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
         [Required]
         public string UserName { get; set; }

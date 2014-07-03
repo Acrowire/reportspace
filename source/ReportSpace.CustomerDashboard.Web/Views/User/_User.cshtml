@@ -14,8 +14,10 @@
         <a href="#" class="btn edit-user-btn" data-modal-url="@Url.Action("edit", new { id = Model.Id})"><i class="iconfa-edit"></i></a>
         @if (User.IsInRole("Administrator") && !Model.IsConfirmed)
         {
-            <a href="#" class="btn activate-user" data-url="@Url.Action("confirm", "account", new {id = Model.Id})"><i class="iconfa-thumbs-up"></i></a>
+            
         }
+        <a href="#" class="btn activate-user" data-url="@Url.Action("confirm", "account", new {id = Model.Id})"><i class="iconfa-thumbs-up"></i></a>
+
         @Ajax.ImageActionLink(
                 "<i class=\"icon-trash\"></i>", 
                 "delete", 

@@ -16,7 +16,7 @@
                                       Email = source.Email,
                                       FirstName = source.FirstName,
                                       LastName = source.LastName,
-                                      Id = source.Id,
+                                      Id = source.UserId,
                                       UserName = source.UserName,
                                       CompanyLogoFileName = source.CompanyLogoFileName,
                                       IsConfirmed = source.Membership.IsConfirmed,

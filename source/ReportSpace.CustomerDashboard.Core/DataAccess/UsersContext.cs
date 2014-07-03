@@ -25,8 +25,7 @@ namespace ReportSpace.CustomerDashboard.Core.DataAccess
                     m.ToTable("TemplateFunctions");
                 });
 
-            modelBuilder.Entity<UserProfile>().HasOptional(p => p.Membership).WithOptionalPrincipal(m => m.UserProfile);
-            //modelBuilder.Entity<Membership>().HasOptional(p => p.UserProfile).WithOptionalDependent(u => u.Membership);
+            //modelBuilder.Entity<UserProfile>().HasOptional(p => p.Membership).WithOptionalPrincipal(m => m.UserProfile);
         }
  
         public IDbSet<UserProfile> UserProfiles { get; set; }

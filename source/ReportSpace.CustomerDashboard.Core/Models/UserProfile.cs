@@ -10,12 +10,12 @@ namespace ReportSpace.CustomerDashboard.Core.Models
     [Table("UserProfile")]
     public class UserProfile : BaseObject
     {
-        [Key]
+        /*[Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid Id { get; set; }
+        public Guid Id { get; set; }*/
 
-        /*[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int UserId { get; set; }*/
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int UserId { get; set; }
 
         public string UserName { get; set; }
 

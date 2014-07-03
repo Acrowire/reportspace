@@ -24,8 +24,8 @@
                         m.ToTable("UserProfileClient");
                     });
             //HasOptional( us => us.Membership ).WithOptionalDependent( us=> us.UserProfile)
-            /*HasRequired(up => up.Membership)
-                .WithRequiredPrincipal().WillCascadeOnDelete(true);*/
+            HasRequired(up => up.Membership)
+                .WithRequiredPrincipal().WillCascadeOnDelete(true);
         }
     }
 }
