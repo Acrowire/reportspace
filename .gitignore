@@ -12,4 +12,7 @@ source/ReportSpace.CustomerDashboard.Web/obj/Release/ReportSpace.CustomerDashboa
 source/ReportSpace.CustomerDashboard.Core/obj/Debug/ReportSpace.CustomerDashboard.Core.csproj.FileListAbsolute.txt
 source/ReportSpace.CustomerDashboard.Core/obj/Debug/ReportSpace.CustomerDashboard.Core.csproj.FileListAbsolute.txt
 source/ReportSpace.CustomerDashboard.Web/obj/Release/ReportSpace.CustomerDashboard.Web.csproj.FileListAbsolute.txt
+source/SystemConfigurator/bin
+source/SystemConfigurator/obj
 source/database/database.dbmdl
+source/ReportSpace.CustomerDashboard.v11.suo
