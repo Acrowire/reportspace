@@ -17,6 +17,16 @@ namespace ReportSpace.CustomerDashboard.Core.DataAccess
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Configurations.AddFromAssembly(Assembly.GetExecutingAssembly());
+
+            modelBuilder.Entity<Template>().HasMany(c => c.Functions).WithMany(p => p.Templates).Map(m =>
+                {
+                    m.MapLeftKey("TemplateId");
+                    m.MapRightKey("FunctionId");
+                    m.ToTable("TemplateFunctions");
+                });
+
+            modelBuilder.Entity<UserProfile>().HasOptional(p => p.Membership).WithOptionalPrincipal(m => m.UserProfile);
+            //modelBuilder.Entity<Membership>().HasOptional(p => p.UserProfile).WithOptionalDependent(u => u.Membership);
         }
  
         public IDbSet<UserProfile> UserProfiles { get; set; }
@@ -29,6 +39,12 @@ namespace ReportSpace.CustomerDashboard.Core.DataAccess
 
         public IDbSet<UserGroup> UserGroups { get; set; }
 
+        public IDbSet<Function> Functions { get; set; }
+
+        public IDbSet<Template> Templates { get; set; }
+
+        public IDbSet<UserFunction> UserFunctions { get; set; }
+
         public IDbSet<UserGroupMembership> UserGroupMemberships { get; set; }
 
         public IDbSet<UserGroupResourcesPermission> UserGroupResourcesPermissions { get; set; }
@@ -36,7 +52,6 @@ namespace ReportSpace.CustomerDashboard.Core.DataAccess
         public IDbSet<Client> Clients { get; set; }
 
         public IDbSet<Role> Roles { get; set; }
-
 
     }
 }

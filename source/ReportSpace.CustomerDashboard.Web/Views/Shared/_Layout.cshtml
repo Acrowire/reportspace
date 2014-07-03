@@ -74,15 +74,26 @@
                 <ul class="nav nav-tabs nav-stacked">
                     <li>@Html.ActionLinkWithContent("<span class=\"icon-tasks\"></span>Reports", "index", "category", null, null)</li>
                     <li><a href=" http://www.microsoft.com/en-us/download/details.aspx?id=29072"><span class="iconsweets-strategy2"></span>Report Builder</a></li>
-                    @if (User.IsInRole("Administrator"))
+                    <!--if (User.IsInRole("Administrator"))
                     {
                         <li><a href="~/Admin/Index"><span class="iconsweets-users"></span>Administration</a></li>
                     }
+                        -->
                     @Html.Partial("_LoginPartial")
-                    
                 </ul>
-                
-
+                <ul >
+                    @{
+                        var list = AccountHelper.GetUserFunctions(User.Identity.Name);
+                        foreach (var function in list)
+                        {
+                            <li>
+                                <a href='@Url.Action(function.Action, function.Controller)'>
+                                    <span class="iconsweets-exit"></span>@function.ResourceName
+                                </a>
+                            </li>
+                        }
+                    }
+                </ul>
 
                 <div id="report-parameters-box" class="widgetbox animate0 fadeIn" style="display: none">
                     <h4 class="widgettitle">Parameters

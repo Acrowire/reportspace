@@ -126,6 +126,7 @@
     <Compile Include="IIdentifiable.cs" />
     <Compile Include="Models\BaseObject.cs" />
     <Compile Include="Models\Client.cs" />
+    <Compile Include="Models\Function.cs" />
     <Compile Include="Models\ICategorizable.cs" />
     <Compile Include="Models\INamed.cs" />
     <Compile Include="Models\IRoleBased.cs" />
@@ -138,6 +139,8 @@
     <Compile Include="Models\ResourceType.cs" />
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\SystemInfo.cs" />
+    <Compile Include="Models\Template.cs" />
+    <Compile Include="Models\UserFunction.cs" />
     <Compile Include="Models\UserGroup.cs" />
     <Compile Include="Models\UserGroupMembership.cs" />
     <Compile Include="Models\UserGroupResourcesPermission.cs" />

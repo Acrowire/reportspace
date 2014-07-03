@@ -23,14 +23,14 @@ namespace ReportSpace.CustomerDashboard.Web.Converters
 
         protected override UserProfile ConvertCore(UserProfileViewModel source)
         {
-            var destination = source.Id != 0
-                ? _userContext.UserProfiles.Include(up => up.Roles).Include(up => up.Clients).First(up => up.UserId == source.Id)
+            var destination = source.Id != Guid.Empty
+                ? _userContext.UserProfiles.Include(up => up.Roles).Include(up => up.Clients).First(up => up.Id == source.Id)
                 : _userContext.UserProfiles.Create();
 
             destination.Email = source.Email;
             destination.FirstName = source.FirstName;
             destination.LastName = source.LastName;
-            destination.UserId = source.Id;
+            destination.Id = source.Id;
             destination.UserName = source.UserName;
             destination.CompanyLogoFileName = source.CompanyLogoFileName;
 

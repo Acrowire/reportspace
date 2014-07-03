@@ -7,8 +7,14 @@
     [Table("webpages_Membership")]
     public class Membership
     {
+        /*[Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public Guid Id { get; set; }*/
+
         [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int UserId { get; set; }
+
+        public Guid? UserProfileId { get; set; }
+        public virtual UserProfile UserProfile { get; set; }
         
         public DateTime? CreateDate { get; set; }
         

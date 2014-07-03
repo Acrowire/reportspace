@@ -17,6 +17,9 @@ namespace ReportSpace.CustomerDashboard.BusinessLayer.Context
         {
             //Func<object> f = () => new Repository<UserProfile>(new UsersContext());
             Dictionary.Add(typeof(UserProfile), () => new Repository<UserProfile>(new UsersContext()));
+            Dictionary.Add(typeof(UserFunction), () => new Repository<UserFunction>(new UsersContext()));
+            Dictionary.Add(typeof(Function), () => new Repository<Function>(new UsersContext()));
+            Dictionary.Add(typeof(Template), () => new Repository<Template>(new UsersContext()));
         }
 
         public static Repository<T> GetRepository<T>() where T : BaseObject

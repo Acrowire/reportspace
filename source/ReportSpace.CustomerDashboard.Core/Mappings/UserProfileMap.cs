@@ -23,9 +23,9 @@
                         m.MapRightKey("ClientId");
                         m.ToTable("UserProfileClient");
                     });
-
-            HasRequired(up => up.Membership)
-                .WithRequiredPrincipal().WillCascadeOnDelete(true);
+            //HasOptional( us => us.Membership ).WithOptionalDependent( us=> us.UserProfile)
+            /*HasRequired(up => up.Membership)
+                .WithRequiredPrincipal().WillCascadeOnDelete(true);*/
         }
     }
 }

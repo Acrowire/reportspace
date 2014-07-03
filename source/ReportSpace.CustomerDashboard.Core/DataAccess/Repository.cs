@@ -30,6 +30,18 @@ namespace ReportSpace.CustomerDashboard.Core.DataAccess
             }
         }
 
+        public T Retrieve(Guid id)
+        {
+            var obj = _dataSet.Find(id);
+            return obj;
+        }
+
+        public T Retrieve(Func<T, bool> func )
+        {
+            T obj = _dataSet.FirstOrDefault(func);
+            return obj;
+        }
+
         public T Create(T data)
         {
             data.Created = DateTime.Now;

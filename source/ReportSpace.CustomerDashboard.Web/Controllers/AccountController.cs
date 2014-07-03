@@ -43,12 +43,13 @@ namespace ReportSpace.CustomerDashboard.Web.Controllers
         }
 
         private UserManager _manager;
+        private Repository<UserProfile> _repository;
         [HttpPost]
         [AllowAnonymous]
         public ActionResult Login(LoginModel model, string returnUrl)
         {
             _manager = new UserManager();
-
+            _repository = RepositoryFactory.GetRepository<UserProfile>();
                // HTTP Context Infomration 
             var headers = Request.ServerVariables;
             
@@ -62,13 +63,29 @@ namespace ReportSpace.CustomerDashboard.Web.Controllers
             
             if (isMembership && ModelState.IsValid)
             {
+                bool exists = WebSecurity.UserExists(SysConstants.RootUserName);
+
+                Console.WriteLine("Exists [{0}]", exists);
+
                 if (model.UserName.Equals(SysConstants.RootUserName) &&
                     !WebSecurity.UserExists(SysConstants.RootUserName))
                 {
-                    //this is execute only once
-                    string password = ConfigurationManager.AppSettings["defaultrootpassword"];
-                    WebSecurity.CreateUserAndAccount(SysConstants.RootUserName, password );
-                    WebSecurity.Login(SysConstants.RootUserName, password,persistCookie: model.RememberMe);
+                    try
+                    {
+                        //var rootuser = _repository.Retrieve(use => use.UserName == SysConstants.RootUserName);
+                        //this is execute only once
+                        string password = ConfigurationManager.AppSettings["defaultrootpassword"];
+                        WebSecurity.CreateUserAndAccount(SysConstants.RootUserName, password
+                            //, new { UserProfileId = rootuser.Id}
+                            );
+                        WebSecurity.Login(SysConstants.RootUserName, password, persistCookie: model.RememberMe);
+                    }
+                    catch (Exception e)
+                    {
+                        throw e;
+                    }
+                    
+
                     return RedirectToLocal(returnUrl);
                 }
                 
@@ -103,8 +120,8 @@ namespace ReportSpace.CustomerDashboard.Web.Controllers
                 {
                     if (!_manager.UserExists(username))
                     {   //create user
-                        Repository<UserProfile> repository = RepositoryFactory.GetRepository<UserProfile>();
-                        repository.Create(new UserProfile()
+
+                        _repository.Create(new UserProfile()
                         {
                             UserName = username,
                             FirstName = "",
@@ -338,10 +355,10 @@ namespace ReportSpace.CustomerDashboard.Web.Controllers
             }
         }
 
-        public ActionResult Confirm(int id)
+        public ActionResult Confirm(Guid id)
         {
             var success = false;
-            var userProfile = _userContext.UserProfiles.SingleOrDefault(up => up.UserId == id);
+            var userProfile = _userContext.UserProfiles.SingleOrDefault(up => up.Id == id);
 
             if (userProfile != null && !string.IsNullOrEmpty(userProfile.Membership.ConfirmationToken))
             {

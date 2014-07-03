@@ -9,9 +9,9 @@ namespace ReportSpace.CustomerDashboard.Core.QueryableExtensions
 
     public static class UserProfileExtensions
     {
-        public static UserProfile FindById(this IQueryable<UserProfile> query, int id)
+        public static UserProfile FindById(this IQueryable<UserProfile> query, Guid id)
         {
-            return query.First(up => up.UserId == id);
+            return query.First(up => up.Id == id);
         }
     }
 }

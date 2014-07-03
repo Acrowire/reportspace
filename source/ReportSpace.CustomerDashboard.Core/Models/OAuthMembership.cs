@@ -1,4 +1,6 @@
-﻿namespace ReportSpace.CustomerDashboard.Core.Models
+﻿using System;
+
+namespace ReportSpace.CustomerDashboard.Core.Models
 {
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;

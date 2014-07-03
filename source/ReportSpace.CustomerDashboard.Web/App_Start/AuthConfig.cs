@@ -10,7 +10,7 @@ namespace ReportSpace.CustomerDashboard.Web
             if (!WebSecurity.Initialized)
             {
                 //WebSecurity.InitializeDatabaseConnection("DefaultConnection", "UserProfile", "UserId", "UserName", autoCreateTables: true);
-                WebSecurity.InitializeDatabaseConnection(DBConstants.GetConnectionString(), DBConstants.ProviderName, "web_profile", "UserId", "Username", autoCreateTables:true);
+                WebSecurity.InitializeDatabaseConnection(DBConstants.GetConnectionString(), DBConstants.ProviderName, "web_profile", "Id", "Username", autoCreateTables:true);
             }
 
             // To let users of this site log in using their accounts from other sites such as Microsoft, Facebook, and Twitter,

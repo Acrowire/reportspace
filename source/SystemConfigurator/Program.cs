@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,13 +11,18 @@ namespace SystemConfigurator
 {
     class Program
     {
+        private static List<Function> functions = new List<Function>(); 
+
         static void Main(string[] args)
         {
             try
             {
+                var ctx = new UsersContext();
+
                 Console.WriteLine("Init System Configuration");
-                FirstTimeConfiguration();
-                Console.WriteLine("End System Configuration");
+                FirstTimeConfiguration(ctx);
+                Console.WriteLine("End System Configuration. Press enter to finish");
+                Console.ReadLine();
             }
             catch (Exception e)
             {
@@ -25,10 +31,8 @@ namespace SystemConfigurator
             
         }
 
-        public static void FirstTimeConfiguration()
+        public static void FirstTimeConfiguration(UsersContext ctx)
         {
-            var ctx = new UsersContext();
-
             ctx.Database.CreateIfNotExists();
 
             var root = new UserProfile()
@@ -38,11 +42,66 @@ namespace SystemConfigurator
                     FirstName = "system",
                     LastName = "admin",
                     Active = true,
+                    
                 };
             ctx.UserProfiles.Add(root);
 
             ctx.SaveChanges();
-
+            LoadFunctions(ctx);
+            AddFunctionsToUsers(ctx, root);
         }
+
+        private static void LoadFunctions(UsersContext ctx)
+        {
+             var createAdminAccount = new Function()
+                {
+                    Name = "Create_Admin_Account",
+                    ResourceName = "Create Admin Account",
+                    Controller = "AdminAccount",
+                    Action = "index"
+                };
+
+             var createUserGroup = new Function()
+             {
+                 Name = "Create_User_Group",
+                 ResourceName = "Create User Group",
+                 Controller = "UserGroup",
+                 Action = "index"
+             };
+
+            ctx.Functions.Add(createAdminAccount);
+            ctx.Functions.Add(createUserGroup);
+
+            functions.Add(createAdminAccount);
+            functions.Add(createUserGroup);
+
+            var adminTemplate = new Template(){ Name = "Admin" };
+
+            adminTemplate.Functions = new Collection<Function>();
+            adminTemplate.Functions.Add(createAdminAccount);
+            adminTemplate.Functions.Add(createUserGroup);
+            ctx.Templates.Add(adminTemplate);
+
+            var userTemplate = new Template() { Name = "User" };
+
+            ctx.Templates.Add(userTemplate);
+
+            ctx.SaveChanges();
+        }
+
+        private static void AddFunctionsToUsers(UsersContext ctx, UserProfile userProfile)
+        {
+            foreach (var function in functions)
+            {
+                var userFunc = new UserFunction()
+                    {
+                        UserProfile = userProfile,
+                        Function = function
+                    };
+                ctx.UserFunctions.Add(userFunc);
+            }
+            ctx.SaveChanges();
+        }
+
     }
 }

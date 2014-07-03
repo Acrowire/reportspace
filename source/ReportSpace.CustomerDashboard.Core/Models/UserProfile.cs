@@ -12,10 +12,10 @@ namespace ReportSpace.CustomerDashboard.Core.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int UserId { get; set; }
+        public Guid Id { get; set; }
 
-        //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        //public int UserId { get; set; }
+        /*[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int UserId { get; set; }*/
 
         public string UserName { get; set; }
 
@@ -29,21 +29,24 @@ namespace ReportSpace.CustomerDashboard.Core.Models
 
         public virtual ICollection<Role> Roles { get; set; }
 
+        public int MembershipId { get; set; }
         public virtual Membership Membership { get; set; }
 
         public virtual ICollection<Client> Clients { get; set; }
 
         public virtual ICollection<UserGroupMembership> UserGroupMemberships { get; set; }
-        
+
+        public virtual ICollection<UserFunction> UserFunctions { get; set; }
+
         public new DateTime? Created { get; set; }
 
         public new DateTime? Updated { get; set; }
-        
+
         public UserProfile()
         {
             Roles = new Collection<Role>();
-
             Clients = new Collection<Client>();
+            UserFunctions = new Collection<UserFunction>();
         }
 
 
