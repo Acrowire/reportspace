@@ -11,7 +11,7 @@ namespace ReportSpace.CustomerDashboard.Core.Models
     public class UserGroupMembership : BaseObject
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         public Guid? UserGroupId { get; set; }
         public virtual UserGroup UserGroup { get; set; }

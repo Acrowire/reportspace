@@ -53,6 +53,7 @@
     </Reference>
     <Reference Include="Microsoft.ReportViewer.Common, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -77,6 +78,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataAccess\DBConstants.cs" />
+    <Compile Include="DataAccess\IRepository.cs" />
     <Compile Include="DataAccess\Repository.cs" />
     <Compile Include="DataAccess\RepositoryFactory.cs" />
     <Compile Include="IModelEntity.cs" />
@@ -128,6 +130,7 @@
     <Compile Include="Models\Client.cs" />
     <Compile Include="Models\Function.cs" />
     <Compile Include="Models\ICategorizable.cs" />
+    <Compile Include="Models\IDataObject.cs" />
     <Compile Include="Models\INamed.cs" />
     <Compile Include="Models\IRoleBased.cs" />
     <Compile Include="Models\IVisibility.cs" />

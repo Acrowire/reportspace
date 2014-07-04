@@ -24,8 +24,6 @@ namespace ReportSpace.CustomerDashboard.Core.DataAccess
                     m.MapRightKey("FunctionId");
                     m.ToTable("TemplateFunctions");
                 });
-
-            //modelBuilder.Entity<UserProfile>().HasOptional(p => p.Membership).WithOptionalPrincipal(m => m.UserProfile);
         }
  
         public IDbSet<UserProfile> UserProfiles { get; set; }

@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="Context\ContextInitializer.cs" />
     <Compile Include="Context\DataInitializer.cs" />
+    <Compile Include="Managers\RepositoryManager.cs" />
     <Compile Include="Managers\UserManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

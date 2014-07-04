@@ -5,7 +5,7 @@
     using System.ComponentModel.DataAnnotations.Schema;
 
     [Table("webpages_Membership")]
-    public class Membership
+    public class Membership// Don't inherit BaseObject
     {
         /*[Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
         public Guid Id { get; set; }*/
@@ -13,8 +13,8 @@
         [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int UserId { get; set; }
 
-        public Guid? UserProfileId { get; set; }
-        public virtual UserProfile UserProfile { get; set; }
+        /*public Guid? UserProfileId { get; set; }
+        public virtual UserProfile UserProfile { get; set; }*/
         
         public DateTime? CreateDate { get; set; }
         
@@ -39,5 +39,7 @@
         public string PasswordVerificationToken { get; set; }
         
         public DateTime? PasswordVerificationTokenExpirationDate { get; set; }
+
+        
     }
 }

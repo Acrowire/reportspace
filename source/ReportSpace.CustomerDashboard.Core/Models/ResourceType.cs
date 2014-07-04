@@ -11,7 +11,7 @@ namespace ReportSpace.CustomerDashboard.Core.Models
     public class ResourceType: BaseObject
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public new Guid Id { get; set; }
+        public Guid Id { get; set; }
 
         public string Name { get; set; }
 

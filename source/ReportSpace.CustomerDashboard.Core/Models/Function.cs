@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -8,6 +9,8 @@ using System.Threading.Tasks;
 
 namespace ReportSpace.CustomerDashboard.Core.Models
 {
+    [Export(typeof(IDataObject))]
+    [ExportMetadata("BaseObjectName", "UserProfile")]
     public class Function : BaseObject
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]

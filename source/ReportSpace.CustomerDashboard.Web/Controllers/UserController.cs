@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web.Mvc;
+using ReportSpace.CustomerDashboard.BusinessLayer.Managers;
 
 namespace ReportSpace.CustomerDashboard.Web.Controllers
 {
@@ -106,17 +107,38 @@ namespace ReportSpace.CustomerDashboard.Web.Controllers
 
         private UserProfile SaveUserProfile(UserProfile userProfile, string password)
         {
-            WebSecurity.CreateUserAndAccount(
-                userProfile.UserName,
-                password,
-                new { userProfile.FirstName, userProfile.LastName, userProfile.Email, userProfile.CompanyLogoFileName });
+            /*var manager = new RepositoryManager();
 
+            WebSecurity.CreateUserAndAccount(userProfile.UserName, password);
+            int id = WebSecurity.GetUserId(userProfile.UserName);
+            
+            var newUser = manager.Create(new UserProfile()
+                {
+                    UserName = userProfile.UserName,
+                    FirstName = userProfile.FirstName,
+                    LastName = userProfile.LastName,
+                    Email = userProfile.Email,
+                    CompanyLogoFileName = userProfile.CompanyLogoFileName,
+                    Clients = userProfile.Clients,
+                    Roles = userProfile.Roles,
+                    MembershipId = id
+                });
+            return newUser;*/
+
+            WebSecurity.CreateUserAndAccount(
+                userProfile.UserName,password,
+                new { userProfile.FirstName, userProfile.LastName, 
+                    userProfile.Email, userProfile.CompanyLogoFileName, Active=true });
+
+            
             var savedUserProfile = _userContext.UserProfiles.First(up => up.UserName == userProfile.UserName);
             savedUserProfile.Clients = userProfile.Clients;
             savedUserProfile.Roles = userProfile.Roles;
             _userContext.SaveChanges();
-
             return savedUserProfile;
+             
+
+
         }
     }
 }

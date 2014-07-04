@@ -21,14 +21,22 @@ namespace SystemConfigurator
 
                 Console.WriteLine("Init System Configuration");
                 FirstTimeConfiguration(ctx);
-                Console.WriteLine("End System Configuration. Press enter to finish");
-                Console.ReadLine();
+
+                //var loader = new CustomClassLoader();
+                /*CustomClassLoader.LoadRepositories();
+                var rep = CustomClassLoader.GetRepository<UserProfile>();
+                if (rep!=null)
+                {
+                    Console.WriteLine("GOOD");
+                }*/
+
             }
             catch (Exception e)
             {
                 Console.WriteLine("Error Message {0}", e.Message);
             }
-            
+            Console.WriteLine("End System Configuration. Press enter to finish");
+            Console.ReadLine();
         }
 
         public static void FirstTimeConfiguration(UsersContext ctx)

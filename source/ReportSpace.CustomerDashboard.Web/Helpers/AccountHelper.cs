@@ -14,8 +14,12 @@ namespace ReportSpace.CustomerDashboard.Web.Helpers
         {
             Repository<UserProfile> repository = RepositoryFactory.GetRepository<UserProfile>();
             var user = repository.Retrieve(usr => usr.UserName == username);
-            var list = user.UserFunctions.Select(x => x.Function);
-            return list.ToList();
+            if (user!=null)
+            {
+                var list = user.UserFunctions.Select(x => x.Function);
+                return list.ToList();
+            }
+            return new List<Function>();
         }
 
     }

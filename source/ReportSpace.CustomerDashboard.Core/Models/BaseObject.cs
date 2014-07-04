@@ -8,11 +8,9 @@ using System.Threading.Tasks;
 
 namespace ReportSpace.CustomerDashboard.Core.Models
 {
-    public class BaseObject // : EntityBase
+    public abstract class BaseObject: IDataObject // : EntityBase
     {
-        /*[Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid Id { get; set; }*/
+        //public abstract Guid Id { get; set; }
 
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime? Created { get; set; }

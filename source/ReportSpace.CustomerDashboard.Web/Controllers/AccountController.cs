@@ -43,13 +43,14 @@ namespace ReportSpace.CustomerDashboard.Web.Controllers
         }
 
         private UserManager _manager;
-        private Repository<UserProfile> _repository;
+        private RepositoryManager _repositoryManager;
         [HttpPost]
         [AllowAnonymous]
         public ActionResult Login(LoginModel model, string returnUrl)
         {
             _manager = new UserManager();
-            _repository = RepositoryFactory.GetRepository<UserProfile>();
+            _repositoryManager = new RepositoryManager();
+
                // HTTP Context Infomration 
             var headers = Request.ServerVariables;
             
@@ -63,26 +64,14 @@ namespace ReportSpace.CustomerDashboard.Web.Controllers
             
             if (isMembership && ModelState.IsValid)
             {
-                bool exists = WebSecurity.UserExists(SysConstants.RootUserName);
-
-                Console.WriteLine("Exists [{0}]", exists);
-
+                string password = ConfigurationManager.AppSettings["defaultrootpassword"];
                 if (model.UserName.Equals(SysConstants.RootUserName) &&
+                    model.Password.Equals(password) &&
                     !WebSecurity.UserExists(SysConstants.RootUserName))
                 {
-                    try
-                    {
-                        //this is execute only once
-                        string password = ConfigurationManager.AppSettings["defaultrootpassword"];
-                        WebSecurity.CreateUserAndAccount(SysConstants.RootUserName, password);
-                        WebSecurity.Login(SysConstants.RootUserName, password, persistCookie: model.RememberMe);
-                    }
-                    catch (Exception e)
-                    {
-                        throw e;
-                    }
-                    
-
+                    WebSecurity.CreateUserAndAccount(SysConstants.RootUserName, password, 
+                        new { FirstName ="root", LastName = "root", Email = "root@test.com", Active = true }, false);
+                    WebSecurity.Login(SysConstants.RootUserName, password, persistCookie: model.RememberMe);
                     return RedirectToLocal(returnUrl);
                 }
                 
@@ -95,11 +84,13 @@ namespace ReportSpace.CustomerDashboard.Web.Controllers
 
             if (isActiveDirectory && ValidateExternalUser(model.UserName, model.Password, ContextType.Domain, ConfigurationManager.AppSettings["security.domain_name"]))
             {
+                WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe);
                 return RedirectToLocal(returnUrl);
             }
 
             if (isLocal && ValidateExternalUser(model.UserName, model.Password, ContextType.Machine, Environment.MachineName))
             {
+                WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe);
                 return RedirectToLocal(returnUrl);
             }
 
@@ -115,21 +106,10 @@ namespace ReportSpace.CustomerDashboard.Web.Controllers
             {
                 if (context.ValidateCredentials(username, password))
                 {
-                    if (!_manager.UserExists(username))
-                    {   //create user
-
-                        _repository.Create(new UserProfile()
-                        {
-                            UserName = username,
-                            FirstName = "",
-                            LastName = "",
-                            Email = ""
-                        });
-                    }
-
                     if (!WebSecurity.UserExists(username))
-                    {
-                        WebSecurity.CreateUserAndAccount(username, password);
+                    {   //create user
+                        WebSecurity.CreateUserAndAccount(username, password,
+                            new { FirstName = username, LastName = username, Email = "", Active = true }, false);
                     }
                     response = true;
                 }
@@ -171,20 +151,11 @@ namespace ReportSpace.CustomerDashboard.Web.Controllers
                 // Attempt to register the user
                 try
                 {
-                    UserManager  manager = new UserManager();
-
-                    if (!manager.UserExists(model.UserName) && !WebSecurity.UserExists(model.UserName))
+                    if (!WebSecurity.UserExists(model.UserName))
                     {
-                        Repository<UserProfile> _repository = RepositoryFactory.GetRepository<UserProfile>();
-
-                        _repository.Create(new UserProfile()
-                            {
-                                UserName = model.UserName,
-                                FirstName = model.FirstName,
-                                LastName = model.LastName,
-                                Email = model.Email
-                            });
-                        WebSecurity.CreateUserAndAccount(model.UserName, model.Password, requireConfirmationToken:true);
+                        WebSecurity.CreateUserAndAccount(model.UserName, model.Password,
+                            new { model.FirstName, model.LastName, model.Email, Active = true },
+                            requireConfirmationToken:true);
                         return RedirectToAction("Login", "Account");
                     }
 

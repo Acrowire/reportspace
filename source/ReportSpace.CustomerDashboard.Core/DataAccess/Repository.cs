@@ -8,7 +8,7 @@ using ReportSpace.CustomerDashboard.Core.Models;
 
 namespace ReportSpace.CustomerDashboard.Core.DataAccess
 {
-    public class Repository<T> where T : BaseObject
+    public class Repository<T> : IRepository<T> where T : BaseObject
     {
         private IDbSet<T> _dataSet;
         private DbContext _context;
@@ -51,6 +51,21 @@ namespace ReportSpace.CustomerDashboard.Core.DataAccess
 
             SaveChanges();
             return obj;
+        }
+
+        public T Update(T data) 
+        {
+            /*var original = _dataSet.Find(data.Active);
+            if (original != null)
+            {
+                _context.Entry(original).CurrentValues.SetValues(data);
+                _context.SaveChanges();
+            }*/
+
+            _dataSet.Attach(data);
+            _context.Entry(data).State = EntityState.Modified;
+            _context.SaveChanges();
+            return data;
         }
 
         public bool Exists(Func<T, bool> func)

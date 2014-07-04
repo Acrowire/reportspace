@@ -11,7 +11,7 @@ namespace ReportSpace.CustomerDashboard.Core.Models
     public class UserGroupResourcesPermission : BaseObject
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public new Guid Id { get; set; }
+        public Guid Id { get; set; }
 
         public Guid? UserGroupId { get; set; }
 
