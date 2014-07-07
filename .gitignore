@@ -16,3 +16,6 @@ source/SystemConfigurator/bin
 source/SystemConfigurator/obj
 source/database/database.dbmdl
 source/ReportSpace.CustomerDashboard.v11.suo
+source/database/database.dbmdl
+source/SpecFlowTest/bin
+source/SpecFlowTest/obj
