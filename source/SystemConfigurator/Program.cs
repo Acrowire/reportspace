@@ -43,7 +43,7 @@ namespace SystemConfigurator
         {
             ctx.Database.CreateIfNotExists();
 
-            var root = new UserProfile()
+            /*var root = new UserProfile()
                 {
                     UserName = "root", 
                     Email = "root@root.com",
@@ -52,7 +52,9 @@ namespace SystemConfigurator
                     Active = true,
                     
                 };
-            ctx.UserProfiles.Add(root);
+            ctx.UserProfiles.Add(root);*/
+
+            var root = ctx.UserProfiles.FirstOrDefault(x => x.UserName == "root");
 
             ctx.SaveChanges();
             LoadFunctions(ctx);
@@ -61,33 +63,44 @@ namespace SystemConfigurator
 
         private static void LoadFunctions(UsersContext ctx)
         {
-             var createAdminAccount = new Function()
+             var manageAdminAccount = new Function()
                 {
-                    Name = "Create_Admin_Account",
-                    ResourceName = "Create Admin Account",
-                    Controller = "AdminAccount",
-                    Action = "index"
+                    Name = "Manage_Admin_Account",
+                    ResourceName = "Manager Admin Account",
+                    Controller = "User",
+                    Action = "IndexAdmin"// "Index"
                 };
 
-             var createUserGroup = new Function()
+             var manageUsers = new Function()
              {
-                 Name = "Create_User_Group",
-                 ResourceName = "Create User Group",
-                 Controller = "UserGroup",
-                 Action = "index"
+                 Name = "Manage_Users",
+                 ResourceName = "Manage User Account",
+                 Controller = "User",
+                 Action = "IndexUser"
              };
 
-            ctx.Functions.Add(createAdminAccount);
-            ctx.Functions.Add(createUserGroup);
+             var manageUserGroup = new Function()
+             {
+                 Name = "Manager_Usergroups",
+                 ResourceName = "Manage User Groups",
+                 Controller = "UserGroup",
+                 Action = "Index"
+             };
 
-            functions.Add(createAdminAccount);
-            functions.Add(createUserGroup);
+            ctx.Functions.Add(manageAdminAccount);
+            ctx.Functions.Add(manageUsers);
+
+            ctx.Functions.Add(manageUserGroup);
+
+            functions.Add(manageAdminAccount);
+            functions.Add(manageUsers);
+            functions.Add(manageUserGroup);
 
             var adminTemplate = new Template(){ Name = "Admin" };
 
             adminTemplate.Functions = new Collection<Function>();
-            adminTemplate.Functions.Add(createAdminAccount);
-            adminTemplate.Functions.Add(createUserGroup);
+            adminTemplate.Functions.Add(manageAdminAccount);
+            adminTemplate.Functions.Add(manageUsers);
             ctx.Templates.Add(adminTemplate);
 
             var userTemplate = new Template() { Name = "User" };

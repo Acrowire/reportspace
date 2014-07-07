@@ -1,7 +1,10 @@
 ﻿@model List<ReportSpace.CustomerDashboard.Web.ViewModels.UserProfileViewModel>
 
 <span>
-    <a href="#" class="btn btn-rounded" id="add-user-btn" data-modal-url="@Url.Action("New", "User")"><i class="icon-user"></i>&nbsp; Add User</a>
+    <a href="#" class="btn btn-rounded" id="add-user-btn" data-modal-url="@Url.Action("New", "User", new{ role = ViewBag.OperationRole })">
+        <i class="icon-user"></i>
+        &nbsp; Add  @ViewBag.OperationRole
+    </a>
 </span>
 
 

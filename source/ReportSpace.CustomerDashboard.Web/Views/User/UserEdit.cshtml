@@ -1,8 +1,10 @@
-﻿@model ReportSpace.CustomerDashboard.Web.ViewModels.UserProfileViewModel
+﻿@using ReportSpace.CustomerDashboard.Core.Models
+@model ReportSpace.CustomerDashboard.Web.ViewModels.UserProfileViewModel
 @{
-    ViewBag.DialogTitle = ViewBag.DialogTitle ?? "Create User";
+    ViewBag.DialogTitle = ViewBag.DialogTitle ?? "Create Admin User";
     ViewBag.HttpMethod = Model.Id == 0 ? "POST" : "PUT";
     ViewBag.Action = Model.Id == 0 ? "create" : "update";
+    IEnumerable<EnumRole> roles = ViewBag.AvailableRoles;
     Layout = null;
 }
 
@@ -55,8 +57,25 @@
             @Html.TextBoxFor(m => m.Email, new { @class = "input-large" })
             @Html.ValidationMessageFor(m => m.Email)
         </span>
+        
+         @Html.LabelFor(m => m.Role, "Role")
+        <div class="field">
+            @foreach (var value in roles )
+            {
+                if (!value.ToString().Equals(EnumRole.Root.ToString()))
+                {
+                    <div>
+                        @Html.RadioButtonFor(m => m.Role, value)
+                        @Html.Label(value.ToString())
+                    </div>
+                    <br />
+                }
+            }
+        </div>
 
-        @Html.LabelFor(m => m.Clients, "Assigned Clients:")
+        
+
+        @* @Html.LabelFor(m => m.Clients, "Assigned Clients:")
         <span class="formwrapper">
             <input id="client-select" class="input-large" type="hidden" name="Clients" value="@Model.Clients"/>
         </span>
@@ -64,7 +83,7 @@
         @Html.LabelFor(m => m.Roles, "Assigned Roles:")
         <span class="formwrapper">
             <input id="role-select" class="input-large" type="hidden" name="Roles" value="@Model.Roles"/>
-        </span>
+        </span>*@
 
         @Html.LabelFor(m => m.CompanyLogoFileName, "Company logo")
         <div class="formwrapper">
@@ -178,7 +197,8 @@
             }
         });
 
-        $('#role-select').select2({
+        $('#role-select').select2(
+            {
             multiple: true,
             placeholder: 'Select roles',
             width: 'resolve',
@@ -199,7 +219,7 @@
                 });
 
                 $(element).val = ids.join(',');
-                
+                alert('step 2');
                 callback(data);
             },
             ajax: { 
@@ -213,12 +233,13 @@
                     };
                 },
                 results: function (data, page) { // parse the results into the format expected by Select2.
+                    
                     var length = data.length;
                     for (var i = 0; i < length; i++) {
                         data[i].id = data[i].Id;
                         data[i].text = data[i].Name;
                     }
-
+                    alert('Step1');
                     return { results: data };
                 }
             }

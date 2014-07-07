@@ -20,6 +20,7 @@
                                       UserName = source.UserName,
                                       CompanyLogoFileName = source.CompanyLogoFileName,
                                       IsConfirmed = source.Membership.IsConfirmed,
+                                      Role = source.Role,
                                       Clients = string.Join(",", source.Clients.Select(c => string.Format("{0};{1}", c.Id, c.Name)).ToArray()),
                                       Roles = string.Join(",", source.Roles.Select(r => string.Format("{0};{1}", r.Id, r.Name)).ToArray())
                                   };

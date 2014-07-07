@@ -33,7 +33,7 @@ namespace ReportSpace.CustomerDashboard.Web.Converters
             destination.UserId = source.Id;
             destination.UserName = source.UserName;
             destination.CompanyLogoFileName = source.CompanyLogoFileName;
-
+            destination.Role = source.Role;
             destination.Roles = _userContext.Roles.FilterByListOfIds(source.RoleIds).ToList();
             destination.Clients = _userContext.Clients.FilterByListOfIds(source.ClientIds).ToList();
 

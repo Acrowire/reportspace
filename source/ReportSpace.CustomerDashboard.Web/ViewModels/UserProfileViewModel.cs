@@ -28,6 +28,8 @@
         [EmailAddress]
         public string Email { get; set; }
 
+        public EnumRole Role { get; set; }
+
         public string CompanyLogoFileName { get; set; }
 
         public string Clients { get; set; }

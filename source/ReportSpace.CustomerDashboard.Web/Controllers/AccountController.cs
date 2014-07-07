@@ -70,7 +70,7 @@ namespace ReportSpace.CustomerDashboard.Web.Controllers
                     !WebSecurity.UserExists(SysConstants.RootUserName))
                 {
                     WebSecurity.CreateUserAndAccount(SysConstants.RootUserName, password, 
-                        new { FirstName ="root", LastName = "root", Email = "root@test.com", Active = true }, false);
+                        new { FirstName ="root", LastName = "root", Email = "root@test.com", Active = true, Role = 0 }, false);
                     WebSecurity.Login(SysConstants.RootUserName, password, persistCookie: model.RememberMe);
                     return RedirectToLocal(returnUrl);
                 }
@@ -101,7 +101,7 @@ namespace ReportSpace.CustomerDashboard.Web.Controllers
 
         public bool ValidateExternalUser(string username, string password, ContextType contexttype, string contextName)
         {
-            bool response = false;
+            var response = false;
             using (PrincipalContext context = new PrincipalContext(contexttype, contextName))
             {
                 if (context.ValidateCredentials(username, password))
@@ -109,7 +109,7 @@ namespace ReportSpace.CustomerDashboard.Web.Controllers
                     if (!WebSecurity.UserExists(username))
                     {   //create user
                         WebSecurity.CreateUserAndAccount(username, password,
-                            new { FirstName = username, LastName = username, Email = "", Active = true }, false);
+                            new { FirstName = username, LastName = username, Email = "", Active = true, Role = 1 }, false);
                     }
                     response = true;
                 }
@@ -154,7 +154,7 @@ namespace ReportSpace.CustomerDashboard.Web.Controllers
                     if (!WebSecurity.UserExists(model.UserName))
                     {
                         WebSecurity.CreateUserAndAccount(model.UserName, model.Password,
-                            new { model.FirstName, model.LastName, model.Email, Active = true },
+                            new { model.FirstName, model.LastName, model.Email, Active = true, Role = 1 },
                             requireConfirmationToken:true);
                         return RedirectToAction("Login", "Account");
                     }

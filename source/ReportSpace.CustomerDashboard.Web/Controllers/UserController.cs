@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Web.Mvc;
 using ReportSpace.CustomerDashboard.BusinessLayer.Managers;
+using ReportSpace.CustomerDashboard.Core.QueryableExtensions;
 
 namespace ReportSpace.CustomerDashboard.Web.Controllers
 {
@@ -26,12 +27,39 @@ namespace ReportSpace.CustomerDashboard.Web.Controllers
             _userContext = context;
         }
 
+        //Add Admin
         public ActionResult Index()
         {
-            List<UserProfile> userProfiles = _userContext.UserProfiles.ToList();
-
+            ViewBag.OperationRole = EnumRole.Admin;
+            List<UserProfile> userProfiles = _userContext.UserProfiles.Where(x => x.Role == EnumRole.Admin).ToList();
             return View(userProfiles.Select(Mapper.Map<UserProfileViewModel>).ToList());
         }
+
+        //Add Admin
+        public ActionResult IndexAdmin()
+        {
+            ViewBag.OperationRole = EnumRole.Admin;
+            List<UserProfile> userProfiles = _userContext.UserProfiles.Where(x => x.Role == EnumRole.Admin).ToList();
+            return View("Index",userProfiles.Select(Mapper.Map<UserProfileViewModel>).ToList());
+        }
+
+        public ActionResult IndexUser()
+        {
+            ViewBag.OperationRole = EnumRole.User;
+            List<UserProfile> userProfiles = _userContext.UserProfiles.Where(x => x.Role == EnumRole.User).ToList();
+            return View("Index", userProfiles.Select(Mapper.Map<UserProfileViewModel>).ToList());
+        }
+
+        public ActionResult New( EnumRole role)
+        {
+            var availableRoles = new List<EnumRole> { role };
+            ViewBag.AvailableRoles = availableRoles;
+
+            ViewBag.DialogTitle = "Create " + role.ToString();
+
+            return View("UserEdit", new UserProfileViewModel());
+        }
+
 
         public ActionResult Show(int id)
         {
@@ -40,11 +68,7 @@ namespace ReportSpace.CustomerDashboard.Web.Controllers
             return View("_User", Mapper.Map<UserProfileViewModel>(userProfile));
         }
 
-        public ActionResult New()
-        {
-            return View("UserEdit", new UserProfileViewModel());
-        }
-
+        
         public ActionResult Create(UserProfileViewModel userProfileViewModel)
         {
             if (!ModelState.IsValid)
@@ -107,38 +131,20 @@ namespace ReportSpace.CustomerDashboard.Web.Controllers
 
         private UserProfile SaveUserProfile(UserProfile userProfile, string password)
         {
-            /*var manager = new RepositoryManager();
-
-            WebSecurity.CreateUserAndAccount(userProfile.UserName, password);
-            int id = WebSecurity.GetUserId(userProfile.UserName);
-            
-            var newUser = manager.Create(new UserProfile()
-                {
-                    UserName = userProfile.UserName,
-                    FirstName = userProfile.FirstName,
-                    LastName = userProfile.LastName,
-                    Email = userProfile.Email,
-                    CompanyLogoFileName = userProfile.CompanyLogoFileName,
-                    Clients = userProfile.Clients,
-                    Roles = userProfile.Roles,
-                    MembershipId = id
-                });
-            return newUser;*/
-
             WebSecurity.CreateUserAndAccount(
                 userProfile.UserName,password,
-                new { userProfile.FirstName, userProfile.LastName, 
-                    userProfile.Email, userProfile.CompanyLogoFileName, Active=true });
+                new { userProfile.FirstName, userProfile.LastName,
+                      userProfile.Email,
+                      userProfile.CompanyLogoFileName,
+                      userProfile.Role,
+                      Active = true,
+                });
 
-            
             var savedUserProfile = _userContext.UserProfiles.First(up => up.UserName == userProfile.UserName);
             savedUserProfile.Clients = userProfile.Clients;
             savedUserProfile.Roles = userProfile.Roles;
             _userContext.SaveChanges();
             return savedUserProfile;
-             
-
-
         }
     }
 }

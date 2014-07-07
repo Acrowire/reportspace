@@ -28,6 +28,8 @@ namespace ReportSpace.CustomerDashboard.Core.Models
 
         public string CompanyLogoFileName { get; set; }
 
+        public EnumRole Role { get; set; }
+
         public virtual ICollection<Role> Roles { get; set; }
 
         public virtual Membership Membership { get; set; }
@@ -47,4 +49,15 @@ namespace ReportSpace.CustomerDashboard.Core.Models
 
 
     }
+
+    public enum EnumRole
+    {
+        Root = 0,
+        Admin = 1,
+        User = 2,
+
+    }
+    
+    
+
 }

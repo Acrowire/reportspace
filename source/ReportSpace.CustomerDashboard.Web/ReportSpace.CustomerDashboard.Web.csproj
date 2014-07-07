@@ -238,6 +238,7 @@
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\SiteController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\UserGroupController.cs" />
     <Compile Include="Converters\ReportToReportViewModelConverter.cs" />
     <Compile Include="Converters\ReportViewModelToReportConverter.cs" />
     <Compile Include="Converters\UserProfileToUserProfileVMConverter.cs" />
@@ -1018,6 +1019,8 @@
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
     <Content Include="Views\Category\Display.cshtml" />
+    <Content Include="Views\UserGroup\Index.cshtml" />
+    <Content Include="Views\UserGroup\_UserGroup.cshtml" />
     <None Include="Web.dev_acrowire.config">
       <DependentUpon>Web.config</DependentUpon>
       <SubType>Designer</SubType>
