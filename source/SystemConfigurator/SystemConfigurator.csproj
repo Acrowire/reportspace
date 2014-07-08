@@ -60,16 +60,6 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ReportSpace.CustomerDashboard.BusinessLayer\ReportSpace.CustomerDashboard.BusinessLayer.csproj">
-      <Project>{ad4edef5-ff82-42a3-bfee-6d6e75765384}</Project>
-      <Name>ReportSpace.CustomerDashboard.BusinessLayer</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ReportSpace.CustomerDashboard.Core\ReportSpace.CustomerDashboard.Core.csproj">
-      <Project>{ce1367e7-17a1-4009-925f-c5e2db331fa8}</Project>
-      <Name>ReportSpace.CustomerDashboard.Core</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

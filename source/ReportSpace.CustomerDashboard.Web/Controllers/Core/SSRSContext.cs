@@ -56,7 +56,7 @@ namespace ReportSpace.CustomerDashboard.Web.Controllers.Core
 
                 this.m_client.Credentials = new System.Net.NetworkCredential(username, password, domain);
 
-                this.m_client.Url = ConfigurationManager.AppSettings["ReportServerUrl"];
+                this.m_client.Url = ConfigurationManager.AppSettings["ssrs.server.url"];
 
                 result = true;
             }

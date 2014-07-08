@@ -1,0 +1,99 @@
+﻿@model ReportSpace.Web.Models.LoginModel
+@{
+    ViewBag.Title = "Login";
+
+}
+
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>ReportSpace | Client Dashboard</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- CSS -->
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/css/bootstrap-responsive.min.css" rel="stylesheet" />
+    <link href="~/Content/css/animate.min.css" rel="stylesheet" />
+    <link href="~/Content/css/style.default.css" rel="stylesheet" />
+    <link href="~/Content/css/style.green.css" rel="stylesheet" />
+    <!-- JS -->
+    <script src="~/Content/lib/jquery-1.9.1.min.js"></script>
+    <script src="~/Content/lib/jquery-migrate-1.1.1.min.js"></script>
+    <script src="~/Content/lib/jquery-ui-1.9.2.min.js"></script>
+    <script src="~/Content/lib/modernizr.min.js"></script>
+    <script src="~/Content/lib/bootstrap.min.js"></script>
+    <script src="~/Content/lib/jquery.cookie.js"></script>
+    <script src="~/Content/lib/custom.js"></script>
+   
+</head>
+<body class="loginpage">
+
+    <div class="loginpanel">
+        <div class="loginpanelinner">
+            <div class="logo animate0 bounceIn">
+                <img src="~/Content/images/logo_white_full.fw.png" alt="ReportSpace" />
+            </div>
+            @using (Html.BeginForm(new { ViewBag.ReturnUrl }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="inputwrapper animate1 bounceIn">
+                    @Html.TextBoxFor(m => m.UserName, new { id = "username", placeholder = "Username" })
+                </div>
+                <div class="inputwrapper animate1 bounceIn">
+                    @Html.PasswordFor(m => m.Password, new { id = "password", placeholder = "Password" })
+                </div>
+                <div class="inputwrapper animate1 bounceIn">
+                    <button name="submit" onclick="">Sign In</button>
+                </div>
+                <div class="inputwrapper animate1 bounceIn">
+                    <div>
+                        @Html.CheckBoxFor(m => m.RememberMe, new { @class = "remember" })
+                        @Html.LabelFor(m => m.RememberMe)
+                    </div>
+                </div>
+                <div>
+                    @if (@ViewBag.Message != String.Empty)
+                    {
+                        <div id="login_form_errors" class="alert alert-error">
+                            <div class="span6 danger"><strong>Oh no!</strong> @ViewBag.Message </div>
+                            @Html.ValidationSummary(true)
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+        <!--loginpanelinner-->
+    </div>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#login_form_errors').hide();
+            $('#login').submit(function () {
+                var u = $('#username').val();
+                var p = $('#password').val();
+                if (u == '' && p == '') {
+                    $('.login-alert').fadeIn();
+                    return false;
+                }
+            });
+        });
+
+        function show_val() {
+            $('#login_form_errors').show();
+        }
+    </script>
+</body>
+<footer class="loginfooter">
+    <div class="content-wrapper">
+        <div class="float-left">
+            <p>&copy; @DateTime.Now.Year - ReportSpace</p>
+        </div>
+    </div>
+</footer>
+</html>

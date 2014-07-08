@@ -1,0 +1,4 @@
+G:\reportspace\source\ReportSpace.Core\bin\Debug\ReportSpace.Core.dll
+G:\reportspace\source\ReportSpace.Core\bin\Debug\ReportSpace.Core.pdb
+G:\reportspace\source\ReportSpace.Core\obj\Debug\ReportSpace.Core.dll
+G:\reportspace\source\ReportSpace.Core\obj\Debug\ReportSpace.Core.pdb

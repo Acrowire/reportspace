@@ -1,0 +1,9 @@
+G:\reportspace\source\ReportSpace.Dal\obj\Debug\ReportSpace.Dal.csprojResolveAssemblyReference.cache
+G:\reportspace\source\ReportSpace.Dal\bin\Debug\ReportSpace.Dal.dll
+G:\reportspace\source\ReportSpace.Dal\bin\Debug\ReportSpace.Dal.pdb
+G:\reportspace\source\ReportSpace.Dal\bin\Debug\ReportSpace.Core.dll
+G:\reportspace\source\ReportSpace.Dal\bin\Debug\ReportSpace.Data.dll
+G:\reportspace\source\ReportSpace.Dal\bin\Debug\ReportSpace.Core.pdb
+G:\reportspace\source\ReportSpace.Dal\bin\Debug\ReportSpace.Data.pdb
+G:\reportspace\source\ReportSpace.Dal\obj\Debug\ReportSpace.Dal.dll
+G:\reportspace\source\ReportSpace.Dal\obj\Debug\ReportSpace.Dal.pdb

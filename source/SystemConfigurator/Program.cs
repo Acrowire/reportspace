@@ -43,7 +43,7 @@ namespace SystemConfigurator
         {
             ctx.Database.CreateIfNotExists();
 
-            /*var root = new UserProfile()
+            var root = new UserProfile()
                 {
                     UserName = "root", 
                     Email = "root@root.com",
@@ -52,9 +52,7 @@ namespace SystemConfigurator
                     Active = true,
                     
                 };
-            ctx.UserProfiles.Add(root);*/
-
-            var root = ctx.UserProfiles.FirstOrDefault(x => x.UserName == "root");
+            ctx.UserProfiles.Add(root);
 
             ctx.SaveChanges();
             LoadFunctions(ctx);

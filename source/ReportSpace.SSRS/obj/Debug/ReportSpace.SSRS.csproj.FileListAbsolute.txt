@@ -1,0 +1,7 @@
+G:\reportspace\source\ReportSpace.SSRS\bin\Debug\ReportSpace.SSRS.dll
+G:\reportspace\source\ReportSpace.SSRS\bin\Debug\ReportSpace.SSRS.pdb
+G:\reportspace\source\ReportSpace.SSRS\bin\Debug\ReportSpace.Core.dll
+G:\reportspace\source\ReportSpace.SSRS\bin\Debug\ReportSpace.Core.pdb
+G:\reportspace\source\ReportSpace.SSRS\obj\Debug\ReportSpace.SSRS.dll
+G:\reportspace\source\ReportSpace.SSRS\obj\Debug\ReportSpace.SSRS.pdb
+G:\reportspace\source\ReportSpace.SSRS\obj\Debug\ReportSpace.SSRS.csprojResolveAssemblyReference.cache
