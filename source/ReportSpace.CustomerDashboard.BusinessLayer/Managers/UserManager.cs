@@ -21,7 +21,7 @@ namespace ReportSpace.CustomerDashboard.BusinessLayer.Managers
 
     public class UserManager
     {
-        private readonly Repository<UserProfile> _repository = RepositoryFactory.GetRepository<UserProfile>();
+        private readonly IRepository<UserProfile> _repository = RepositoryFactory.GetRepository<UserProfile>();
 
         public bool ValidateDataBaseUser(string user, string password)
         {

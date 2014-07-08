@@ -19,3 +19,5 @@ source/ReportSpace.CustomerDashboard.v11.suo
 source/database/database.dbmdl
 source/SpecFlowTest/bin
 source/SpecFlowTest/obj
+source/ReportSpace.CustomDashboard.Common/bin
+source/ReportSpace.CustomDashboard.Common/obj

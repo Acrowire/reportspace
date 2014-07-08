@@ -9,7 +9,7 @@ using ReportSpace.CustomerDashboard.Core.Models;
 
 namespace ReportSpace.CustomerDashboard.BusinessLayer.Managers
 {
-    public class RepositoryManager
+    public class RepositoryManager : IDisposable
     {
 
         public T Retrieve<T>(Func<T, bool> func ) where T : BaseObject
@@ -37,6 +37,24 @@ namespace ReportSpace.CustomerDashboard.BusinessLayer.Managers
         {
             var repository = RepositoryFactory.GetRepository<T>();
             return repository.Update(data);
+        }
+
+        public IEnumerable<T> GetAll<T>() where T : BaseObject
+        {
+            var repository = RepositoryFactory.GetRepository<T>();
+            return repository.GetAll();
+        }
+
+        public IEnumerable<T> GetAll<T>(Func<T, bool> filter ) where T : BaseObject
+        {
+            var repository = RepositoryFactory.GetRepository<T>();
+            return repository.GetAll(filter);
+        }
+
+
+        public void Dispose()
+        {
+            
         }
     }
 }

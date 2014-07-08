@@ -3,6 +3,8 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using ReportSpace.CustomDashboard.Common;
+using ReportSpace.CustomerDashboard.Core.DataAccess;
 
 namespace ReportSpace.CustomerDashboard.Web
 {
@@ -31,6 +33,22 @@ namespace ReportSpace.CustomerDashboard.Web
             DataBaseConfig.RegisterDatabase();
             AuthConfig.RegisterAuth();
             MappingConfig.RegisterMaps();
+        }
+
+        protected void Application_BeginRequest()
+        {
+            AppContext.Context.HttpContext = HttpContext.Current;
+            AppContext.Context.DbContext = new UsersContext();
+        }
+
+        protected void Application_EndRequest()
+        {
+            var ctx = AppContext.Context.DbContext as UsersContext;
+            if (ctx != null)
+            {
+                ctx.SaveChanges();
+                ctx.Dispose();
+            }
         }
     }
 }

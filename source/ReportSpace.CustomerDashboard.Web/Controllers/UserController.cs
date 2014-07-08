@@ -85,10 +85,14 @@ namespace ReportSpace.CustomerDashboard.Web.Controllers
             return this.PartialView("_User", Mapper.Map<UserProfileViewModel>(newProfile));
         }
 
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int id, EnumRole role)
         {
             UserProfile userProfile = _userContext.UserProfiles.Find(id);
-            
+
+            var availableRoles = new List<EnumRole> { role };
+            ViewBag.AvailableRoles = availableRoles;
+
+
             ViewBag.DialogTitle = "Edit User";
             return View("UserEdit", Mapper.Map<UserProfileViewModel>(userProfile));
         }
@@ -106,6 +110,8 @@ namespace ReportSpace.CustomerDashboard.Web.Controllers
             {
                 ChangePassword(userProfileViewModel, userProfile);
             }
+
+            ViewBag.OperationRole = userProfileViewModel.Role;
 
             _userContext.SaveChanges();
             

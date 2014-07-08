@@ -1,1 +1,36 @@
-﻿
+﻿@using ReportSpace.CustomerDashboard.Web.Helpers
+@model ReportSpace.CustomerDashboard.Core.Models.UserGroup
+@{
+    var rowClass = String.Empty;
+}
+<tr class="@rowClass" id="user_@Model.Id">
+    <td>@Model.Name</td>
+    <td class="left">   
+        <a href="#" class="btn edit-user-btn" data-modal-url="@Url.Action("Edit", new { id = Model.Id})">
+            <i class="iconfa-edit"></i>
+        </a>
+        <a href="#" class="btn activate-user" data-url="">
+            <i class="iconfa-thumbs-up"></i>
+        </a>
+
+        @Ajax.ImageActionLink(
+                "<i class=\"icon-trash\"></i>", 
+                "Delete", 
+                "UserGroup", 
+                new { id = @Model.Id }, 
+                new AjaxOptions
+                    {
+                        Confirm = "Delete user?", 
+                        HttpMethod = "Delete",
+                        OnSuccess = "onSuccess"
+                    },
+                new { @class = "btn"})
+    </td>
+</tr>
+
+<script type="text/javascript">
+    function onSuccess(data) {
+        var deletedUser = "#user_".concat(data.Id);
+        $(deletedUser).remove();
+    }
+</script>

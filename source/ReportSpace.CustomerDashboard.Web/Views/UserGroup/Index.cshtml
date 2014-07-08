@@ -1,7 +1,8 @@
-﻿@model List<ReportSpace.CustomerDashboard.Web.ViewModels.UserProfileViewModel>
+﻿@model IEnumerable<ReportSpace.CustomerDashboard.Core.Models.UserGroup>
 
 <span>
-    <a href="#" class="btn btn-rounded" id="add-user-btn" data-modal-url="@Url.Action("New", "UserGroup" )">
+    <a href="#" class="btn btn-rounded" id="add-user-btn" 
+        data-modal-url="@Url.Action("New", "UserGroup" )">
         <i class="icon-user"></i>
         &nbsp; Add User Group
     </a>
@@ -20,9 +21,9 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var user in Model)
+        @foreach (var userGroup in Model)
         {
-            @Html.Partial("_UserGroup", user)
+            @Html.Partial("_UserGroup", userGroup)
         }
     </tbody>
 </table>

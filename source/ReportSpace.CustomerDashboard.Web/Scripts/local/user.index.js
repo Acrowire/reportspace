@@ -4,7 +4,7 @@
         $.ajax({
             url: url,
             cache: false
-            }).then(function (data) {
+        }).then(function (data) {
                 $('#edit-user-container').html(data);
                 $('#edit-user').modal('show');
             });

@@ -16,6 +16,12 @@ namespace ReportSpace.CustomerDashboard.Core.DataAccess
 
         T Create(T data);
 
+        T Update(T data);
+        
+        IEnumerable<T> GetAll();
+
+        IEnumerable<T> GetAll(Func<T, bool> filter);
+
         bool Exists(Func<T, bool> func);
 
     }

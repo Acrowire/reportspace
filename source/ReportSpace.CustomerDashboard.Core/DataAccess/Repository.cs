@@ -8,7 +8,7 @@ using ReportSpace.CustomerDashboard.Core.Models;
 
 namespace ReportSpace.CustomerDashboard.Core.DataAccess
 {
-    public class Repository<T> : IRepository<T> where T : BaseObject
+    public class Repository<T> : IDisposable, IRepository<T> where T : BaseObject
     {
         private IDbSet<T> _dataSet;
         private DbContext _context;
@@ -68,11 +68,26 @@ namespace ReportSpace.CustomerDashboard.Core.DataAccess
             return data;
         }
 
+        public IEnumerable<T> GetAll()
+        {
+            return _dataSet.ToList();
+        }
+
+        public IEnumerable<T> GetAll(Func<T, bool> filter )
+        {
+            return _dataSet.Where(filter);
+        }
+
         public bool Exists(Func<T, bool> func)
         {
             T obj = _dataSet.FirstOrDefault(func);
             return obj!=null;
         }
 
+        public void Dispose()
+        {
+            //_context.SaveChanges();
+            _context.Dispose();
+        }
     }
 }

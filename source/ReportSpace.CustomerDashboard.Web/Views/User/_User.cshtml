@@ -11,7 +11,7 @@
     <td>@Model.Role</td>
     <td>@Model.IsConfirmed</td>
     <td class="left">   
-        <a href="#" class="btn edit-user-btn" data-modal-url="@Url.Action("edit", new { id = Model.Id})"><i class="iconfa-edit"></i></a>
+        <a href="#" class="btn edit-user-btn" data-modal-url="@Url.Action("edit", new { id = Model.Id, role = ViewBag.OperationRole})"><i class="iconfa-edit"></i></a>
         @if (User.IsInRole("Administrator") && !Model.IsConfirmed)
         {
             

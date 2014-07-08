@@ -5,6 +5,7 @@ using System.ComponentModel.Composition.Hosting;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using ReportSpace.CustomDashboard.Common;
 using ReportSpace.CustomerDashboard.Core.Models;
 
 namespace ReportSpace.CustomerDashboard.Core.DataAccess
@@ -38,13 +39,14 @@ namespace ReportSpace.CustomerDashboard.Core.DataAccess
             Dictionary.Add(typeof(Template), () => new Repository<Template>(new UsersContext()));*/
         }
 
-        public static Repository<T> GetRepository<T>() where T : BaseObject
+        public static IRepository<T> GetRepository<T>() where T : BaseObject
         {
             String name = typeof(T).Name;
             var list = _dataObjects.Where(s => s.Metadata["BaseObjectName"].Equals(name));
             if (list.Any())
             {
-                return new Repository<T>(new UsersContext());
+                var ctx = AppContext.Context.DbContext as UsersContext;
+                return new Repository<T>(ctx);
             }
             throw new KeyNotFoundException("The type [" + (typeof(T) + "] could not be found"));
 

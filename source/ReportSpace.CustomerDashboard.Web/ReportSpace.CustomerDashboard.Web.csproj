@@ -1021,6 +1021,7 @@
     <Content Include="Views\Category\Display.cshtml" />
     <Content Include="Views\UserGroup\Index.cshtml" />
     <Content Include="Views\UserGroup\_UserGroup.cshtml" />
+    <Content Include="Views\UserGroup\UserGroupEdit.cshtml" />
     <None Include="Web.dev_acrowire.config">
       <DependentUpon>Web.config</DependentUpon>
       <SubType>Designer</SubType>
@@ -1209,6 +1210,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ReportSpace.CustomDashboard.Common\ReportSpace.CustomDashboard.Common.csproj">
+      <Project>{3d7dbe15-1cae-4f87-a039-4f5e4c6417ae}</Project>
+      <Name>ReportSpace.CustomDashboard.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ReportSpace.CustomerDashboard.BusinessLayer\ReportSpace.CustomerDashboard.BusinessLayer.csproj">
       <Project>{ad4edef5-ff82-42a3-bfee-6d6e75765384}</Project>
       <Name>ReportSpace.CustomerDashboard.BusinessLayer</Name>

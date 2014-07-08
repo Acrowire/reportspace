@@ -13,7 +13,7 @@ namespace ReportSpace.CustomerDashboard.BusinessLayer.Context
 
         public static void Initialize()
         {
-            Repository<UserProfile> repository = RepositoryFactory.GetRepository<UserProfile>();
+            IRepository<UserProfile> repository = RepositoryFactory.GetRepository<UserProfile>();
 
         }
 
