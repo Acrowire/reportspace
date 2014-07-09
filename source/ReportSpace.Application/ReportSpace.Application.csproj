@@ -66,15 +66,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Security\ApplicationPasswordStore.cs" />
     <Compile Include="Security\ApplicationRole.cs" />
-    <Compile Include="Security\ApplicationRoleStore.cs" />
+    <Compile Include="Security\ApplicationSecurityComponent.cs" />
     <Compile Include="Security\ApplicationSecurityException.cs" />
     <Compile Include="Security\ApplicationUser.cs" />
-    <Compile Include="Security\ApplicationUserClaimStore.cs" />
     <Compile Include="Security\ApplicationUserSecurityStampStore.cs" />
     <Compile Include="Security\ApplicationUserManager.cs" />
-    <Compile Include="Security\ApplicationUserStore.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ReportSpace.Bll\ReportSpace.Bll.csproj">

@@ -39,6 +39,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exceptions\RolesException.cs" />
+    <Compile Include="Exceptions\UsersException.cs" />
+    <Compile Include="Exceptions\UsersRolesException.cs" />
+    <Compile Include="Extensions.cs" />
     <Compile Include="GlobalTools.cs" />
     <Compile Include="GlobalTools.generated.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

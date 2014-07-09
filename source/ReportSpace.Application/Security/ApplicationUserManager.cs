@@ -16,15 +16,15 @@ namespace ReportSpace.Application.Security
         #endregion
 
         #region [ Constructor ]
-        public ApplicationUserManager(ApplicationUserStore store) :
-             base(store)
+        public ApplicationUserManager(ApplicationSecurityComponent comp)
+            : base(comp)
         {
             
         }
         #endregion
 
         #region [ Overides ]
-        
+
         #endregion
     }
 }
