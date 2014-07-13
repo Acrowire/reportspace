@@ -11,7 +11,7 @@ namespace ReportSpace.CustomerDashboard.Core.DataAccess
 
         public static String GetConnectionString(string databasename = "")
         {
-            string connectionString = "Data Source=(local);Initial Catalog=" + ((String.IsNullOrEmpty(databasename)) ? DataBaseName : databasename) + ";Integrated Security=True";
+            string connectionString = "Data Source=ACROWINSQL03;Initial Catalog=" + ((String.IsNullOrEmpty(databasename)) ? DataBaseName : databasename) + ";Integrated Security=True";
             return connectionString;
         }
         

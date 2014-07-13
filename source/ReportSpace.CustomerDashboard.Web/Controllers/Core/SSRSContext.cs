@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Configuration;
+using ReportSpace.CustomerDashboard.Web.ReportingService2010;
 
 namespace ReportSpace.CustomerDashboard.Web.Controllers.Core
 {
@@ -33,9 +34,6 @@ namespace ReportSpace.CustomerDashboard.Web.Controllers.Core
                 return this.m_client;
             }
         }
-        #endregion
-
-        #region [ Queries ] 
         #endregion
 
         #region [ Actions ] 
@@ -73,27 +71,74 @@ namespace ReportSpace.CustomerDashboard.Web.Controllers.Core
         {
             var vm = new CataLogViewModel();
             vm.Path = path;
-            ReportingService2010.CatalogItem[] items = new ReportingService2010.CatalogItem[0];
 
-            // Check Cache for Path
-            this.m_client.Credentials = System.Net.CredentialCache.DefaultCredentials;
-            items = this.m_client.ListChildren(path, false);
-
-
-            foreach (var item in items)
+            #region [ Resource Plugins ] 
+            try
             {
-                var vmItem = new CatalogItemViewModel();
-                vmItem.CreatedBy = item.CreatedBy;
-                vmItem.CreationDate = item.CreationDate; 
-                vmItem.Description = item.Description; 
-                vmItem.Name = item.Name; 
-                vmItem.Path = item.Path; 
-                vmItem.TypeName = item.TypeName;
-                vmItem.VirtualPath = item.VirtualPath;
-                vm.Items.Add(vmItem);
+                ReportingService2010.CatalogItem[] items = new ReportingService2010.CatalogItem[0];
+
+                // Check Cache for Path
+                this.m_client.Credentials = System.Net.CredentialCache.DefaultCredentials;
+                items = this.m_client.ListChildren(path, false);
+
+
+                foreach (var item in items)
+                {
+                    var vmItem = new CatalogItemViewModel();
+                    vmItem.CreatedBy = item.CreatedBy;
+                    vmItem.CreationDate = item.CreationDate;
+                    vmItem.Description = item.Description;
+                    vmItem.Name = item.Name;
+                    vmItem.Path = item.Path;
+                    vmItem.TypeName = item.TypeName;
+                    vmItem.VirtualPath = item.VirtualPath;
+                    vm.Items.Add(vmItem);
+                }
             }
+            catch (Exception x)
+            {
+                // Create a Basic Empty Catalog Item 
+                var generic = new CatalogItemViewModel()
+                {
+                    CreatedBy = "Application",
+                    CreationDate = DateTime.Now,
+                    Description = "You currently have no resources!",
+                    Name = "None",
+                    Path = path,
+                    TypeName = "/type",
+                    VirtualPath = path
+                };
+
+                vm.Items.Add(generic);
+            }
+            #endregion
 
             return vm;
+        }
+
+        public bool CreateCatalog(String username)
+        {
+            // when a new User is Created, we need to automatically create the Folder in SSRS for them
+            bool created = false;
+
+            try
+            {
+
+                Property newProp = new Property();
+                newProp.Name = "FolderType";
+                newProp.Value = "User";
+                Property[] props = new Property[1];
+                props[0] = newProp;
+
+                this.m_client.CreateFolder(username, "/", props);
+                created = true;
+            }
+            catch (Exception x)
+            {
+                throw x;
+            }
+
+            return created;
         }
 
         public void AddReport()

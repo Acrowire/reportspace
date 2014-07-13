@@ -17,6 +17,7 @@ using ReportSpace.CustomerDashboard.Core;
 using ReportSpace.CustomerDashboard.Core.Models;
 using System.DirectoryServices.AccountManagement;
 using System.Configuration;
+using ReportSpace.CustomerDashboard.Web.Controllers.Core;
 
 
 namespace ReportSpace.CustomerDashboard.Web.Controllers
@@ -48,51 +49,49 @@ namespace ReportSpace.CustomerDashboard.Web.Controllers
         [AllowAnonymous]
         public ActionResult Login(LoginModel model, string returnUrl)
         {
+            // Arrange authentication Managers
             _manager = new UserManager();
             _repositoryManager = new RepositoryManager();
 
-               // HTTP Context Infomration 
+            // HTTP Context Infomration 
             var headers = Request.ServerVariables;
             
-            // Eval Username input format then try to authenticate using differnet means 
-            // Attempt Local 
-            bool isLocal = (model.UserName.Contains((@"\")));
-            // Attempt AD 
-            bool isActiveDirectory = (model.UserName.Contains("@"));
-            // Is ASP Membership USer 
-            bool isMembership = ((isLocal && isActiveDirectory) == false);
-            
+            // Simple Detect Active Directory / Internal 
+            bool isActiveDirectory = (model.UserName.Contains("\\"));
+            bool isMembership = ((isActiveDirectory) == false);
+
+            #region [ Login through Memebership ] 
             if (isMembership && ModelState.IsValid)
             {
-                string password = ConfigurationManager.AppSettings["defaultrootpassword"];
+                string password = "!QAZxsw2";
                 if (model.UserName.Equals(SysConstants.RootUserName) &&
                     model.Password.Equals(password) &&
                     !WebSecurity.UserExists(SysConstants.RootUserName))
                 {
-                    WebSecurity.CreateUserAndAccount(SysConstants.RootUserName, password, 
-                        new { FirstName ="root", LastName = "root", Email = "root@test.com", Active = true, Role = 0 }, false);
+                    SSRSContext c = new SSRSContext();
+                    c.CreateCatalog(model.UserName);
+                    WebSecurity.CreateUserAndAccount(SysConstants.RootUserName, password,
+                        new { FirstName = "root", LastName = "root", Email = "root@test.com", Active = true, Role = 0 }, false);
                     WebSecurity.Login(SysConstants.RootUserName, password, persistCookie: model.RememberMe);
                     return RedirectToLocal(returnUrl);
                 }
-                
+
                 if (_manager.ValidateDataBaseUser(model.UserName, model.Password) &&
                     WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
                 {
                     return RedirectToLocal(returnUrl);
                 }
             }
+            #endregion
 
+            #region [ Login and Validate via Active Directory ]
             if (isActiveDirectory && ValidateExternalUser(model.UserName, model.Password, ContextType.Domain, ConfigurationManager.AppSettings["security.domain_name"]))
             {
                 WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe);
                 return RedirectToLocal(returnUrl);
             }
+            #endregion
 
-            if (isLocal && ValidateExternalUser(model.UserName, model.Password, ContextType.Machine, Environment.MachineName))
-            {
-                WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe);
-                return RedirectToLocal(returnUrl);
-            }
 
             // If we got this far, something failed, redisplay form
             ModelState.AddModelError(string.Empty, "The user name or password provided is incorrect.");
@@ -104,10 +103,14 @@ namespace ReportSpace.CustomerDashboard.Web.Controllers
             var response = false;
             using (PrincipalContext context = new PrincipalContext(contexttype, contextName))
             {
-                if (context.ValidateCredentials(username, password))
+                string clean_ad_name = username.Split('\\')[1];
+                if (context.ValidateCredentials(clean_ad_name, password))
                 {
-                    if (!WebSecurity.UserExists(username))
-                    {   //create user
+                    if (!WebSecurity.UserExists(clean_ad_name))
+                    {   
+                        SSRSContext c = new SSRSContext();
+                        c.CreateCatalog(clean_ad_name);
+                        
                         WebSecurity.CreateUserAndAccount(username, password,
                             new { FirstName = username, LastName = username, Email = "", Active = true, Role = 1 }, false);
                     }
