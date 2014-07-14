@@ -26,5 +26,11 @@ namespace ReportSpace.WebApplication.Controllers
 
             return View();
         }
+
+        public ActionResult Unauthroized()
+        {
+            return View();
+        }
+        
     }
 }

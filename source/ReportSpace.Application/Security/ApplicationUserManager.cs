@@ -24,7 +24,15 @@ namespace ReportSpace.Application.Security
         #endregion
 
         #region [ Overides ]
+        public override Task<Microsoft.AspNet.Identity.IdentityResult> CreateAsync(ApplicationUser user)
+        {
+            return base.CreateAsync(user);
+        }
 
+        public override Task<Microsoft.AspNet.Identity.IdentityResult> CreateAsync(ApplicationUser user, string password)
+        {
+            return base.CreateAsync(user, password);
+        }
         #endregion
     }
 }

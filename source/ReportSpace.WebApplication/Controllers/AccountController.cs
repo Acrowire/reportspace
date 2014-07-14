@@ -21,7 +21,7 @@ namespace ReportSpace.WebApplication.Controllers
 
         #region [ Constructors ]
         public AccountController()
-            : this(new ApplicationUserManager(new ApplicationUserStore()))
+            : this(new ApplicationUserManager(new ApplicationSecurityComponent()))
         {
         }
 
@@ -82,7 +82,11 @@ namespace ReportSpace.WebApplication.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser() { UserName = model.UserName };
+                var user = new ApplicationUser() { 
+                    UserName = model.UserName,
+                    Email = model.Email,
+                    PasswordHash = model.Password
+                };
 
                 // OWIN : Registration
                 var result = await UserManager.CreateAsync(user, model.Password);

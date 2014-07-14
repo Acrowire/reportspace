@@ -88,11 +88,12 @@ namespace ReportSpace.Application.Security
 
             try
             {
+
                 Bll.Users _user = new Users()
                 {
                     Active = true,
                     Email = user.Email,
-                    Publicid = user.PublicId,
+                    Publicid = Guid.NewGuid(),
                     Username = user.UserName,
                     Passwordhash = user.PasswordHash
                 };
@@ -166,12 +167,16 @@ namespace ReportSpace.Application.Security
                 // Load user info from the Database
                 var _user = Users.GetByUserName(userName);
 
-                user = new ApplicationUser(_user.Publicid.Value)
+                if (_user.Publicid != null)
                 {
-                    Email = _user.Email,
-                    UserName = _user.Username,
-                    PasswordHash = _user.Passwordhash
-                };
+
+                    user = new ApplicationUser(_user.Publicid.Value)
+                    {
+                        Email = _user.Email,
+                        UserName = _user.Username,
+                        PasswordHash = _user.Passwordhash
+                    };
+                }
             }
             catch (Exception x)
             {
@@ -361,7 +366,8 @@ namespace ReportSpace.Application.Security
         public Task<IList<string>> GetRolesAsync(ApplicationUser user)
         {
             IList<string> userRoles = new List<string>();
-            var _user = ToUser(user);
+            var _user = Bll.Users.GetByUserName(user.UserName);
+
             if (_user.Exists() == false)
             {
                 throw new ApplicationSecurityException(this.GetObjectContext(), "Can not get roles for user, user does not exist", null);
@@ -369,7 +375,9 @@ namespace ReportSpace.Application.Security
 
             try
             {
+                var _userRoles = Bll.Userroles.Select_UserRoless_By_UserId(_user.Id);
 
+                userRoles = _userRoles.Select(ur => ur.Roles.Name).ToList();
             }
             catch (Exception x)
             {
