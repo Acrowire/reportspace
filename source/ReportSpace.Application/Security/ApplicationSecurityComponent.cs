@@ -347,7 +347,7 @@ namespace ReportSpace.Application.Security
             {
                 Userroles role_assignment = new Userroles();
                 var _role = Bll.Roles.GetByName(roleName);
-                var _user = Bll.Users.GetById(user.PublicId);
+                    _user = Bll.Users.GetById(user.PublicId);
                 role_assignment.Create(_role, _user);
             }
             catch (Exception x)

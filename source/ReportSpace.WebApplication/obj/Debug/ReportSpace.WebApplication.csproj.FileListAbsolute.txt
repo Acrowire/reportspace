@@ -59,3 +59,5 @@ G:\reportspace\source\ReportSpace.WebApplication\bin\ReportSpace.Dal.dll
 G:\reportspace\source\ReportSpace.WebApplication\bin\ReportSpace.Data.dll
 G:\reportspace\source\ReportSpace.WebApplication\bin\ReportSpace.Dal.pdb
 G:\reportspace\source\ReportSpace.WebApplication\bin\ReportSpace.Data.pdb
+P:\github\reportspace\source\ReportSpace.WebApplication\obj\Debug\ReportSpace.WebApplication.csprojResolveAssemblyReference.cache
+P:\github\reportspace\source\ReportSpace.WebApplication\obj\Debug\ReportSpace.WebApplication.dll
