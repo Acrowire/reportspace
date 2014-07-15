@@ -45,6 +45,14 @@
     <Compile Include="Extensions.cs" />
     <Compile Include="GlobalTools.cs" />
     <Compile Include="GlobalTools.generated.cs" />
+    <Compile Include="Organizations.cs" />
+    <Compile Include="Organizations.generated.cs" />
+    <Compile Include="OrganizationsCollection.cs" />
+    <Compile Include="OrganizationsCollection.generated.cs" />
+    <Compile Include="Organizationusers.cs" />
+    <Compile Include="Organizationusers.generated.cs" />
+    <Compile Include="OrganizationusersCollection.cs" />
+    <Compile Include="OrganizationusersCollection.generated.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Roles.cs" />
     <Compile Include="Roles.generated.cs" />

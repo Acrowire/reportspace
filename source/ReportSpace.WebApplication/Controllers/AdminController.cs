@@ -319,6 +319,180 @@ namespace ReportSpace.WebApplication.Controllers
 
         #endregion
 
+        #region [ Organizations ]
+        public ActionResult OrgList()
+        {
+            Bll.OrganizationsCollection model = Bll.Organizations.GetAll();
+
+            return View(model);
+        }
+
+        [HttpGet]
+        public ActionResult NewOrg()
+        {
+            var model = new NewOrgViewModel();
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult NewOrg(NewOrgViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                if (Bll.Organizations.Exists(model.Name) == false)
+                {
+                    Bll.Organizations _org = new Bll.Organizations();
+                    _org.Name = model.Name;
+                    _org.Active = true;
+                    _org.Publicid = Guid.NewGuid();
+                    _org.Insert();
+                    
+                    return RedirectToAction("OrgList", "Admin");
+                }
+                else
+                {
+                    ModelState.AddModelError("An organization by that name already exists",new ArgumentException("An organization by that name already exists"));
+                }
+            }
+
+            return View(model);
+        }
+
+        [HttpGet]
+        public ActionResult EditOrg(Guid PublicId)
+        {
+            var model = new EditOrgViewModel();
+            Bll.Organizations org = Bll.Organizations.GetById(PublicId);
+
+            model.Active = org.Active.Value;
+            model.Name = org.Name;
+            model.PublicId = org.Publicid.Value;
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult EditOrg(EditOrgViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                    Bll.Organizations _org = Bll.Organizations.GetById(model.PublicId);
+                    _org.Name = model.Name;
+                    _org.Active = model.Active;
+                    _org.Update();
+
+                    return RedirectToAction("OrgList", "Admin");
+            }
+
+            return View(model);
+        }
+        #endregion
+
+        #region [ Organization Users ]
+
+        public ActionResult OrgUsersList()
+        {
+            Bll.OrganizationusersCollection model = Bll.Organizationusers.GetAll();
+
+            return View(model);
+        }
+
+        [HttpGet]
+        public ActionResult CreateOrgUser()
+        {
+            CreateOrgUserViewModel model = new Models.CreateOrgUserViewModel();
+
+            List<SelectListItem> orgList = new List<SelectListItem>();
+            List<SelectListItem> userList = new List<SelectListItem>();
+
+            orgList = Bll.Organizations.GetAll()
+                         .Where(o => o.Active == true)
+                         .Select(o => new SelectListItem()
+                         {
+                              Text = o.Name,
+                              Value = o.Publicid.Value.ToString()
+                         })
+                         .ToList();
+
+            userList = Bll.Users.GetAll()
+                          .Where(u => u.Active == true)
+                          .Select(u => new SelectListItem()
+                          {
+                              Text = String.Format("{0} - ({1})",u.Username, u.Email),
+                              Value = u.Publicid.Value.ToString()
+                          })
+                          .ToList();
+
+            ViewBag.orgs = orgList;
+            ViewBag.users = userList;
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult CreateOrgUser(CreateOrgUserViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                Bll.Organizationusers.Create(model.OrganizationPublicId, model.UserPublicId);
+
+                return RedirectToAction("OrgUsersList", "Admin");
+            }
+
+            return View(model);
+        }
+
+        [HttpGet]
+        public ActionResult EditOrgUser(Int32 Id)
+        {
+            EditOrgUserViewModel model = new Models.EditOrgUserViewModel();
+            Bll.Organizationusers orgUser =  Bll.Organizationusers.GetById(Id);
+            List<SelectListItem> orgList = new List<SelectListItem>();
+            List<SelectListItem> userList = new List<SelectListItem>();
+
+            model.Active = orgUser.Active.Value ;
+            model.Id = Id;
+            model.OrganizationPublicId = orgUser.OrganizationPublicId;
+            model.UserPublicId = orgUser.UserPublicId;
+
+            orgList = Bll.Organizations.GetAll()
+                       .Where(o => o.Active == true)
+                       .Select(o => new SelectListItem()
+                       {
+                           Text = o.Name,
+                           Value = o.Publicid.Value.ToString()
+                       })
+                       .ToList();
+
+            userList = Bll.Users.GetAll()
+                          .Where(u => u.Active == true)
+                          .Select(u => new SelectListItem()
+                          {
+                              Text = String.Format("{0} - ({1})", u.Username, u.Email)
+                          })
+                          .ToList();
+
+            ViewBag.orgs = orgList;
+            ViewBag.users = userList;
+            
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult EditOrgUser(EditOrgUserViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                Bll.Organizationusers.Update(model.Id, model.OrganizationPublicId, model.UserPublicId, model.Active);
+                
+                return RedirectToAction("OrgUsersList", "Admin");
+            }
+
+            return View(model);
+        }
+        #endregion
+
         #endregion
 
 

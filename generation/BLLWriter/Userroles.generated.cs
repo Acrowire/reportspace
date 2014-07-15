@@ -1,4 +1,4 @@
-namespace ReportSPace.Bll {
+namespace ReportSpace.Bll {
     
     
     public partial class Userroles {
@@ -36,7 +36,7 @@ namespace ReportSPace.Bll {
         public virtual Roles Roles {
             get {
                 if ((this._roles == null)) {
-                    this._roles = ReportSPace.Bll.Roles.Load(this._userid);
+                    this._roles = ReportSpace.Bll.Roles.Load(this._roleid);
                 }
                 return this._roles;
             }
@@ -48,7 +48,7 @@ namespace ReportSPace.Bll {
         public virtual Users Users {
             get {
                 if ((this._users == null)) {
-                    this._users = ReportSPace.Bll.Users.Load(this._roleid);
+                    this._users = ReportSpace.Bll.Users.Load(this._userid);
                 }
                 return this._users;
             }
@@ -82,37 +82,10 @@ namespace ReportSPace.Bll {
             }
         }
         
-        public static UserrolesCollection Select_UserRoless_By_UserId(System.Nullable<int> UserId) {
-            ReportSPace.Dal.Userroles dbo = null;
-            try {
-                dbo = new ReportSPace.Dal.Userroles();
-                System.Data.DataSet ds = dbo.Select_UserRoless_By_UserId(UserId);
-                UserrolesCollection collection = new UserrolesCollection();
-                if (GlobalTools.IsSafeDataSet(ds)) {
-                    for (int i = 0; (i < ds.Tables[0].Rows.Count); i = (i + 1)) {
-                        Userroles obj = new Userroles();
-                        obj.Fill(ds.Tables[0].Rows[i]);
-                        if ((obj != null)) {
-                            collection.Add(obj);
-                        }
-                    }
-                }
-                return collection;
-            }
-            catch (System.Exception ) {
-                throw;
-            }
-            finally {
-                if ((dbo != null)) {
-                    dbo.Dispose();
-                }
-            }
-        }
-        
         public static UserrolesCollection Select_UserRoless_By_RoleId(System.Nullable<int> RoleId) {
-            ReportSPace.Dal.Userroles dbo = null;
+            ReportSpace.Dal.Userroles dbo = null;
             try {
-                dbo = new ReportSPace.Dal.Userroles();
+                dbo = new ReportSpace.Dal.Userroles();
                 System.Data.DataSet ds = dbo.Select_UserRoless_By_RoleId(RoleId);
                 UserrolesCollection collection = new UserrolesCollection();
                 if (GlobalTools.IsSafeDataSet(ds)) {
@@ -136,10 +109,37 @@ namespace ReportSPace.Bll {
             }
         }
         
-        public static UserrolesCollection GetAll() {
-            ReportSPace.Dal.Userroles dbo = null;
+        public static UserrolesCollection Select_UserRoless_By_UserId(System.Nullable<int> UserId) {
+            ReportSpace.Dal.Userroles dbo = null;
             try {
-                dbo = new ReportSPace.Dal.Userroles();
+                dbo = new ReportSpace.Dal.Userroles();
+                System.Data.DataSet ds = dbo.Select_UserRoless_By_UserId(UserId);
+                UserrolesCollection collection = new UserrolesCollection();
+                if (GlobalTools.IsSafeDataSet(ds)) {
+                    for (int i = 0; (i < ds.Tables[0].Rows.Count); i = (i + 1)) {
+                        Userroles obj = new Userroles();
+                        obj.Fill(ds.Tables[0].Rows[i]);
+                        if ((obj != null)) {
+                            collection.Add(obj);
+                        }
+                    }
+                }
+                return collection;
+            }
+            catch (System.Exception ) {
+                throw;
+            }
+            finally {
+                if ((dbo != null)) {
+                    dbo.Dispose();
+                }
+            }
+        }
+        
+        public static UserrolesCollection GetAll() {
+            ReportSpace.Dal.Userroles dbo = null;
+            try {
+                dbo = new ReportSpace.Dal.Userroles();
                 System.Data.DataSet ds = dbo.UserRoles_Select_All();
                 UserrolesCollection collection = new UserrolesCollection();
                 if (GlobalTools.IsSafeDataSet(ds)) {
@@ -164,9 +164,9 @@ namespace ReportSPace.Bll {
         }
         
         public static Userroles Load(System.Nullable<int> Id) {
-            ReportSPace.Dal.Userroles dbo = null;
+            ReportSpace.Dal.Userroles dbo = null;
             try {
-                dbo = new ReportSPace.Dal.Userroles();
+                dbo = new ReportSpace.Dal.Userroles();
                 System.Data.DataSet ds = dbo.UserRoles_Select_One(Id);
                 Userroles obj = null;
                 if (GlobalTools.IsSafeDataSet(ds)) {
@@ -188,9 +188,9 @@ namespace ReportSPace.Bll {
         }
         
         public virtual void Load() {
-            ReportSPace.Dal.Userroles dbo = null;
+            ReportSpace.Dal.Userroles dbo = null;
             try {
-                dbo = new ReportSPace.Dal.Userroles();
+                dbo = new ReportSpace.Dal.Userroles();
                 System.Data.DataSet ds = dbo.UserRoles_Select_One(this.Id);
                 if (GlobalTools.IsSafeDataSet(ds)) {
                     if ((ds.Tables[0].Rows.Count > 0)) {
@@ -209,9 +209,9 @@ namespace ReportSPace.Bll {
         }
         
         public virtual void Insert() {
-            ReportSPace.Dal.Userroles dbo = null;
+            ReportSpace.Dal.Userroles dbo = null;
             try {
-                dbo = new ReportSPace.Dal.Userroles();
+                dbo = new ReportSpace.Dal.Userroles();
                 dbo.UserRoles_Insert(this._roleid, this._userid, this.Active);
             }
             catch (System.Exception ) {
@@ -225,9 +225,9 @@ namespace ReportSPace.Bll {
         }
         
         public virtual void Delete() {
-            ReportSPace.Dal.Userroles dbo = null;
+            ReportSpace.Dal.Userroles dbo = null;
             try {
-                dbo = new ReportSPace.Dal.Userroles();
+                dbo = new ReportSpace.Dal.Userroles();
                 dbo.UserRoles_Delete(this.Id);
             }
             catch (System.Exception ) {
@@ -241,9 +241,9 @@ namespace ReportSPace.Bll {
         }
         
         public virtual void Update() {
-            ReportSPace.Dal.Userroles dbo = null;
+            ReportSpace.Dal.Userroles dbo = null;
             try {
-                dbo = new ReportSPace.Dal.Userroles();
+                dbo = new ReportSpace.Dal.Userroles();
                 dbo.UserRoles_Update(this.Id, this._roleid, this._userid, this.Active);
             }
             catch (System.Exception ) {

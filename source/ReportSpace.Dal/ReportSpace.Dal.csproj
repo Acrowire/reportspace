@@ -39,6 +39,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Organizations.cs" />
+    <Compile Include="Organizations.generated.cs" />
+    <Compile Include="Organizationusers.cs" />
+    <Compile Include="Organizationusers.generated.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Roles.cs" />
     <Compile Include="Roles.generated.cs" />

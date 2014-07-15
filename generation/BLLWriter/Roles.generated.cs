@@ -1,4 +1,4 @@
-namespace ReportSPace.Bll {
+namespace ReportSpace.Bll {
     
     
     public partial class Roles {
@@ -52,7 +52,7 @@ namespace ReportSPace.Bll {
         public virtual UserrolesCollection UserrolesCollection {
             get {
                 if ((this._userrolesCollection == null)) {
-                    _userrolesCollection = ReportSPace.Bll.Userroles.Select_UserRoless_By_UserId(this.Id);
+                    _userrolesCollection = ReportSpace.Bll.Userroles.Select_UserRoless_By_RoleId(this.Id);
                 }
                 return this._userrolesCollection;
             }
@@ -83,9 +83,9 @@ namespace ReportSPace.Bll {
         }
         
         public static RolesCollection GetAll() {
-            ReportSPace.Dal.Roles dbo = null;
+            ReportSpace.Dal.Roles dbo = null;
             try {
-                dbo = new ReportSPace.Dal.Roles();
+                dbo = new ReportSpace.Dal.Roles();
                 System.Data.DataSet ds = dbo.Roles_Select_All();
                 RolesCollection collection = new RolesCollection();
                 if (GlobalTools.IsSafeDataSet(ds)) {
@@ -110,9 +110,9 @@ namespace ReportSPace.Bll {
         }
         
         public static Roles Load(System.Nullable<int> Id) {
-            ReportSPace.Dal.Roles dbo = null;
+            ReportSpace.Dal.Roles dbo = null;
             try {
-                dbo = new ReportSPace.Dal.Roles();
+                dbo = new ReportSpace.Dal.Roles();
                 System.Data.DataSet ds = dbo.Roles_Select_One(Id);
                 Roles obj = null;
                 if (GlobalTools.IsSafeDataSet(ds)) {
@@ -134,9 +134,9 @@ namespace ReportSPace.Bll {
         }
         
         public virtual void Load() {
-            ReportSPace.Dal.Roles dbo = null;
+            ReportSpace.Dal.Roles dbo = null;
             try {
-                dbo = new ReportSPace.Dal.Roles();
+                dbo = new ReportSpace.Dal.Roles();
                 System.Data.DataSet ds = dbo.Roles_Select_One(this.Id);
                 if (GlobalTools.IsSafeDataSet(ds)) {
                     if ((ds.Tables[0].Rows.Count > 0)) {
@@ -155,9 +155,9 @@ namespace ReportSPace.Bll {
         }
         
         public virtual void Insert() {
-            ReportSPace.Dal.Roles dbo = null;
+            ReportSpace.Dal.Roles dbo = null;
             try {
-                dbo = new ReportSPace.Dal.Roles();
+                dbo = new ReportSpace.Dal.Roles();
                 dbo.Roles_Insert(this.Publicid, this.Name, this.Active);
             }
             catch (System.Exception ) {
@@ -171,9 +171,9 @@ namespace ReportSPace.Bll {
         }
         
         public virtual void Delete() {
-            ReportSPace.Dal.Roles dbo = null;
+            ReportSpace.Dal.Roles dbo = null;
             try {
-                dbo = new ReportSPace.Dal.Roles();
+                dbo = new ReportSpace.Dal.Roles();
                 dbo.Roles_Delete(this.Id);
             }
             catch (System.Exception ) {
@@ -187,9 +187,9 @@ namespace ReportSPace.Bll {
         }
         
         public virtual void Update() {
-            ReportSPace.Dal.Roles dbo = null;
+            ReportSpace.Dal.Roles dbo = null;
             try {
-                dbo = new ReportSPace.Dal.Roles();
+                dbo = new ReportSpace.Dal.Roles();
                 dbo.Roles_Update(this.Id, this.Publicid, this.Name, this.Active);
             }
             catch (System.Exception ) {

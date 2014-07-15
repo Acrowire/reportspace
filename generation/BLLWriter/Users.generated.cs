@@ -1,4 +1,4 @@
-namespace ReportSPace.Bll {
+namespace ReportSpace.Bll {
     
     
     public partial class Users {
@@ -14,6 +14,8 @@ namespace ReportSPace.Bll {
         private System.Nullable<bool> _active;
         
         private string _passwordhash;
+        
+        private OrganizationusersCollection _organizationusersCollection;
         
         private UserrolesCollection _userrolesCollection;
         
@@ -71,10 +73,19 @@ namespace ReportSPace.Bll {
             }
         }
         
+        public virtual OrganizationusersCollection OrganizationusersCollection {
+            get {
+                if ((this._organizationusersCollection == null)) {
+                    _organizationusersCollection = ReportSpace.Bll.Organizationusers.Select_OrganizationUserss_By_UserId(this.Id);
+                }
+                return this._organizationusersCollection;
+            }
+        }
+        
         public virtual UserrolesCollection UserrolesCollection {
             get {
                 if ((this._userrolesCollection == null)) {
-                    _userrolesCollection = ReportSPace.Bll.Userroles.Select_UserRoless_By_RoleId(this.Id);
+                    _userrolesCollection = ReportSpace.Bll.Userroles.Select_UserRoless_By_UserId(this.Id);
                 }
                 return this._userrolesCollection;
             }
@@ -87,6 +98,7 @@ namespace ReportSPace.Bll {
             this.Email = string.Empty;
             this.Active = null;
             this.Passwordhash = string.Empty;
+            this._organizationusersCollection = null;
             this._userrolesCollection = null;
         }
         
@@ -113,9 +125,9 @@ namespace ReportSPace.Bll {
         }
         
         public static UsersCollection GetAll() {
-            ReportSPace.Dal.Users dbo = null;
+            ReportSpace.Dal.Users dbo = null;
             try {
-                dbo = new ReportSPace.Dal.Users();
+                dbo = new ReportSpace.Dal.Users();
                 System.Data.DataSet ds = dbo.Users_Select_All();
                 UsersCollection collection = new UsersCollection();
                 if (GlobalTools.IsSafeDataSet(ds)) {
@@ -140,9 +152,9 @@ namespace ReportSPace.Bll {
         }
         
         public static Users Load(System.Nullable<int> Id) {
-            ReportSPace.Dal.Users dbo = null;
+            ReportSpace.Dal.Users dbo = null;
             try {
-                dbo = new ReportSPace.Dal.Users();
+                dbo = new ReportSpace.Dal.Users();
                 System.Data.DataSet ds = dbo.Users_Select_One(Id);
                 Users obj = null;
                 if (GlobalTools.IsSafeDataSet(ds)) {
@@ -164,9 +176,9 @@ namespace ReportSPace.Bll {
         }
         
         public virtual void Load() {
-            ReportSPace.Dal.Users dbo = null;
+            ReportSpace.Dal.Users dbo = null;
             try {
-                dbo = new ReportSPace.Dal.Users();
+                dbo = new ReportSpace.Dal.Users();
                 System.Data.DataSet ds = dbo.Users_Select_One(this.Id);
                 if (GlobalTools.IsSafeDataSet(ds)) {
                     if ((ds.Tables[0].Rows.Count > 0)) {
@@ -185,9 +197,9 @@ namespace ReportSPace.Bll {
         }
         
         public virtual void Insert() {
-            ReportSPace.Dal.Users dbo = null;
+            ReportSpace.Dal.Users dbo = null;
             try {
-                dbo = new ReportSPace.Dal.Users();
+                dbo = new ReportSpace.Dal.Users();
                 dbo.Users_Insert(this.Publicid, this.Username, this.Email, this.Active, this.Passwordhash);
             }
             catch (System.Exception ) {
@@ -201,9 +213,9 @@ namespace ReportSPace.Bll {
         }
         
         public virtual void Delete() {
-            ReportSPace.Dal.Users dbo = null;
+            ReportSpace.Dal.Users dbo = null;
             try {
-                dbo = new ReportSPace.Dal.Users();
+                dbo = new ReportSpace.Dal.Users();
                 dbo.Users_Delete(this.Id);
             }
             catch (System.Exception ) {
@@ -217,9 +229,9 @@ namespace ReportSPace.Bll {
         }
         
         public virtual void Update() {
-            ReportSPace.Dal.Users dbo = null;
+            ReportSpace.Dal.Users dbo = null;
             try {
-                dbo = new ReportSPace.Dal.Users();
+                dbo = new ReportSpace.Dal.Users();
                 dbo.Users_Update(this.Id, this.Publicid, this.Username, this.Email, this.Active, this.Passwordhash);
             }
             catch (System.Exception ) {

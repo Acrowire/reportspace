@@ -1,4 +1,4 @@
-namespace ReportSPace.Bll {
+namespace ReportSpace.Bll {
     
     
     internal partial class GlobalTools {

@@ -7,8 +7,8 @@
     <ProjectGuid>{B481ED8D-CBCA-4582-9163-8B0CA2482DAA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ReportSPace.Dal</RootNamespace>
-    <AssemblyName>ReportSPace.Dal</AssemblyName>
+    <RootNamespace>ReportSpace.Dal</RootNamespace>
+    <AssemblyName>ReportSpace.Dal</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -39,6 +39,14 @@
 <DependentUpon>DataAccess.cs</DependentUpon>
 </Compile>
 <Compile Include="DataAccess.cs" />
+<Compile Include="Organizations.generated.cs">
+<DependentUpon>Organizations.cs</DependentUpon>
+</Compile>
+<Compile Include="Organizations.cs" />
+<Compile Include="Organizationusers.generated.cs">
+<DependentUpon>Organizationusers.cs</DependentUpon>
+</Compile>
+<Compile Include="Organizationusers.cs" />
 <Compile Include="Roles.generated.cs">
 <DependentUpon>Roles.cs</DependentUpon>
 </Compile>

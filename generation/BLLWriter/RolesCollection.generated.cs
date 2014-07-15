@@ -1,4 +1,4 @@
-namespace ReportSPace.Bll {
+namespace ReportSpace.Bll {
     using System.Collections.ObjectModel;
     
     

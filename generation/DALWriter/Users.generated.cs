@@ -1,4 +1,4 @@
-namespace ReportSPace.Dal {
+namespace ReportSpace.Dal {
     using System;
     using System.Collections.Generic;
     using System.Data.SqlClient;
