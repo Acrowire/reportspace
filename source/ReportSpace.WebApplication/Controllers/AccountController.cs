@@ -91,7 +91,7 @@ namespace ReportSpace.WebApplication.Controllers
                 // OWIN : Registration
                 var result = await UserManager.CreateAsync(user, model.Password);
 
-                if (result.Succeeded)
+                if (result.Errors.Count() == 0)
                 {
                     await SignInAsync(user, isPersistent: false);
                     return RedirectToAction("Index", "Home");

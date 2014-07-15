@@ -23,14 +23,20 @@ namespace ReportSpace.Application.Security
         #region [ local ]
         private Bll.Users ToUser(ApplicationUser user)
         {
-            Bll.Users _user = new Users()
+            Bll.Users _user = new Users();
+
+            try
             {
-                Active = true,
-                Email = user.Email,
-                Publicid = user.PublicId,
-                Username = user.UserName,
-                Passwordhash = user.PasswordHash
-            };
+                if (user.PublicId != Guid.Empty)
+                {
+                    _user = Bll.Users.GetById(user.PublicId);
+                }
+            }
+            catch (Exception x)
+            {
+                throw new ApplicationSecurityException(this.GetObjectContext(), "Error converting user", x);
+            }
+
 
             return _user;
         }
@@ -188,6 +194,7 @@ namespace ReportSpace.Application.Security
 
         public Task UpdateAsync(ApplicationUser user)
         {
+            Microsoft.AspNet.Identity.IdentityResult result = new IdentityResult(new[] { "none" });
             try
             {
                 var _user = this.ToUser(user);
@@ -195,10 +202,13 @@ namespace ReportSpace.Application.Security
                 if (_user.Exists())
                 {
                     _user.Update();
+                    result = new IdentityResult(new string[0]);
+
                 }
                 else
                 {
-                    throw new ApplicationSecurityException(this.GetObjectContext(), "Could not update user, user does not exist", new ArgumentException("User does not exist"));
+                    result = new IdentityResult(new string[1] { "Could not update user." });
+                    //throw new ApplicationSecurityException(this.GetObjectContext(), "Could not update user, user does not exist", new ArgumentException("User does not exist"));
                 }
             }
             catch (Exception x)
@@ -206,9 +216,67 @@ namespace ReportSpace.Application.Security
                 throw new ApplicationSecurityException(this.GetObjectContext(), "Could not update user", x);
             }
 
-            return Task.FromResult(1);
+            return Task.FromResult(result);
         }
 
+        public Task<IdentityResult> UpdateUserAsync(ApplicationUser user)
+        {
+            Microsoft.AspNet.Identity.IdentityResult result = new IdentityResult(new[] { "none" });
+
+            try
+            {
+                var _user = this.ToUser(user);
+
+                if (_user.Exists())
+                {
+                    _user.Username = user.UserName;
+                    _user.Email = user.Email;
+                    _user.Update();
+
+                    result = IdentityResult.Success;
+                }
+                else
+                {
+                    result = IdentityResult.Failed("User does not exist");
+                }
+            }
+            catch (Exception x)
+            {
+                throw new ApplicationSecurityException(this.GetObjectContext(), "Could not update user", x);
+            }
+
+            return Task.FromResult(result);
+        }
+
+        public Task<IdentityResult> UpdateUserFullAsync(ApplicationUser user)
+        {
+            Microsoft.AspNet.Identity.IdentityResult result = new IdentityResult(new[] { "none" });
+
+            try
+            {
+                var _user = this.ToUser(user);
+
+                if (_user.Exists())
+                {
+                    _user.Username = user.UserName;
+                    _user.Email = user.Email;
+                    _user.Passwordhash = user.PasswordHash;
+                    _user.Update();
+
+                    result = IdentityResult.Success;
+                }
+                else
+                {
+                    result = IdentityResult.Failed("User does not exist");
+                }
+            }
+            catch (Exception x)
+            {
+                throw new ApplicationSecurityException(this.GetObjectContext(), "Could not update user", x);
+            }
+
+            return Task.FromResult(result);
+        }
         #endregion
 
         #region IUserPasswordStore<ApplicationUser,string> Members
@@ -229,6 +297,11 @@ namespace ReportSpace.Application.Security
         {
             CheckDisposed(user);
             user.PasswordHash = passwordHash;
+
+            var _user = this.ToUser(user);
+            _user.Passwordhash = passwordHash;
+            _user.Update();
+
             return Task.FromResult(0);
         }
 

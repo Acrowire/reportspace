@@ -1,11 +1,32 @@
 ﻿
 @{
-    ViewBag.Title = "Administration";
+    ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Welcome to Administation</h2>
+<h2><strong>Administration</strong></h2>
 <div class="container">
+    <div class="row">
+        <!--Administration Actions  -->
+        <div class="col-md-3">
+            <strong>Security</strong>
+            <ul class="list-group">
+                <li class="list-group-item">@Html.ActionLink("Users", "UserList")</li>
+                <li class="list-group-item">@Html.ActionLink("Roles", "RolesList")</li>
+            </ul>
+            <strong>Resources</strong>
+            <ul class="list-group">
+                <li class="list-group-item"><a href="#">Reports</a></li>
+            </ul>
+            <strong>Resources</strong>
+            <ul class="list-group">
+                <li class="list-group-item"><a href="#">Reports</a></li>
+            </ul>
+        </div>
 
+        <!-- Stats -->
+        <div class="col-md-9">
 
+        </div>
+    </div>
 </div>

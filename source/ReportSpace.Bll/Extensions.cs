@@ -18,34 +18,39 @@ namespace ReportSpace.Bll
             {
                 if (user.Id.HasValue)
                 {
-                    return Bll.Users.GetAll()
+
+                    exists =  Bll.Users.GetAll()
                                       .Where(u => u.Active == true)
                                       .Where(u => u.Id.Value == user.Id.Value)
                                       .Any();
+                    return exists;
                 }
 
                 if (user.Publicid.HasValue)
                 {
-                    return Bll.Users.GetAll()
+                    exists = Bll.Users.GetAll()
                                       .Where(u => u.Active == true)
-                                      .Where(u => u.Publicid.Value == u.Publicid.Value)
+                                      .Where(u => u.Publicid.Value == user.Publicid.Value)
                                       .Any();
+                    return exists;
                 }
 
                 if (String.IsNullOrEmpty(user.Email) == false)
                 {
-                    return Bll.Users.GetAll()
+                    exists = Bll.Users.GetAll()
                                       .Where(u => u.Active == true)
                                       .Where(u => u.Email == u.Email)
                                       .Any();
+                    return exists;
                 }
 
                 if (String.IsNullOrEmpty(user.Username) == false)
                 {
-                    return Bll.Users.GetAll()
+                    exists = Bll.Users.GetAll()
                                       .Where(u => u.Active == true)
                                       .Where(u => u.Username == u.Username)
                                       .Any();
+                    return exists;
                 }
                 
             }

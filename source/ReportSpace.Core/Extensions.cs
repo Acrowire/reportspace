@@ -69,8 +69,6 @@ namespace ReportSpace
             return String.Format("{0}.{1}.{2}", methodBase.DeclaringType.Namespace, methodBase.DeclaringType.Name, methodBase.Name);
         }
 
-
-
         public static Int32 nInt(this Hashtable hastable, String Key)
         {
             return Int32.Parse(hastable[Key].ToString());
