@@ -201,11 +201,128 @@ namespace ReportSpace.WebApplication.Controllers
         }
         #endregion
 
+        #region [ Roles ] 
+        public ActionResult RoleList()
+        {
+            var model = Bll.Roles.GetAll();
+            return View(model);
+        }
+
+        [HttpGet]
+        public ActionResult NewRole()
+        {
+            NewRoleViewModel model = new NewRoleViewModel();
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult NewRole(NewRoleViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                Bll.Roles _role = new Bll.Roles();
+                _role.Active = true;
+                _role.Name = model.Name;
+                _role.Publicid = Guid.NewGuid();
+                _role.Insert();
+
+                return RedirectToAction("RoleList", "Admin");
+            }
+
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
+
+        [HttpGet]
+        public ActionResult EditRole(Guid PublicId)
+        {
+            EditRoleViewModel model = new EditRoleViewModel();
+
+            Bll.Roles role = Bll.Roles.GetById(PublicId);
+            model.Active = role.Active.Value;
+            model.Name = role.Name;
+            model.PublicId = role.Publicid.Value;
+            
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult EditRole(EditRoleViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                Bll.Roles role = Bll.Roles.GetById(model.PublicId);
+                role.Active = model.Active;
+                role.Name = model.Name;
+                role.Update();
+
+                return RedirectToAction("RoleList", "Admin");
+            }
+
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
+        #endregion
+
+        #region [ User Roles ] 
+        public ActionResult UserRoleList()
+        {
+            var model = Bll.UserrolesCollection.GetAll();
+
+            return View(model);
+        }
+
+        [HttpGet]
+        public ActionResult CreateUserRole()
+        {
+            CreateUserRoleViewModel model = new CreateUserRoleViewModel();
+            List<SelectListItem> roles = new List<SelectListItem>();
+            List<SelectListItem> users = new List<SelectListItem>();
+
+            roles = Bll.Roles.GetAll()
+                             .Where( r=> r.Active == true)
+                             .Select(r => new SelectListItem()
+                             {
+                                 Text = r.Name,
+                                 Value = r.Publicid.Value.ToString()
+                             }).ToList();
+
+            users = Bll.Users.GetAll()
+                             .Where(u => u.Active == true)
+                             .Select(u => new SelectListItem()
+                             {
+                                 Text = String.Format("{0} ({1})",u.Username,u.Email),
+                                 Value = u.Publicid.Value.ToString()
+                             }).ToList();
+
+            ViewBag.Roles = roles;
+            ViewBag.Users = users;
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult CreateUserRole(CreateUserRoleViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                Bll.Userroles _userrole = new Bll.Userroles();
+                _userrole.Create(Bll.Roles.GetById(model.RolePublicId), Bll.Users.GetById(model.UserPublicId));
+
+                // Finally
+                return RedirectToAction("UserRoleList", "Admin");
+            }
+
+            return View(model);
+        }
+
+        #endregion
 
         #endregion
 
 
-        #region [ Local Methods ] 
+        #region [ Local Methods ]
         private void AddErrors(IdentityResult result)
         {
             foreach (var error in result.Errors)
@@ -224,6 +341,7 @@ namespace ReportSpace.WebApplication.Controllers
             return false;
         }
         #endregion
+
         #region [ Local Enums ]
         public enum AdminManageMessageId
         {

@@ -15,6 +15,7 @@ namespace ReportSpace.Bll {
                 this._userid = user.Id.Value;
                 this._roleid = role.Id.Value;
                 this._active = true;
+                this.Insert();
                 created = true;
             }
             catch (Exception x)
@@ -23,6 +24,16 @@ namespace ReportSpace.Bll {
             }
 
             return created;
+        }
+
+        public Int32 RoleId
+        {
+            get { return this._roleid.Value; }
+        }
+
+        public Int32 UserId
+        {
+            get { return this._userid.Value; }
         }
     }
 }

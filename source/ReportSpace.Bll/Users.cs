@@ -5,8 +5,9 @@ using System.Collections;
 namespace ReportSpace.Bll {
     
     
-    public partial class Users 
+    public partial class Users
     {
+
         public static Users GetByEmail(string email)
         {
             Users user = new Users();

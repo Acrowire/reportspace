@@ -6,6 +6,7 @@ using System.Web;
 
 namespace ReportSpace.WebApplication.Models
 {
+    #region [ Users ] 
     public class CreateUserViewModel
     {
         [Required]
@@ -61,4 +62,40 @@ namespace ReportSpace.WebApplication.Models
         [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
     }
+    #endregion
+
+
+    #region [ Roles ]
+    public class NewRoleViewModel
+    {
+        public String Name { get; set; } 
+    }
+
+    public class EditRoleViewModel
+    {
+        public String Name { get; set; }
+        public Guid PublicId { get; set; }
+        public bool Active { get; set; } 
+    }
+    #endregion
+
+    #region [ User Roles ]
+    public class CreateUserRoleViewModel
+    {
+        public Guid RolePublicId { get; set; }
+
+        public Guid UserPublicId { get; set; } 
+
+    }
+
+    public class EditUserRoleViewModel
+    {
+        public Int32 Id { get; set; }  
+        public Guid RolePublicId { get; set; }
+
+        public Guid UserPublicId { get; set; }
+
+        public bool Active { get; set; }  
+    }
+    #endregion
 }
