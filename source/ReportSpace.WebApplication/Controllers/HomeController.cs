@@ -4,6 +4,10 @@ using System.Dynamic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ReportSpace.WebApplication;
+using ReportSpace.Application;
+using Newtonsoft.Json;
+using System.Collections;
 
 namespace ReportSpace.WebApplication.Controllers
 {
@@ -11,20 +15,6 @@ namespace ReportSpace.WebApplication.Controllers
     {
         public ActionResult Index()
         {
-            return View();
-        }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
             return View();
         }
 
@@ -39,9 +29,29 @@ namespace ReportSpace.WebApplication.Controllers
             dynamic model = new ExpandoObject();
 
             model.Client = ClientName;
+           
+            return View(model);
+        }
+
+        [HttpGet]
+        public JsonResult Report_ClientHoursData(String ClientName)
+        {
+            PMP.PMPReportAccess reports = new PMP.PMPReportAccess();
+
+            List<Hashtable> report_data = reports.ClientHoursReport(new PMP.OrganizationReportParameters()
+            {
+                StartDate = DateTime.Parse("01/01/2014"),
+                EndDate = DateTime.Now,
+                OrganizationName = ClientName
+            });
 
 
-            return View();
+            return new JsonResult()
+            {
+                Data = report_data,
+                ContentType = "application/json",
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
         }
         #endregion
     }

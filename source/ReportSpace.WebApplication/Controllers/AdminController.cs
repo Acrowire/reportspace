@@ -437,6 +437,12 @@ namespace ReportSpace.WebApplication.Controllers
             {
                 Bll.Organizationusers.Create(model.OrganizationPublicId, model.UserPublicId);
 
+                if (MvcApplication.UserRolesCache.ContainsKey(model.UserPublicId.ToString()))
+                {
+                    List<String> old = new List<string>();
+                    MvcApplication.UserRolesCache.TryRemove(model.UserPublicId.ToString(), out old);
+                }
+
                 return RedirectToAction("OrgUsersList", "Admin");
             }
 

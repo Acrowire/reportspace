@@ -55,6 +55,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportSpace.WebApplication"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportSpace.Tests", "ReportSpace.Tests\ReportSpace.Tests.csproj", "{F29321AD-9579-457F-92CD-6BCF1B43B2E0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportSpace.PMP", "ReportSpace.PMP\ReportSpace.PMP.csproj", "{5A537E78-599B-44F5-A350-03EDE3D6B59B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -110,6 +112,12 @@ Global
 		{F29321AD-9579-457F-92CD-6BCF1B43B2E0}.dev_acrowire|Any CPU.Build.0 = Debug|Any CPU
 		{F29321AD-9579-457F-92CD-6BCF1B43B2E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F29321AD-9579-457F-92CD-6BCF1B43B2E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A537E78-599B-44F5-A350-03EDE3D6B59B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A537E78-599B-44F5-A350-03EDE3D6B59B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A537E78-599B-44F5-A350-03EDE3D6B59B}.dev_acrowire|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A537E78-599B-44F5-A350-03EDE3D6B59B}.dev_acrowire|Any CPU.Build.0 = Debug|Any CPU
+		{5A537E78-599B-44F5-A350-03EDE3D6B59B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A537E78-599B-44F5-A350-03EDE3D6B59B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -129,5 +137,6 @@ Global
 		{5D724EC1-49F6-4B33-9473-5B9866217BB3} = {97619412-3267-4D2A-8398-A9C3708F094A}
 		{A6044E35-3ED6-48E3-94A6-AE59464840D1} = {753C4CE1-FD18-42B8-99C9-29FB6F86ACA4}
 		{0B2F96CC-5800-4F18-8546-FF3EEC0A24E1} = {0EA6F098-27E7-44B5-A307-CDD2D34158F2}
+		{5A537E78-599B-44F5-A350-03EDE3D6B59B} = {0EA6F098-27E7-44B5-A307-CDD2D34158F2}
 	EndGlobalSection
 EndGlobal

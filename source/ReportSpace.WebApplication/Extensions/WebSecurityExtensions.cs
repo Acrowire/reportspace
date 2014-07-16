@@ -26,16 +26,17 @@ namespace ReportSpace.WebApplication.Extensions
         public static Boolean HasRole(this IIdentity identity, String RoleName)
         {
             bool has_role = false;
+            string user_public_id = identity.User().PublicId.ToString();
 
             // Cache 
-            if(MvcApplication.UserRolesCache.ContainsKey(identity.GetUserName()) == false)
+            if (MvcApplication.UserRolesCache.ContainsKey(user_public_id) == false)
             {
                 var roles = MvcApplication.Security.GetRolesAsync(identity.User()).Result;
-                MvcApplication.UserRolesCache.TryAdd(identity.GetUserName(), roles.ToList());
+                MvcApplication.UserRolesCache.TryAdd(user_public_id, roles.ToList());
             }
             // End Cache
 
-            has_role = MvcApplication.UserRolesCache[identity.GetUserName()]
+            has_role = MvcApplication.UserRolesCache[user_public_id]
                                      .Where(r => r.ToLower() == RoleName.ToLower())
                                      .Any();                                     
        

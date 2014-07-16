@@ -120,3 +120,5 @@ P:\github\reportspace\source\ReportSpace.WebApplication\bin\Microsoft.Owin.Secur
 P:\github\reportspace\source\ReportSpace.WebApplication\bin\ReportSpace.Dal.pdb
 P:\github\reportspace\source\ReportSpace.WebApplication\bin\ReportSpace.Data.pdb
 P:\github\reportspace\source\ReportSpace.WebApplication\obj\Debug\ReportSpace.WebApplication.pdb
+P:\github\reportspace\source\ReportSpace.WebApplication\bin\ReportSpace.PMP.dll
+P:\github\reportspace\source\ReportSpace.WebApplication\bin\ReportSpace.PMP.pdb

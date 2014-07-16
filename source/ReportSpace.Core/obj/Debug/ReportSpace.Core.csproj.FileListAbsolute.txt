@@ -6,3 +6,4 @@ P:\github\reportspace\source\ReportSpace.Core\bin\Debug\ReportSpace.Core.dll
 P:\github\reportspace\source\ReportSpace.Core\bin\Debug\ReportSpace.Core.pdb
 P:\github\reportspace\source\ReportSpace.Core\obj\Debug\ReportSpace.Core.dll
 P:\github\reportspace\source\ReportSpace.Core\obj\Debug\ReportSpace.Core.pdb
+P:\github\reportspace\source\ReportSpace.Core\obj\Debug\ReportSpace.Core.csprojResolveAssemblyReference.cache
