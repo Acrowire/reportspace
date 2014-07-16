@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -31,6 +32,17 @@ namespace ReportSpace.WebApplication.Controllers
         {
             return View();
         }
-        
+
+        #region [ Reports ] 
+        public ActionResult Report_ClientHours(String ClientName)
+        {
+            dynamic model = new ExpandoObject();
+
+            model.Client = ClientName;
+
+
+            return View();
+        }
+        #endregion
     }
 }

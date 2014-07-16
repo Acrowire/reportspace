@@ -41,5 +41,22 @@ namespace ReportSpace.WebApplication.Extensions
        
             return has_role;
         }
+
+        #region [ Organizations ]
+        public static Bll.Organizations GetUserOrganization(this IIdentity identity)
+        {
+            Bll.Organizations org = new Bll.Organizations();
+            Guid PublicId = identity.User().PublicId;
+
+            var orgs = Bll.Organizationusers.GetAll()
+                                 .Where(u => u.UserPublicId == PublicId);
+
+            if (orgs.Any()) {
+                org = Bll.Organizations.Load(orgs.First().OrganizationId);
+            }
+
+            return org;
+        }
+        #endregion
     }
 }

@@ -450,7 +450,7 @@ namespace ReportSpace.Application.Security
             {
                 var _userRoles = Bll.Userroles.Select_UserRoless_By_UserId(_user.Id);
 
-                userRoles = _userRoles.Select(ur => ur.Roles.Name).ToList();
+                userRoles = _userRoles.Select(ur => ur.RoleName).ToList();
             }
             catch (Exception x)
             {

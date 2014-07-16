@@ -26,6 +26,31 @@ namespace ReportSpace.Bll {
             return created;
         }
 
+        public String RoleName
+        {
+            get
+            {
+                if (this._roles == null)
+                {
+                    this._roles = Bll.Roles.Load(this._roleid);
+                }
+
+                return this._roles.Name;
+            }
+        }
+
+        public String UserName
+        {
+            get
+            {
+                if (this._users == null) {
+                    this._users = Bll.Users.Load(this._userid);
+                }
+
+                return this._users.Username;
+            }
+        }
+
         public Int32 RoleId
         {
             get { return this._roleid.Value; }
