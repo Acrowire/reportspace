@@ -1,0 +1,9 @@
+P:\github\reportspace\source\ReportSpace.Dal\bin\Release\ReportSpace.Dal.dll
+P:\github\reportspace\source\ReportSpace.Dal\bin\Release\ReportSpace.Dal.pdb
+P:\github\reportspace\source\ReportSpace.Dal\bin\Release\ReportSpace.Core.dll
+P:\github\reportspace\source\ReportSpace.Dal\bin\Release\ReportSpace.Data.dll
+P:\github\reportspace\source\ReportSpace.Dal\bin\Release\ReportSpace.Core.pdb
+P:\github\reportspace\source\ReportSpace.Dal\bin\Release\ReportSpace.Data.pdb
+P:\github\reportspace\source\ReportSpace.Dal\obj\Release\ReportSpace.Dal.csprojResolveAssemblyReference.cache
+P:\github\reportspace\source\ReportSpace.Dal\obj\Release\ReportSpace.Dal.dll
+P:\github\reportspace\source\ReportSpace.Dal\obj\Release\ReportSpace.Dal.pdb

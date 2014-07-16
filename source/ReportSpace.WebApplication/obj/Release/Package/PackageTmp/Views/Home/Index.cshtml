@@ -1,0 +1,24 @@
+﻿@using ReportSpace;
+@using ReportSpace.WebApplication;
+@using ReportSpace.WebApplication.Extensions;
+@using Microsoft.AspNet.Identity;
+@using Microsoft.AspNet.Identity.Owin;
+@{
+    ViewBag.Title = "Home Page";
+}
+
+@if (User.Identity.IsAuthenticated)
+{
+    if (User.Identity.HasRole("Client"))
+    {
+        string client_name = User.Identity.GetUserOrganization().Name;
+        <div class="row">
+            <h3>Reports</h3>
+            <ul class="list-group">
+                <li class="list-group-item">
+                    @Html.ActionLink("Client Project Hours Report", "Report_ClientHours", new { ClientName = client_name })
+                </li>
+            </ul>
+        </div>
+    }   
+}
