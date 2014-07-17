@@ -4,31 +4,39 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2 class="page-header">Client Project Hours Report</h2>
-<div class="container">
-    <div class="col-sm-2">
-        <ul class="list-group">
-            <li class="list-group-item">
-                Click the <span class="glyphicon glyphicon-plus"></span> to expand details.
-            </li>
-        </ul>
+<h2 class="page-header" style="font-family: 'Titillium Web', sans-serif;">Client Project Hours Report</h2>
+<div class="container-fluid">
+    <div class="row">
+        <div  class="col-sm-12">
+
+        </div>
     </div>
-    <div class="col-lg-10">
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <td>Organization</td>
-                    <td>Project</td>
-                    <td>Year</td>
-                    <td>Month</td>
-                    <td>Ticket</td>
-                    <td>Hours</td>
-                </tr>
-            </thead>
-            <tbody id="report_body">
-               
-            </tbody>
-        </table>
+    <div class="row">
+        <div class="col-sm-4">
+            <ul class="list-group">
+                <li class="list-group-item">
+                    Click the <span class="glyphicon glyphicon-plus"></span> to expand details.
+                </li>
+            </ul>
+            <div id="analytics-area">
+
+            </div>
+        </div>
+        <div class="col-lg-8">
+            <table id="report_table" class="table table-hover">
+                <thead>
+                    <tr>
+                        <td>Organization</td>
+                        <td>Project</td>
+                        <td>Year</td>
+                        <td>Month</td>
+                        <td>Ticket</td>
+                        <td>Hours</td>
+                    </tr>
+                </thead>
+                <tbody id="report_body"></tbody>
+            </table>
+        </div>
     </div>
     @section Scripts {
         <script type="text/javascript">
@@ -37,8 +45,10 @@
                 var url = 'Report_ClientHoursData?ClientName=' + '@Model.Client';
                 $.get(url, function (data, ts, error) {
                     var r = {};
+                    var ax = [];
+                    var month_hours = {};
 
-                    // Graph
+                    // Graph Data 
                     for (var index in data) {
                         var row = data[index];
 
@@ -62,7 +72,9 @@
                         if (!r[row.company_name][row.project_name][year][month]) {
                             r[row.company_name][row.project_name][year][month] = {};
                             r[row.company_name][row.project_name][year][month].total_hours = 0;
+                            
                         }
+
                         
                         // Task 
                         if (!r[row.company_name][row.project_name][year][month][row.parent_name]) {
@@ -75,6 +87,14 @@
                         r[row.company_name][row.project_name][year][month].total_hours = r[row.company_name][row.project_name][year][month].total_hours + row.billable_hours;
                         r[row.company_name][row.project_name][year][month][row.parent_name].total_hours = r[row.company_name][row.project_name][year][month][row.parent_name].total_hours + row.billable_hours;
 
+                        if (!month_hours[month]) {
+                            month_hours[month] = 0;
+                        }
+                        month_hours[month] = month_hours[month] + row.billable_hours;
+                    }
+
+                    for (var month_index in month_hours) {
+                        ax.push({ "month": month_index, "hours": month_hours[month_index] });
                     }
 
                     // Render 
@@ -155,6 +175,7 @@
 
                                         for (var _ticket in r[_company][_project][_year][_month]) {
                                             if (_ticket != 'total_hours') {
+                                             
                                                 var ticket_data = r[_company][_project][_year][_month][_ticket];
                                                 $table.append($detail_row("", "", _year, _month, _ticket, ticket_data.total_hours));
                                             }
@@ -166,6 +187,30 @@
                         }
                     }
                     
+                    // Init DataTables + Table Tools 
+                    $('#report_table').DataTable({
+                        dom: 'T<"clear">lfrtip',
+                        paging: false,
+                        searching: false,
+                        ordering: false,
+                        TableTools: {
+                            "sSwfPath": "swf/copy_csv_xls.swf",
+                            "sSwfPath": "http://localhost:21775/Content/swf/copy_csv_xls_pdf.swf"
+                        }
+                    });
+
+                    // Render Chart 
+                    var svg = dimple.newSvg("#analytics-area", 350, 400);
+                    var myChart = new dimple.chart(svg,ax);
+                    myChart.setBounds("10%,10", "10%,1", 320, 320);
+                    var x = myChart.addCategoryAxis("x", "month");
+                    x.lineMarkers = true;
+                    x.addOrderRule(["January","Febuary","March","April","May","June","July","August","September","October","November","December"]);
+                    myChart.addMeasureAxis("y","hours");
+                    var s = myChart.addSeries(null,dimple.plot.line);
+                    myChart.draw();
+
+
                 });
             });
 

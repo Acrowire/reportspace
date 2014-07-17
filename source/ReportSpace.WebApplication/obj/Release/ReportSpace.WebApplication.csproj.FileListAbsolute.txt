@@ -59,3 +59,5 @@ P:\github\reportspace\source\ReportSpace.WebApplication\bin\ReportSpace.Data.pdb
 P:\github\reportspace\source\ReportSpace.WebApplication\obj\Release\ReportSpace.WebApplication.csprojResolveAssemblyReference.cache
 P:\github\reportspace\source\ReportSpace.WebApplication\obj\Release\ReportSpace.WebApplication.dll
 P:\github\reportspace\source\ReportSpace.WebApplication\obj\Release\ReportSpace.WebApplication.pdb
+P:\github\reportspace\source\ReportSpace.WebApplication\bin\ReportSpace.PMP.dll
+P:\github\reportspace\source\ReportSpace.WebApplication\bin\ReportSpace.PMP.pdb

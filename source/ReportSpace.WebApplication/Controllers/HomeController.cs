@@ -24,6 +24,7 @@ namespace ReportSpace.WebApplication.Controllers
         }
 
         #region [ Reports ] 
+        [Authorize]
         public ActionResult Report_ClientHours(String ClientName)
         {
             dynamic model = new ExpandoObject();
@@ -34,6 +35,7 @@ namespace ReportSpace.WebApplication.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public JsonResult Report_ClientHoursData(String ClientName)
         {
             PMP.PMPReportAccess reports = new PMP.PMPReportAccess();

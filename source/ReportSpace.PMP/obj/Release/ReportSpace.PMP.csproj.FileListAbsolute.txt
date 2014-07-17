@@ -1,0 +1,9 @@
+P:\github\reportspace\source\ReportSpace.PMP\bin\Release\ReportSpace.PMP.dll
+P:\github\reportspace\source\ReportSpace.PMP\bin\Release\ReportSpace.PMP.pdb
+P:\github\reportspace\source\ReportSpace.PMP\bin\Release\ReportSpace.Core.dll
+P:\github\reportspace\source\ReportSpace.PMP\bin\Release\ReportSpace.Data.dll
+P:\github\reportspace\source\ReportSpace.PMP\bin\Release\ReportSpace.Core.pdb
+P:\github\reportspace\source\ReportSpace.PMP\bin\Release\ReportSpace.Data.pdb
+P:\github\reportspace\source\ReportSpace.PMP\obj\Release\ReportSpace.PMP.csprojResolveAssemblyReference.cache
+P:\github\reportspace\source\ReportSpace.PMP\obj\Release\ReportSpace.PMP.dll
+P:\github\reportspace\source\ReportSpace.PMP\obj\Release\ReportSpace.PMP.pdb
