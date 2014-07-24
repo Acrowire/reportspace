@@ -33,14 +33,20 @@ namespace ReportSpace.WebApplication
 
             bundles.Add(new ScriptBundle("~/bundles/analytics").Include(
                        "~/Scripts/d3.js",
+                       "~/Scripts/numeral.js",
                        "~/Scripts/dimple.v2.0.0.js"));
 
+            /// JavaScript Application Files (Modules)
+            bundles.Add(new ScriptBundle("~/bundles/app").Include(
+                       "~/Scripts/app/report.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/jquery.dataTables.css",
                       "~/Content/font-awesome.css",
                       "~/Content/site.css"));
+
+
         }
     }
 }

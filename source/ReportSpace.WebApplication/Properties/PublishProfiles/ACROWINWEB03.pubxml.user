@@ -76,7 +76,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/16/2014 13:06:21</publishTime>
     </File>
     <File Include="bin/ReportSpace.WebApplication.dll">
-      <publishTime>07/16/2014 19:35:24</publishTime>
+      <publishTime>07/24/2014 10:02:14</publishTime>
     </File>
     <File Include="bin/System.Web.Helpers.dll">
       <publishTime>07/16/2014 09:13:52</publishTime>
@@ -136,7 +136,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/16/2014 13:22:45</publishTime>
     </File>
     <File Include="Content/Site.css">
-      <publishTime>07/16/2014 18:22:38</publishTime>
+      <publishTime>07/21/2014 08:20:05</publishTime>
     </File>
     <File Include="Content/swf/copy_csv_xls.swf">
       <publishTime>07/16/2014 13:30:47</publishTime>
@@ -178,7 +178,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/16/2014 09:13:42</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>07/16/2014 09:13:43</publishTime>
+      <publishTime>07/17/2014 08:39:03</publishTime>
+    </File>
+    <File Include="Scripts/app/report.js">
+      <publishTime>07/24/2014 08:58:09</publishTime>
     </File>
     <File Include="Scripts/bootstrap.js">
       <publishTime>07/16/2014 09:13:42</publishTime>
@@ -240,6 +243,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Scripts/moment.js">
       <publishTime>07/16/2014 12:34:31</publishTime>
     </File>
+    <File Include="Scripts/numeral.js">
+      <publishTime>07/21/2014 08:23:29</publishTime>
+    </File>
     <File Include="Scripts/respond.js">
       <publishTime>07/16/2014 09:13:42</publishTime>
     </File>
@@ -247,7 +253,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/16/2014 09:13:42</publishTime>
     </File>
     <File Include="Scripts/_references.js">
-      <publishTime>07/16/2014 17:48:37</publishTime>
+      <publishTime>07/21/2014 08:31:29</publishTime>
     </File>
     <File Include="swf/copy_csv_xls.swf">
       <publishTime>07/16/2014 17:38:31</publishTime>
@@ -340,10 +346,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/14/2014 15:32:23</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>07/16/2014 18:41:49</publishTime>
+      <publishTime>07/21/2014 08:20:15</publishTime>
     </File>
     <File Include="Views/Home/Report_ClientHours.cshtml">
-      <publishTime>07/16/2014 18:51:45</publishTime>
+      <publishTime>07/24/2014 08:41:54</publishTime>
     </File>
     <File Include="Views/Home/Unauthroized.cshtml">
       <publishTime>07/16/2014 09:13:42</publishTime>
@@ -352,7 +358,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/16/2014 09:13:42</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>07/16/2014 18:22:12</publishTime>
+      <publishTime>07/24/2014 08:41:35</publishTime>
     </File>
     <File Include="Views/Shared/_LoginPartial.cshtml">
       <publishTime>07/16/2014 13:09:57</publishTime>
@@ -364,7 +370,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/16/2014 09:13:42</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>07/16/2014 13:06:28</publishTime>
+      <publishTime>07/17/2014 08:48:10</publishTime>
     </File>
   </ItemGroup>
 </Project>

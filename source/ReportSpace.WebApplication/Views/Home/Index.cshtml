@@ -27,8 +27,8 @@
         string client_name = User.Identity.GetUserOrganization().Name;
         <div class="row" style="padding-left: 10px; padding-right: 10px;">
                 <ul class="list-group">
-                    <li class="list-group-item" style="font-size: large">
-                        <i class="fa fa-bar-chart-o fa-lg pull-left"></i> 
+                    <li class="list-group-item gradient_item" style="font-size: large">
+                        <i class="fa fa-bar-chart-o fa-lg pull-left"></i>
                         @Html.ActionLink("Client Project Hours Report", "Report_ClientHours", new { ClientName = client_name })
                     </li>
                 </ul>
