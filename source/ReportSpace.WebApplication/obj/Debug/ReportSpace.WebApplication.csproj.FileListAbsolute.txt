@@ -19,7 +19,6 @@ G:\reportspace\source\ReportSpace.WebApplication\bin\Owin.dll
 G:\reportspace\source\ReportSpace.WebApplication\bin\ReportSpace.Application.dll
 G:\reportspace\source\ReportSpace.WebApplication\bin\ReportSpace.Bll.dll
 G:\reportspace\source\ReportSpace.WebApplication\bin\ReportSpace.Core.dll
-G:\reportspace\source\ReportSpace.WebApplication\bin\ReportSpace.SSRS.dll
 G:\reportspace\source\ReportSpace.WebApplication\bin\System.Web.Helpers.dll
 G:\reportspace\source\ReportSpace.WebApplication\bin\System.Web.Mvc.dll
 G:\reportspace\source\ReportSpace.WebApplication\bin\System.Web.Optimization.dll
@@ -31,7 +30,6 @@ G:\reportspace\source\ReportSpace.WebApplication\bin\WebGrease.dll
 G:\reportspace\source\ReportSpace.WebApplication\bin\ReportSpace.Application.pdb
 G:\reportspace\source\ReportSpace.WebApplication\bin\ReportSpace.Bll.pdb
 G:\reportspace\source\ReportSpace.WebApplication\bin\ReportSpace.Core.pdb
-G:\reportspace\source\ReportSpace.WebApplication\bin\ReportSpace.SSRS.pdb
 G:\reportspace\source\ReportSpace.WebApplication\bin\System.Web.Helpers.xml
 G:\reportspace\source\ReportSpace.WebApplication\bin\System.Web.Mvc.xml
 G:\reportspace\source\ReportSpace.WebApplication\bin\System.Web.Optimization.xml

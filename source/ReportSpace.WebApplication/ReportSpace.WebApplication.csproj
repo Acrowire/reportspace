@@ -294,10 +294,6 @@
       <Project>{5a537e78-599b-44f5-a350-03ede3d6b59b}</Project>
       <Name>ReportSpace.PMP</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ReportSpace.SSRS\ReportSpace.SSRS.csproj">
-      <Project>{0b2f96cc-5800-4f18-8546-ff3eec0a24e1}</Project>
-      <Name>ReportSpace.SSRS</Name>
-    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
