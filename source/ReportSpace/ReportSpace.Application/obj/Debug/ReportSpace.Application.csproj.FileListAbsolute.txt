@@ -1,4 +1,0 @@
-P:\github\reportspace\source\ReportSpace\ReportSpace.Application\bin\Debug\ReportSpace.Application.dll
-P:\github\reportspace\source\ReportSpace\ReportSpace.Application\bin\Debug\ReportSpace.Application.pdb
-P:\github\reportspace\source\ReportSpace\ReportSpace.Application\obj\Debug\ReportSpace.Application.dll
-P:\github\reportspace\source\ReportSpace\ReportSpace.Application\obj\Debug\ReportSpace.Application.pdb

@@ -7,3 +7,12 @@ P:\github\reportspace\source\ReportSpace.PMP\bin\Debug\ReportSpace.Core.pdb
 P:\github\reportspace\source\ReportSpace.PMP\bin\Debug\ReportSpace.Data.pdb
 P:\github\reportspace\source\ReportSpace.PMP\obj\Debug\ReportSpace.PMP.dll
 P:\github\reportspace\source\ReportSpace.PMP\obj\Debug\ReportSpace.PMP.pdb
+G:\Reportspace\source\ReportSpace.PMP\bin\Debug\ReportSpace.PMP.dll
+G:\Reportspace\source\ReportSpace.PMP\bin\Debug\ReportSpace.PMP.pdb
+G:\Reportspace\source\ReportSpace.PMP\bin\Debug\ReportSpace.Core.dll
+G:\Reportspace\source\ReportSpace.PMP\bin\Debug\ReportSpace.Data.dll
+G:\Reportspace\source\ReportSpace.PMP\bin\Debug\ReportSpace.Core.pdb
+G:\Reportspace\source\ReportSpace.PMP\bin\Debug\ReportSpace.Data.pdb
+G:\Reportspace\source\ReportSpace.PMP\obj\Debug\ReportSpace.PMP.csprojResolveAssemblyReference.cache
+G:\Reportspace\source\ReportSpace.PMP\obj\Debug\ReportSpace.PMP.dll
+G:\Reportspace\source\ReportSpace.PMP\obj\Debug\ReportSpace.PMP.pdb

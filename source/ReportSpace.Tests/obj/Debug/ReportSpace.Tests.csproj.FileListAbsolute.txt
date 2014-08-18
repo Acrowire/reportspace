@@ -1,0 +1,5 @@
+G:\Reportspace\source\ReportSpace.Tests\bin\Debug\ReportSpace.Tests.dll
+G:\Reportspace\source\ReportSpace.Tests\bin\Debug\ReportSpace.Tests.pdb
+G:\Reportspace\source\ReportSpace.Tests\obj\Debug\ReportSpace.Tests.csprojResolveAssemblyReference.cache
+G:\Reportspace\source\ReportSpace.Tests\obj\Debug\ReportSpace.Tests.dll
+G:\Reportspace\source\ReportSpace.Tests\obj\Debug\ReportSpace.Tests.pdb

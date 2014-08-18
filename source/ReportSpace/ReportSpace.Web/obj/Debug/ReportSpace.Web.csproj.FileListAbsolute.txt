@@ -1,1 +1,0 @@
-P:\github\reportspace\source\ReportSpace\ReportSpace.Web\obj\Debug\ReportSpace.Web.csprojResolveAssemblyReference.cache

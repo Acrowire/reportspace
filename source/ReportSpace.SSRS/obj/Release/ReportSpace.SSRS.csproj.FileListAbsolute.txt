@@ -1,7 +1,0 @@
-P:\github\reportspace\source\ReportSpace.SSRS\bin\Release\ReportSpace.SSRS.dll
-P:\github\reportspace\source\ReportSpace.SSRS\bin\Release\ReportSpace.SSRS.pdb
-P:\github\reportspace\source\ReportSpace.SSRS\bin\Release\ReportSpace.Core.dll
-P:\github\reportspace\source\ReportSpace.SSRS\bin\Release\ReportSpace.Core.pdb
-P:\github\reportspace\source\ReportSpace.SSRS\obj\Release\ReportSpace.SSRS.csprojResolveAssemblyReference.cache
-P:\github\reportspace\source\ReportSpace.SSRS\obj\Release\ReportSpace.SSRS.dll
-P:\github\reportspace\source\ReportSpace.SSRS\obj\Release\ReportSpace.SSRS.pdb
