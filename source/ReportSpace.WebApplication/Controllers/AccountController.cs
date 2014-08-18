@@ -344,9 +344,16 @@ namespace ReportSpace.WebApplication.Controllers
 
         private async Task SignInAsync(ApplicationUser user, bool isPersistent)
         {
-            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
+            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+
             var identity = await UserManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie);
-            AuthenticationManager.SignIn(new AuthenticationProperties() { IsPersistent = isPersistent }, identity);
+
+            var properties = new AuthenticationProperties() {
+                ExpiresUtc = (DateTimeOffset.Now).AddMinutes(20),
+                IsPersistent = true
+            };
+
+            AuthenticationManager.SignIn(properties , identity);
         }
 
         private void AddErrors(IdentityResult result)
