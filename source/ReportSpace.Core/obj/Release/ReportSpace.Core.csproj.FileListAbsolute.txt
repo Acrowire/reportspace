@@ -1,5 +1,0 @@
-P:\github\reportspace\source\ReportSpace.Core\bin\Release\ReportSpace.Core.dll
-P:\github\reportspace\source\ReportSpace.Core\bin\Release\ReportSpace.Core.pdb
-P:\github\reportspace\source\ReportSpace.Core\obj\Release\ReportSpace.Core.csprojResolveAssemblyReference.cache
-P:\github\reportspace\source\ReportSpace.Core\obj\Release\ReportSpace.Core.dll
-P:\github\reportspace\source\ReportSpace.Core\obj\Release\ReportSpace.Core.pdb

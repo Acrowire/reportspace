@@ -1,0 +1,17 @@
+source/ReportSpace.Application/bin/
+source/ReportSpace.Application/obj/
+source/ReportSpace.Bll/bin/
+source/ReportSpace.Bll/obj/
+source/ReportSpace.Core/bin/
+source/ReportSpace.Core/obj/
+source/ReportSpace.Dal/bin/
+source/ReportSpace.Dal/obj/
+source/ReportSpace.Data/bin/
+source/ReportSpace.Data/obj/
+source/ReportSpace.PMP/bin/
+source/ReportSpace.PMP/obj/
+source/ReportSpace.Tests/bin/
+source/ReportSpace.Tests/obj/
+source/ReportSpace.WebApplication/bin/
+source/ReportSpace.WebApplication/obj/
+source/ReportSpace.CustomerDashboard.v11.suo
