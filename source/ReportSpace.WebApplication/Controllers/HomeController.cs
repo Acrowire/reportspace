@@ -27,11 +27,11 @@ namespace ReportSpace.WebApplication.Controllers
         [Authorize]
         public ActionResult Report_ClientHours(String ClientName)
         {
-            dynamic model = new ExpandoObject();
-
-            model.Client = ClientName;
-           
-            return View(model);
+            var dic = new Dictionary<string, string>
+                {
+                    {"client", ClientName}
+                };
+            return View(dic);
         }
 
         [HttpGet]

@@ -1,7 +1,11 @@
-﻿@{
+﻿@using System.Dynamic
+@model Dictionary<string,string>
+@{
+    string clientName = Model["client"];
     ViewBag.Title = "Report / Client Hours";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 <style>
     .year_row {
         -webkit-box-shadow: 0px 2px 4px 0px rgba(50, 50, 50, 0.75);
@@ -9,6 +13,7 @@
         box-shadow: 0px 2px 4px 0px rgba(50, 50, 50, 0.75);
     }
 </style>
+
 <h2 class="page-header" style="font-family: 'Titillium Web', sans-serif;">Client Project Hours Report</h2>
 <div class="container-fluid">
     <div class="row">
@@ -45,10 +50,12 @@
     </div>
     
     @section Scripts {
-    @Scripts.Render("~/bundles/app")
-        <script type="text/javascript" src="">
-
+        
+        <script type="text/javascript">
+            window.clientName = '@clientName';
+            var _clientname = '@clientName';
         </script>
+        @Scripts.Render("~/bundles/app")
     }
 
 </div>

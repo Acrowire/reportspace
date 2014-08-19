@@ -1,5 +1,6 @@
 ﻿$(function () {
-    var url = 'Report_ClientHoursData?ClientName=' + 'sunoco';
+    //alert('The clientname: ' + _clientname);
+    var url = 'Report_ClientHoursData?ClientName=' + window.clientName;
     $.get(url, function (data, ts, error) {
         var r = {};
         var ax = [];
