@@ -36,6 +36,7 @@ namespace ReportSpace.Application.Security
         public Guid PublicId
         {
             get { return this.m_public_id; }
+            set { this.m_public_id = value; }
         }
         public string Id
         {

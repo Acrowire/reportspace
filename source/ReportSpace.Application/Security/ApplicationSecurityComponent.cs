@@ -94,7 +94,6 @@ namespace ReportSpace.Application.Security
 
             try
             {
-
                 Bll.Users _user = new Users()
                 {
                     Active = true,
@@ -103,6 +102,8 @@ namespace ReportSpace.Application.Security
                     Username = user.UserName,
                     Passwordhash = user.PasswordHash
                 };
+
+                user.PublicId = _user.Publicid??Guid.Empty;
 
                 if (_user.Exists() == false)
                 {
