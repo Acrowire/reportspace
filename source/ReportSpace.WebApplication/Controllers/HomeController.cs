@@ -34,6 +34,16 @@ namespace ReportSpace.WebApplication.Controllers
             return View(dic);
         }
 
+        [Authorize]
+        public ActionResult Report_WeeklyClientHours(String ClientName)
+        {
+            var dic = new Dictionary<string, string>
+                {
+                    {"client", ClientName}
+                };
+            return View(dic);
+        }
+
         [HttpGet]
         [Authorize]
         public JsonResult Report_ClientHoursData(String ClientName)
@@ -47,10 +57,25 @@ namespace ReportSpace.WebApplication.Controllers
                 OrganizationName = ClientName
             });
 
-
             return new JsonResult()
             {
                 Data = report_data,
+                ContentType = "application/json",
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
+
+        [HttpGet]
+        [Authorize]
+        public JsonResult Report_WeeklyClientHoursData(String ClientName, string weekname)
+        {
+            PMP.PMPReportAccess reports = new PMP.PMPReportAccess();
+
+            List<Hashtable> reportData = reports.WeeklyClientReport(weekname, ClientName);
+
+            return new JsonResult()
+            {
+                Data = reportData,
                 ContentType = "application/json",
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };

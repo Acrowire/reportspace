@@ -14,4 +14,7 @@ source/ReportSpace.Tests/bin/
 source/ReportSpace.Tests/obj/
 source/ReportSpace.WebApplication/bin/
 source/ReportSpace.WebApplication/obj/
+source/ReportSpace.PMPConnector/bin/
+source/ReportSpace.PMPConnector/obj/
 source/ReportSpace.CustomerDashboard.v11.suo
+source/ReportSpace.CustomerDashboard.sln.DotSettings.user

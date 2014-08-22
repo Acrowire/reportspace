@@ -1,6 +1,10 @@
 ﻿$(function () {
-    //alert('The clientname: ' + _clientname);
-    var url = 'Report_ClientHoursData?ClientName=' + window.clientName;
+
+    //alert('Report name: ' + window.ReportName + '?' + window.Clientparams);
+    var url = window.ReportName+'?' + window.Clientparams;
+    //var url = 'Report_WeeklyClientHoursData?ClientName=' + window.clientName + '&weekname=' + window.weekName;
+    //var url = 'Report_ClientHoursData?ClientName=' + window.clientName;
+
     $.get(url, function (data, ts, error) {
         var r = {};
         var ax = [];

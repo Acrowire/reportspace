@@ -52,7 +52,9 @@
     @section Scripts {
         
         <script type="text/javascript">
-            window.clientName = '@clientName';
+            window.ReportName = "Report_ClientHoursData";
+            window.Clientparams = 'ClientName=@clientName';
+            
             var _clientname = '@clientName';
         </script>
         @Scripts.Render("~/bundles/app")

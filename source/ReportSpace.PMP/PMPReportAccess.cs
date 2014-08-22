@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ReportSpace.PMPConnector.Connector;
 
 namespace ReportSpace.PMP
 {
@@ -43,6 +44,27 @@ namespace ReportSpace.PMP
 
             return data;
         }
+
+        public List<Hashtable> WeeklyClientReport(string weekname, string orgName)
+        {
+            List<Hashtable> data = new List<Hashtable>();
+
+            try
+            {
+                var access = DataAccess.Create("pmp");
+                access.CreateProcedureCommand("sp_rpt_weekly_client_project_data");
+                access.AddParameter("@week_name", weekname, System.Data.ParameterDirection.Input);
+                data = access.ExecuteHash();
+            }
+            catch (Exception x)
+            {
+                throw x;
+            }
+
+            return data;
+        }
+
+
         #endregion
     }
 }

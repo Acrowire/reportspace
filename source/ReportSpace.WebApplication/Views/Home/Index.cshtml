@@ -31,6 +31,11 @@
                         <i class="fa fa-bar-chart-o fa-lg pull-left"></i>
                         @Html.ActionLink("Client Project Hours Report", "Report_ClientHours", new { ClientName = client_name })
                     </li>
+                    
+                    <li class="list-group-item gradient_item" style="font-size: large">
+                        <i class="fa fa-bar-chart-o fa-lg pull-left"></i>
+                        @Html.ActionLink("Weekly Client Project Hours Report", "Report_WeeklyClientHours", new { ClientName = client_name })
+                    </li>
                 </ul>
         </div>
     }   
