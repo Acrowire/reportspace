@@ -4,6 +4,7 @@ using System.Dynamic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ReportSpace.PMPConnector.Connector;
 using ReportSpace.WebApplication;
 using ReportSpace.Application;
 using Newtonsoft.Json;
@@ -67,11 +68,11 @@ namespace ReportSpace.WebApplication.Controllers
 
         [HttpGet]
         [Authorize]
-        public JsonResult Report_WeeklyClientHoursData(String ClientName, string weekname)
+        public JsonResult Report_WeeklyClientHoursData(String ClientName, int week, int year)
         {
             PMP.PMPReportAccess reports = new PMP.PMPReportAccess();
 
-            List<Hashtable> reportData = reports.WeeklyClientReport(weekname, ClientName);
+            List<Hashtable> reportData = reports.WeeklyClientReport(week, year, ClientName);
 
             return new JsonResult()
             {
@@ -80,6 +81,23 @@ namespace ReportSpace.WebApplication.Controllers
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }
+
+        [HttpGet]
+        [Authorize]
+        public JsonResult Report_WeekNameData()
+        {
+            var reports = new PMP.PMPReportAccess();
+            List<PmpWeekInfo> reportData = reports.GetAllWeekName();
+
+            return new JsonResult()
+            {
+                Data = reportData,
+                ContentType = "application/json",
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
+
+
         #endregion
     }
 }

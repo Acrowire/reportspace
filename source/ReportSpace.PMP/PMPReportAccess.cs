@@ -45,7 +45,7 @@ namespace ReportSpace.PMP
             return data;
         }
 
-        public List<Hashtable> WeeklyClientReport(string weekname, string orgName)
+        public List<Hashtable> WeeklyClientReport(int week, int year, string clientName)
         {
             List<Hashtable> data = new List<Hashtable>();
 
@@ -53,7 +53,14 @@ namespace ReportSpace.PMP
             {
                 var access = DataAccess.Create("pmp");
                 access.CreateProcedureCommand("sp_rpt_weekly_client_project_data");
-                access.AddParameter("@week_name", weekname, System.Data.ParameterDirection.Input);
+                access.AddParameter("@week", week, System.Data.ParameterDirection.Input);
+                access.AddParameter("@year", year, System.Data.ParameterDirection.Input);
+
+                if (!String.IsNullOrWhiteSpace(clientName))
+                {
+                    access.AddParameter("@projectName", clientName, System.Data.ParameterDirection.Input);
+                }
+
                 data = access.ExecuteHash();
             }
             catch (Exception x)
@@ -64,6 +71,12 @@ namespace ReportSpace.PMP
             return data;
         }
 
+        public List<PmpWeekInfo> GetAllWeekName()
+        {
+            var request = new PmpRequest("http://api.acrowire.com/api/reporting/projectsbyuser/options");
+            var list = request.GetResponse<PmpWeekInfo>();
+            return list;
+        }
 
         #endregion
     }

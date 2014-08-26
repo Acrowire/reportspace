@@ -15,4 +15,14 @@ namespace ReportSpace.PMPConnector.Connector
         public string User_name { get; set; }
         public float Gross_revenue { get; set; }
     }
+
+
+    public class PmpWeekInfo
+    {
+        public int Year { get; set; }
+
+        public string Week_name { get; set; }
+
+        public int Week { get; set; }
+    }
 }

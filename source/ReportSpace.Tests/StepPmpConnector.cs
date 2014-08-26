@@ -70,7 +70,7 @@ namespace ReportSpace.Tests
                         "INSERT INTO vw_project_summary_by_user values('{0}','{1}', {2}, {3}, {4}, {5}, {6} );",
                                                  pmpResource.User_name, pmpResource.Project, pmpResource.Total_hours,
                                                  pmpResource.Billable_hours, pmpResource.Gross_revenue,
-                                                 pmpResource.Direct_labor, "12");
+                                                 pmpResource.Direct_labor, "12" );
                     ctx.Database.ExecuteSqlCommand(query);
                 }
             }
@@ -88,11 +88,14 @@ namespace ReportSpace.Tests
         [When(@"I get the List response (.*)")]
         public void WhenIGetTheListResponse(int p0)
         {
+            int year = 2014;
+
             _list = _request.GetResponse<PmpResource>();
 
             using (SqlConnection openCon = new SqlConnection("Data Source=TXBOJVALDES;Initial Catalog=PmpRepository;User Id=admin;Password=admin;Max Pool Size=100;Pooling=True;"))
             {
                 openCon.Open();
+
                 foreach (var pmpResource in _list)
                 {
                     using (SqlCommand command = new SqlCommand())
@@ -100,14 +103,15 @@ namespace ReportSpace.Tests
                         command.Connection = openCon;            // <== lacking
                         command.CommandType = CommandType.Text;
                         command.CommandText = "INSERT into vw_project_summary_by_user (user_name, project, total_hours, billable_hours, gross_revenue, direct_labor, weekname) " +
-                                              "VALUES (@userName, @project, @total_hours, @billable_hours, @gross_revenue, @direct_labor, @weekname)";
+                                              "VALUES (@userName, @project, @total_hours, @billable_hours, @gross_revenue, @direct_labor, @week, @year)";
                         command.Parameters.AddWithValue("@userName", pmpResource.User_name);
                         command.Parameters.AddWithValue("@project", pmpResource.Project);
                         command.Parameters.AddWithValue("@total_hours", pmpResource.Total_hours);
                         command.Parameters.AddWithValue("@billable_hours", pmpResource.Billable_hours);
                         command.Parameters.AddWithValue("@gross_revenue", pmpResource.Gross_revenue);
                         command.Parameters.AddWithValue("@direct_labor", pmpResource.Direct_labor);
-                        command.Parameters.AddWithValue("@weekname", p0);
+                        command.Parameters.AddWithValue("@week", p0);
+                        command.Parameters.AddWithValue("@year", year);
 
                         int recordsAffected = command.ExecuteNonQuery();
                     }
@@ -124,5 +128,58 @@ namespace ReportSpace.Tests
 
         #endregion
 
+
+        #region
+
+        private int requests;
+        [Given(@"I want to create pmp requests for week (.*) or higher")]
+        public void GivenIWantToCreatePmpRequestsForWeekOrHigher(int p0)
+        {
+            requests = p0;
+        }
+
+
+        [When(@"I get the run the requests")]
+        public void WhenIGetTheRunTheRequests()
+        {
+            int year = 2014;
+
+            for (int i = requests; i < requests + 7; i++)
+            {
+                var request = new PmpRequest("http://api.acrowire.com/api/reporting/projectsbyuser/2014-" + i);
+
+                var list = request.GetResponse<PmpResource>();
+
+                using (SqlConnection openCon = new SqlConnection("Data Source=TXBOJVALDES;Initial Catalog=PmpRepository;User Id=admin;Password=admin;Max Pool Size=100;Pooling=True;"))
+                {
+                    openCon.Open();
+
+                    foreach (var pmpResource in list)
+                    {
+                        using (SqlCommand command = new SqlCommand())
+                        {
+                            command.Connection = openCon;            // <== lacking
+                            command.CommandType = CommandType.Text;
+                            command.CommandText = "INSERT into vw_project_summary_by_user (user_name, project, total_hours, billable_hours, gross_revenue, direct_labor, week, year) " +
+                                                  "VALUES (@userName, @project, @total_hours, @billable_hours, @gross_revenue, @direct_labor, @week, @year)";
+                            command.Parameters.AddWithValue("@userName", pmpResource.User_name);
+                            command.Parameters.AddWithValue("@project", pmpResource.Project);
+                            command.Parameters.AddWithValue("@total_hours", pmpResource.Total_hours);
+                            command.Parameters.AddWithValue("@billable_hours", pmpResource.Billable_hours);
+                            command.Parameters.AddWithValue("@gross_revenue", pmpResource.Gross_revenue);
+                            command.Parameters.AddWithValue("@direct_labor", pmpResource.Direct_labor);
+                            command.Parameters.AddWithValue("@week", i);
+                            command.Parameters.AddWithValue("@year", year);
+
+                            int recordsAffected = command.ExecuteNonQuery();
+                        }
+                    }
+                }
+
+            }
+        }
+
+
+        #endregion
     }
 }

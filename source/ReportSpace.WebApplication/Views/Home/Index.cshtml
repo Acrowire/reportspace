@@ -1,4 +1,6 @@
-﻿@using ReportSpace;
+﻿@Scripts.Render("~/bundles/jquery")
+
+@using ReportSpace;
 @using ReportSpace.WebApplication;
 @using ReportSpace.WebApplication.Extensions;
 @using Microsoft.AspNet.Identity;
@@ -31,12 +33,19 @@
                         <i class="fa fa-bar-chart-o fa-lg pull-left"></i>
                         @Html.ActionLink("Client Project Hours Report", "Report_ClientHours", new { ClientName = client_name })
                     </li>
-                    
-                    <li class="list-group-item gradient_item" style="font-size: large">
-                        <i class="fa fa-bar-chart-o fa-lg pull-left"></i>
-                        @Html.ActionLink("Weekly Client Project Hours Report", "Report_WeeklyClientHours", new { ClientName = client_name })
-                    </li>
+                    <!-- for Centacs client only -->
+                    @if (User.Identity.BelongsToOrganization("Centacs"))
+                    {
+                        <li class="list-group-item gradient_item" style="font-size: large">
+                            <i class="fa fa-bar-chart-o fa-lg pull-left"></i>
+                            @Html.ActionLink("Weekly Client Project Hours Report", "Report_WeeklyClientHours", new { ClientName = client_name })
+                        </li>
+                    }
                 </ul>
         </div>
     }   
 }
+
+
+
+

@@ -43,6 +43,24 @@ namespace ReportSpace.WebApplication.Extensions
             return has_role;
         }
 
+        public static Boolean BelongsToOrganization(this IIdentity identity, string orgName)
+        {
+            Guid publicId = identity.User().PublicId;
+
+            var org = Bll.Organizations.GetAll().FirstOrDefault(x => x.Name.Equals(orgName));
+
+            bool response = false;
+            if (org!=null)
+            {
+                var userOrgs = Bll.Organizationusers.GetAll()
+                                 .Where(u => u.UserPublicId == publicId && u.OrganizationId == org.Id);
+                response = userOrgs.Any();
+            }
+
+            return response;
+        }
+
+
         #region [ Organizations ]
         public static Bll.Organizations GetUserOrganization(this IIdentity identity)
         {

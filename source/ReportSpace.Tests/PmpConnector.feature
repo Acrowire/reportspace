@@ -15,4 +15,8 @@ Scenario: Get data from PMP url
 	Given I create a pmp request for week 14
 	When I get the List response 14
 	Then the response should contain 73 items
-	
+
+Scenario: Set All data
+	Given I want to create pmp requests for week 14 or higher
+	When I get the run the requests
+

@@ -11,7 +11,8 @@ namespace ReportSpace.WebApplication
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js",
                         "~/Scripts/jquery.dataTables.js",
-                        "~/Scripts/dataTables.tableTools.js"
+                        "~/Scripts/dataTables.tableTools.js",
+                        "~/Scripts/dataTables.rowGrouping.js"
                         ));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
