@@ -69,3 +69,23 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 .gradient_action {
 
 }
+
+.tablecontainer {
+    /*border: 1px solid green;*/
+    width: 100%;
+    clear: both;
+    
+}
+
+.tablediv {
+    /*border: 1px solid black;*/
+    float: left;
+    width: 50%;
+}
+
+
+.graphdiv {
+    /*border: 1px solid red;*/
+    float: left;
+    width: 50%;
+}

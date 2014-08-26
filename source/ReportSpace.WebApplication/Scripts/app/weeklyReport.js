@@ -92,8 +92,8 @@ function ShowReport(year, week) {
             "bLengthChange": false,
             "bPaginate": false,
             "bJQueryUI": true,
-            "bDestroy": true,
-            "bAutoWidth": false
+            "bDestroy": true
+            ,"bAutoWidth": false
         }).rowGrouping({
             bExpandableGrouping: true,
             bExpandSingleGroup: false,

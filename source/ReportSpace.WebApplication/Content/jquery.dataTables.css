@@ -2,7 +2,7 @@
  * Table styles
  */
 table.dataTable {
-    width: 100%;
+    width: 90%;
     margin: 0 auto;
     clear: both;
     border-collapse: separate;
@@ -370,8 +370,8 @@ table.dataTable {
     }
 
     .dataTables_wrapper .dataTables_filter {
-        float: right;
-        text-align: right;
+        float: left;
+        text-align: left;
     }
 
         .dataTables_wrapper .dataTables_filter input {
@@ -565,29 +565,32 @@ table.dataTable {
 /**************************/
 
 tr:hover th, tr:hover td {
-    background-color:#ebebeb;
-    background-image:none;
+    background-color: #ebebeb;
+    background-image: none;
 }
-td {
-    height:26px;
-    padding:0px 0px 0px 20px !important;
-    text-align:left;
-    border-bottom:1px solid #d0d0d0;
-    vertical-align:middle;
-    color:#555555;
-    background-color:#ffffff;
 
+td {
+    height: 26px;
+    padding: 0px 0px 0px 20px !important;
+    text-align: left;
+    border-bottom: 1px solid #d0d0d0;
+    vertical-align: middle;
+    color: #555555;
+    background-color: #ffffff;
 }
-td.group {
-    /*background-color: #d5eafd !important;*/
-    background-color: lightgray !important;
-    /*border-bottom: 1px solid #94bafd;    #c0e1ff */  
-    border-bottom: 1px solid darkgrey;
-    border-top: 1px solid darkgrey;
-}
-td.expanded-group {
-    background: url("http://jquery-datatables-row-grouping.googlecode.com/svn/trunk/media/images/minus.jpg") no-repeat scroll left center transparent;
-}
+
+    td.group {
+        /*background-color: #d5eafd !important;*/
+        background-color: lightgray !important;
+        /*border-bottom: 1px solid #94bafd;    #c0e1ff */
+        border-bottom: 1px solid darkgrey;
+        border-top: 1px solid darkgrey;
+    }
+
+    td.expanded-group {
+        background: url("http://jquery-datatables-row-grouping.googlecode.com/svn/trunk/media/images/minus.jpg") no-repeat scroll left center transparent;
+    }
+
 tr:hover td.expanded-group {
     background: url("http://jquery-datatables-row-grouping.googlecode.com/svn/trunk/media/images/minus.jpg") no-repeat scroll left center darkgrey !important;
 }
@@ -595,9 +598,11 @@ tr:hover td.expanded-group {
 td.collapsed-group {
     background: url("http://jquery-datatables-row-grouping.googlecode.com/svn/trunk/media/images/plus.jpg") no-repeat scroll left center transparent;
 }
+
 tr:hover td.collapsed-group {
     background: url("http://jquery-datatables-row-grouping.googlecode.com/svn/trunk/media/images/plus.jpg") no-repeat scroll left center darkgrey !important;
 }
-.DataTables_sort_wrapper span{
+
+.DataTables_sort_wrapper span {
     float: right;
 }
