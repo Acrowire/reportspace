@@ -28,12 +28,15 @@ $(document).on("click", ".group", function (ev) {
         $('#analytics-area').empty();
         return;
     }
+    
+    //collapse all open groups
+    $('.dataTables_wrapper').find('.expanded-group').not($(this)).trigger('click');
+
     $('#analytics-area').empty();
 
-    var text = $(this).text();
+    var text = $(this).attr('data-group');
     var selected = $('#weekselector').find(":selected").text();
     var data = selected.split('-');
-
     var url = 'Report_WeeklyClientHoursData?year=' + data[0] + '&week=' + data[1] + '&ClientName=' + text;
     $.get(url, function (data, ts, error) {
 
@@ -101,13 +104,58 @@ function ShowReport(year, week) {
             asExpandedGroups: [""]
         });
 
-    });
+        //addExpandAllButton();
+        
 
+        /*$('.dataTables_wrapper').find('[id|=group-id]').each(function () {
+            var rowCount = $(this).nextUntil('[id|=group-id]').length;
+            $(this).find('td').append($(' <span />', { 'class': 'rowCount-grid' }).append($('<b />', { 'text':rowCount })));
+        });*/
+        
+    });
 }
+
+
+function addExpandAllButton() {
+    $('.dataTables_wrapper').find('.dataTables_filter').prepend($('<input />', {
+        'type': 'button',
+        'class': 'expandedOrCollapsedGroup collapsed',
+        'value': 'Expand All'
+    }));
+    
+}
+
+$(document).on("click", ".expandedOrCollapsedGroup", function (ev) {
+    if ($(this).hasClass('collapsed')) {
+        $(this).addClass('expanded').removeClass('collapsed').val('Collapse All').parents('.dataTables_wrapper').find('.collapsed-group').trigger('click');
+    }
+    else {
+        $(this).addClass('collapsed').removeClass('expanded').val('Expand All').parents('.dataTables_wrapper').find('.expanded-group').trigger('click');
+    }
+    
+});
+
+
+
+function GridRowCount() {
+    $('span.rowCount-grid').remove();
+    $('input.expandedOrCollapsedGroup').remove();
+
+    $('.dataTables_wrapper').find('[id|=group-id]').each(function () {
+        var rowCount = $(this).nextUntil('[id|=group-id]').length;
+        $(this).find('p').prepend($('<span />', {
+            'class': 'rowCount-grid'
+        }).append($('<b />', {
+            'text': "(" + rowCount + ")"
+        })));
+    });
+}
+
+
 $(document).ready(function () {
     LoadWeekNames();
     //ShowReport(2014,10);
     $('#report_table').dataTable().fnDestroy();
-    
+    //addExpandAllButton();
 });
 
