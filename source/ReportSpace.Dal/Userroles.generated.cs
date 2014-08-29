@@ -1,3 +1,5 @@
+using ReportSpace.Data;
+
 namespace ReportSpace.Dal {
     using System;
     using System.Collections.Generic;
@@ -5,7 +7,6 @@ namespace ReportSpace.Dal {
     using System.Configuration;
     using System.Data;
     using System.Xml;
-    using ReportSpace.Data;
     
     
     public partial class Userroles : IDisposable {
@@ -16,16 +17,16 @@ namespace ReportSpace.Dal {
             this._dataAccess = new DataAccess();
         }
         
-        public virtual System.Data.DataSet Select_UserRoless_By_UserId(System.Nullable<int> UserId) {
-            this._dataAccess.CreateProcedureCommand("sp_Select_UserRoless_By_UserId");
-            this._dataAccess.AddParameter("UserId", UserId, ParameterDirection.Input);
+        public virtual System.Data.DataSet Select_UserRoless_By_RoleId(System.Nullable<int> RoleId) {
+            this._dataAccess.CreateProcedureCommand("sp_Select_UserRoless_By_RoleId");
+            this._dataAccess.AddParameter("RoleId", RoleId, ParameterDirection.Input);
             DataSet value = this._dataAccess.ExecuteDataSet();
             return value;
         }
         
-        public virtual System.Data.DataSet Select_UserRoless_By_RoleId(System.Nullable<int> RoleId) {
-            this._dataAccess.CreateProcedureCommand("sp_Select_UserRoless_By_RoleId");
-            this._dataAccess.AddParameter("RoleId", RoleId, ParameterDirection.Input);
+        public virtual System.Data.DataSet Select_UserRoless_By_UserId(System.Nullable<int> UserId) {
+            this._dataAccess.CreateProcedureCommand("sp_Select_UserRoless_By_UserId");
+            this._dataAccess.AddParameter("UserId", UserId, ParameterDirection.Input);
             DataSet value = this._dataAccess.ExecuteDataSet();
             return value;
         }

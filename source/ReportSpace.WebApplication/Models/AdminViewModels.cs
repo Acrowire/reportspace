@@ -98,4 +98,31 @@ namespace ReportSpace.WebApplication.Models
         public bool Active { get; set; }  
     }
     #endregion
+
+
+    #region
+
+    public class ReportViewModel
+    {
+        public Guid PublicId { get; set; }
+
+        [Required]
+        [Display(Name = "Name")]
+        public string Name { get; set; }
+
+        [Required]
+        [Display(Name = "Controller")]
+        public string Controller { get; set; }
+
+        [Required]
+        [Display(Name = "Action")]
+        public string Action { get; set; }
+
+
+        [Required]
+        [Display(Name = "Organization")]
+        public int OrganizationId { get; set; }
+    }
+
+    #endregion
 }

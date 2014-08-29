@@ -9,9 +9,9 @@ GO
 CREATE DATABASE [ReportSpace]
  CONTAINMENT = NONE
  ON  PRIMARY 
-( NAME = N'ReportSpace', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL11.MSSQLSERVER\MSSQL\DATA\ReportSpace.mdf' , SIZE = 3072KB , MAXSIZE = UNLIMITED, FILEGROWTH = 1024KB )
+( NAME = N'ReportSpace', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL11.MSSQLSERVER\MSSQL\DATA\ReportSpace.mdf' , SIZE = 4MB , MAXSIZE = UNLIMITED, FILEGROWTH = 1024KB )
  LOG ON 
-( NAME = N'ReportSpace_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL11.MSSQLSERVER\MSSQL\DATA\ReportSpace_log.ldf' , SIZE = 1536KB , MAXSIZE = 2048GB , FILEGROWTH = 10%)
+( NAME = N'ReportSpace_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL11.MSSQLSERVER\MSSQL\DATA\ReportSpace_log.ldf' , SIZE = 4MB , MAXSIZE = 2048GB , FILEGROWTH = 10%)
 GO
 
 ALTER DATABASE [ReportSpace] ADD FILEGROUP [INDEX]
@@ -913,3 +913,73 @@ REFERENCES [dbo].[Users] ([Id])
 GO
 ALTER TABLE [dbo].[UserRoles] CHECK CONSTRAINT [FK_UserRoles_Users]
 GO
+
+
+
+/****** Object:  Table [dbo].[Reports]    Script Date: 8/28/2014 12:20:24 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[Reports](
+	[Id] [int]  IDENTITY(1,1) NOT NULL,
+	[OrganizationId] [int] NOT NULL,
+	[PublicId] [uniqueidentifier] NOT NULL,
+	[Name] [varchar](50) NOT NULL,
+	[Controller] [varchar](50) NOT NULL,
+	[Action] [varchar](50) NOT NULL,
+ CONSTRAINT [PK_Reports] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+ALTER TABLE [dbo].[Reports]  WITH CHECK ADD  CONSTRAINT [FK_Reports_Organization] FOREIGN KEY([OrganizationId])
+REFERENCES [dbo].[Organizations] ([Id])
+GO
+ALTER TABLE [dbo].[Reports] CHECK CONSTRAINT [FK_Reports_Organization]
+GO
+
+
+/****** Object:  Table [dbo].[UserReports]    Script Date: 8/28/2014 12:20:42 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[UserReports](
+	[Id] [int]  IDENTITY(1,1) NOT NULL,
+	[UserId] [int] NOT NULL,
+	[ReportId] [int] NOT NULL,
+ CONSTRAINT [PK_UserReports] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+ALTER TABLE [dbo].[UserReports]  WITH CHECK ADD  CONSTRAINT [FK_UserReports_Reports] FOREIGN KEY([ReportId])
+REFERENCES [dbo].[Reports] ([Id])
+GO
+
+ALTER TABLE [dbo].[UserReports] CHECK CONSTRAINT [FK_UserReports_Reports]
+GO
+
+ALTER TABLE [dbo].[UserReports]  WITH CHECK ADD  CONSTRAINT [FK_UserReports_Users] FOREIGN KEY([UserId])
+REFERENCES [dbo].[Users] ([Id])
+GO
+
+ALTER TABLE [dbo].[UserReports] CHECK CONSTRAINT [FK_UserReports_Users]
+GO
+

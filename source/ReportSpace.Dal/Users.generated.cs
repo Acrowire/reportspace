@@ -1,3 +1,5 @@
+using ReportSpace.Data;
+
 namespace ReportSpace.Dal {
     using System;
     using System.Collections.Generic;
@@ -5,7 +7,6 @@ namespace ReportSpace.Dal {
     using System.Configuration;
     using System.Data;
     using System.Xml;
-    using ReportSpace.Data;
     
     
     public partial class Users : IDisposable {

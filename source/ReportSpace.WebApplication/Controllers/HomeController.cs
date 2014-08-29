@@ -16,7 +16,14 @@ namespace ReportSpace.WebApplication.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            Nullable<int> id = 12;
+            Bll.UserreportsCollection useReports = Bll.Userreports.Select_UserReportss_By_UserId(id);
+
+            var list = useReports.Select(x => x.Reports).ToList();
+
+            Console.WriteLine(" [{0}] ", list.Count);
+
+            return View(list);
         }
 
         public ActionResult Unauthroized()
@@ -92,6 +99,24 @@ namespace ReportSpace.WebApplication.Controllers
             return new JsonResult()
             {
                 Data = reportData,
+                ContentType = "application/json",
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
+
+
+        [HttpGet]
+        [Authorize]
+        public JsonResult Report_GetAssignedByUser()
+        {
+            Nullable<int> id = 0;
+            Bll.UserreportsCollection useReports = Bll.Userreports.Select_UserReportss_By_UserId(id);
+
+            var list = useReports.Select(x => x.Reports).ToList();
+
+            return new JsonResult()
+            {
+                Data = list,
                 ContentType = "application/json",
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };

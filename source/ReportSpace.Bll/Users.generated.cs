@@ -15,6 +15,10 @@ namespace ReportSpace.Bll {
         
         private string _passwordhash;
         
+        private OrganizationusersCollection _organizationusersCollection;
+        
+        private UserreportsCollection _userreportsCollection;
+        
         private UserrolesCollection _userrolesCollection;
         
         public virtual System.Nullable<int> Id {
@@ -71,10 +75,28 @@ namespace ReportSpace.Bll {
             }
         }
         
+        public virtual OrganizationusersCollection OrganizationusersCollection {
+            get {
+                if ((this._organizationusersCollection == null)) {
+                    _organizationusersCollection = ReportSpace.Bll.Organizationusers.Select_OrganizationUserss_By_UserId(this.Id);
+                }
+                return this._organizationusersCollection;
+            }
+        }
+        
+        public virtual UserreportsCollection UserreportsCollection {
+            get {
+                if ((this._userreportsCollection == null)) {
+                    _userreportsCollection = ReportSpace.Bll.Userreports.Select_UserReportss_By_UserId(this.Id);
+                }
+                return this._userreportsCollection;
+            }
+        }
+        
         public virtual UserrolesCollection UserrolesCollection {
             get {
                 if ((this._userrolesCollection == null)) {
-                    _userrolesCollection = ReportSpace.Bll.Userroles.Select_UserRoless_By_RoleId(this.Id);
+                    _userrolesCollection = ReportSpace.Bll.Userroles.Select_UserRoless_By_UserId(this.Id);
                 }
                 return this._userrolesCollection;
             }
@@ -87,6 +109,8 @@ namespace ReportSpace.Bll {
             this.Email = string.Empty;
             this.Active = null;
             this.Passwordhash = string.Empty;
+            this._organizationusersCollection = null;
+            this._userreportsCollection = null;
             this._userrolesCollection = null;
         }
         

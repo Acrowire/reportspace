@@ -36,7 +36,7 @@ namespace ReportSpace.Bll {
         public virtual Roles Roles {
             get {
                 if ((this._roles == null)) {
-                    this._roles = ReportSpace.Bll.Roles.Load(this._userid);
+                    this._roles = ReportSpace.Bll.Roles.Load(this._roleid);
                 }
                 return this._roles;
             }
@@ -48,7 +48,7 @@ namespace ReportSpace.Bll {
         public virtual Users Users {
             get {
                 if ((this._users == null)) {
-                    this._users = ReportSpace.Bll.Users.Load(this._roleid);
+                    this._users = ReportSpace.Bll.Users.Load(this._userid);
                 }
                 return this._users;
             }

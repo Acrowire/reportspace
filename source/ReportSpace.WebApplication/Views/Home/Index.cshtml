@@ -1,4 +1,5 @@
 ﻿@Scripts.Render("~/bundles/jquery")
+@model IEnumerable<ReportSpace.Bll.Reports>
 
 @using ReportSpace;
 @using ReportSpace.WebApplication;
@@ -29,22 +30,31 @@
         string client_name = User.Identity.GetUserOrganization().Name;
         <div class="row" style="padding-left: 10px; padding-right: 10px;">
                 <ul class="list-group">
-                    <li class="list-group-item gradient_item" style="font-size: large">
-                        <i class="fa fa-bar-chart-o fa-lg pull-left"></i>
-                        @Html.ActionLink("Client Project Hours Report", "Report_ClientHours", new { ClientName = client_name })
-                    </li>
-                    <!-- for Centacs client only -->
-                    @if (User.Identity.BelongsToOrganization("Centacs"))
+                    @foreach (var report in Model )
                     {
                         <li class="list-group-item gradient_item" style="font-size: large">
                             <i class="fa fa-bar-chart-o fa-lg pull-left"></i>
-                            @Html.ActionLink("Weekly Client Project Hours Report", "Report_WeeklyClientHours", new { ClientName = client_name })
+                            @Html.ActionLink(report.Name, 
+                            report.Action, report.Controller, 
+                            new { ClientName = client_name }, new{})
                         </li>
                     }
+
                 </ul>
         </div>
     }   
 }
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        
+
+
+    });
+
+
+
+</script>
 
 
 

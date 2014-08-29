@@ -2,6 +2,7 @@
 using Microsoft.AspNet.Identity;
 using ReportSpace.Application.Security;
 using ReportSpace.Application.Security;
+using ReportSpace.Bll;
 using ReportSpace.WebApplication.Controllers.Attributes;
 using ReportSpace.WebApplication.Models;
 using ReportSpace.WebApplication.Models;
@@ -327,6 +328,7 @@ namespace ReportSpace.WebApplication.Controllers
             return View(model);
         }
 
+       
         [HttpGet]
         public ActionResult NewOrg()
         {

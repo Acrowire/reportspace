@@ -295,6 +295,163 @@ END
 GO
 
 
+-- The %D% at %T% :Reports
+-- 6 stored procedures to generate.
+
+
+if exists (select * from sys.objects where ([type] = 'P' and [name]='sp_Select_Reportss_By_OrganizationId'))
+drop procedure sp_Select_Reportss_By_OrganizationId
+
+
+GO
+
+
+Create Procedure sp_Select_Reportss_By_OrganizationId
+(
+@OrganizationId int
+)
+AS
+BEGIN
+    SELECT [Id],[OrganizationId],[PublicId],[Name],[Controller],[Action]
+    FROM [dbo].[Reports]
+    WHERE
+        [OrganizationId]=@OrganizationId
+END
+
+GO
+
+
+if exists (select * from sys.objects where ([type] = 'P' and [name]='sp_Reports_Select_All'))
+drop procedure sp_Reports_Select_All
+
+
+GO
+
+
+Create Procedure sp_Reports_Select_All
+AS
+BEGIN
+    SELECT [Id],[OrganizationId],[PublicId],[Name],[Controller],[Action]
+    FROM [dbo].[Reports]
+END
+
+GO
+
+
+if exists (select * from sys.objects where ([type] = 'P' and [name]='sp_Reports_Select_One'))
+drop procedure sp_Reports_Select_One
+
+
+GO
+
+
+Create Procedure sp_Reports_Select_One
+(
+@Id int
+)
+AS
+BEGIN
+    SELECT [Id],[OrganizationId],[PublicId],[Name],[Controller],[Action]
+    FROM [dbo].[Reports]
+    WHERE
+        [Id]=@Id
+END
+
+GO
+
+
+if exists (select * from sys.objects where ([type] = 'P' and [name]='sp_Reports_Insert'))
+drop procedure sp_Reports_Insert
+
+
+GO
+
+
+Create Procedure sp_Reports_Insert
+(
+@OrganizationId int,
+@PublicId uniqueidentifier,
+@Name varchar(50),
+@Controller varchar(50),
+@Action varchar(50)
+)
+AS
+BEGIN
+    INSERT INTO [dbo].[Reports]
+    (
+        [OrganizationId],
+[PublicId],
+[Name],
+[Controller],
+[Action]
+    )
+    VALUES
+    (
+        @OrganizationId,
+@PublicId,
+@Name,
+@Controller,
+@Action
+
+    )
+    Select @@identity;
+END
+
+GO
+
+
+if exists (select * from sys.objects where ([type] = 'P' and [name]='sp_Reports_Delete'))
+drop procedure sp_Reports_Delete
+
+
+GO
+
+
+Create Procedure sp_Reports_Delete
+(
+@Id int
+)
+AS
+BEGIN
+    DELETE FROM [dbo].[Reports]
+    WHERE
+        [Id]=@Id
+END
+
+GO
+
+
+if exists (select * from sys.objects where ([type] = 'P' and [name]='sp_Reports_Update'))
+drop procedure sp_Reports_Update
+
+
+GO
+
+
+Create Procedure sp_Reports_Update
+(
+@Id int,
+@OrganizationId int,
+@PublicId uniqueidentifier,
+@Name varchar(50),
+@Controller varchar(50),
+@Action varchar(50)
+)
+AS
+BEGIN
+    UPDATE [dbo].[Reports]
+    SET
+        [OrganizationId]=@OrganizationId,
+        [PublicId]=@PublicId,
+        [Name]=@Name,
+        [Controller]=@Controller,
+        [Action]=@Action
+WHERE        [Id]=@Id
+END
+
+GO
+
+
 -- The %D% at %T% :Roles
 -- 5 stored procedures to generate.
 
@@ -414,6 +571,170 @@ BEGIN
         [PublicId]=@PublicId,
         [Name]=@Name,
         [Active]=@Active
+WHERE        [Id]=@Id
+END
+
+GO
+
+
+-- The %D% at %T% :UserReports
+-- 7 stored procedures to generate.
+
+
+if exists (select * from sys.objects where ([type] = 'P' and [name]='sp_Select_UserReportss_By_ReportId'))
+drop procedure sp_Select_UserReportss_By_ReportId
+
+
+GO
+
+
+Create Procedure sp_Select_UserReportss_By_ReportId
+(
+@ReportId int
+)
+AS
+BEGIN
+    SELECT [Id],[UserId],[ReportId]
+    FROM [dbo].[UserReports]
+    WHERE
+        [ReportId]=@ReportId
+END
+
+GO
+
+
+if exists (select * from sys.objects where ([type] = 'P' and [name]='sp_Select_UserReportss_By_UserId'))
+drop procedure sp_Select_UserReportss_By_UserId
+
+
+GO
+
+
+Create Procedure sp_Select_UserReportss_By_UserId
+(
+@UserId int
+)
+AS
+BEGIN
+    SELECT [Id],[UserId],[ReportId]
+    FROM [dbo].[UserReports]
+    WHERE
+        [UserId]=@UserId
+END
+
+GO
+
+
+if exists (select * from sys.objects where ([type] = 'P' and [name]='sp_UserReports_Select_All'))
+drop procedure sp_UserReports_Select_All
+
+
+GO
+
+
+Create Procedure sp_UserReports_Select_All
+AS
+BEGIN
+    SELECT [Id],[UserId],[ReportId]
+    FROM [dbo].[UserReports]
+END
+
+GO
+
+
+if exists (select * from sys.objects where ([type] = 'P' and [name]='sp_UserReports_Select_One'))
+drop procedure sp_UserReports_Select_One
+
+
+GO
+
+
+Create Procedure sp_UserReports_Select_One
+(
+@Id int
+)
+AS
+BEGIN
+    SELECT [Id],[UserId],[ReportId]
+    FROM [dbo].[UserReports]
+    WHERE
+        [Id]=@Id
+END
+
+GO
+
+
+if exists (select * from sys.objects where ([type] = 'P' and [name]='sp_UserReports_Insert'))
+drop procedure sp_UserReports_Insert
+
+
+GO
+
+
+Create Procedure sp_UserReports_Insert
+(
+@UserId int,
+@ReportId int
+)
+AS
+BEGIN
+    INSERT INTO [dbo].[UserReports]
+    (
+        [UserId],
+[ReportId]
+    )
+    VALUES
+    (
+        @UserId,
+@ReportId
+
+    )
+    Select @@identity;
+END
+
+GO
+
+
+if exists (select * from sys.objects where ([type] = 'P' and [name]='sp_UserReports_Delete'))
+drop procedure sp_UserReports_Delete
+
+
+GO
+
+
+Create Procedure sp_UserReports_Delete
+(
+@Id int
+)
+AS
+BEGIN
+    DELETE FROM [dbo].[UserReports]
+    WHERE
+        [Id]=@Id
+END
+
+GO
+
+
+if exists (select * from sys.objects where ([type] = 'P' and [name]='sp_UserReports_Update'))
+drop procedure sp_UserReports_Update
+
+
+GO
+
+
+Create Procedure sp_UserReports_Update
+(
+@Id int,
+@UserId int,
+@ReportId int
+)
+AS
+BEGIN
+    UPDATE [dbo].[UserReports]
+    SET
+        [UserId]=@UserId,
+        [ReportId]=@ReportId
 WHERE        [Id]=@Id
 END
 
