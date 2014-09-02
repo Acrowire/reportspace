@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Reports List</h2>
+<h2>Reports</h2>
 
 <p>
     @Html.ActionLink("Create New", "CreateReport")
@@ -13,9 +13,10 @@
     <thead>
         <tr>
             <td>Name</td>
+            <td>Organization</td>
             <td>Controller</td>
             <td>Action</td>
-            <td>Organization</td>
+            
             <td>Edit</td>
             <td>Delete</td>
         </tr>
@@ -28,13 +29,13 @@
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
                 <td>
+                    @Html.DisplayFor(modelItem => item.Organizations.Name)
+                </td>
+                <td>
                     @Html.DisplayFor(modelItem => item.Controller)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Action)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Organizations.Name)
                 </td>
                 <td>@Html.ActionLink("Edit", "EditReport", new { PublicId = item.Publicid })</td>
                 <td>@Html.ActionLink("Delete", "DeleteReport", new { PublicId = item.Publicid })</td>
@@ -42,3 +43,6 @@
         }
 
 </table>
+<div>
+    @Html.ActionLink("Back to Menu", "Index", "Admin")
+</div>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace ReportSpace.Bll {
     
@@ -247,7 +248,14 @@ namespace ReportSpace.Bll {
         
         public virtual void Delete() {
             ReportSpace.Dal.Reports dbo = null;
-            try {
+            try
+            {
+                var list =  Bll.UserreportsCollection.GetAllByReportId(this.Id.Value);
+                foreach (var item in list)
+                {
+                    item.Delete();
+                }
+                
                 dbo = new ReportSpace.Dal.Reports();
                 dbo.Reports_Delete(this.Id);
             }

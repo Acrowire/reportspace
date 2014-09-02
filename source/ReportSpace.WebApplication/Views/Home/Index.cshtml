@@ -1,4 +1,4 @@
-﻿@Scripts.Render("~/bundles/jquery")
+﻿
 @model IEnumerable<ReportSpace.Bll.Reports>
 
 @using ReportSpace;
@@ -9,6 +9,9 @@
 @{
     ViewBag.Title = "Home Page";
 }
+
+<link href="~/Scripts/jsTree3/themes/default/style.css" rel="stylesheet" />
+<script src="~/Scripts/jsTree3/jstree.js"></script>
 
 <div class="jumbotron">
     <div class="row text-center">
@@ -44,18 +47,3 @@
         </div>
     }   
 }
-
-<script type="text/javascript">
-    $(document).ready(function () {
-        
-
-
-    });
-
-
-
-</script>
-
-
-
-

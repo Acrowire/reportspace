@@ -4,10 +4,13 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using ReportSpace.Bll;
+using ReportSpace.WebApplication.Controllers.Attributes;
+using ReportSpace.WebApplication.Extensions;
 using ReportSpace.WebApplication.Models;
 
 namespace ReportSpace.WebApplication.Controllers
 {
+    [ApplicationAuthorize(Roles = "Admin")]
     public class ReportsController : Controller
     {
         public ActionResult ReportsList()
@@ -96,11 +99,47 @@ namespace ReportSpace.WebApplication.Controllers
             return RedirectToAction("ReportsList", "Reports");
         }
 
-        public ActionResult UpdateUserReports()
+        public ActionResult ShowUserList()
         {
+            var users = Bll.Users.GetAll();
 
-            return View();
+            return View(users);
         }
 
+        public ActionResult UpdateUserReports(int userid)
+        {
+            var  response = new Dictionary<Organizations, ReportsCollection>();
+
+            var orgUser = Bll.Organizationusers.Select_OrganizationUserss_By_UserId(userid);
+            var list = orgUser.Select(x => x.Organizations);
+
+            foreach (var org in list)
+            {
+                var reports = Bll.Reports.Select_Reportss_By_OrganizationId(org.Id);
+                response.Add(org,reports);
+            }
+
+            var user = Bll.Users.GetById(userid);
+            var userReports = Bll.UserreportsCollection.GetAllByUserId(user.Id.Value);
+
+            ViewBag.UserReports = userReports.Select( x => x.ReportId ).ToList();
+            ViewBag.Userid = user.Publicid;
+            return View(response);
+        }
+
+        [HttpPost]
+        public ActionResult UpdateUserReports(FormCollection collection)
+        {
+            var userId = collection["UserPublicid"];
+
+            var value = collection["selectedcheckboxes"];
+            var list =  value.Split(',');
+            var idReports = list.Select(str => str.Replace("rep_", "")).Select(id => Int32.Parse(id)).ToList();
+            var user = Bll.Users.GetById(Guid.Parse(userId));
+
+            Bll.Userreports.AddUpdateReports(user.Id.Value, idReports);
+
+            return RedirectToAction("ShowUserList", "Reports");
+        }
     }
 }

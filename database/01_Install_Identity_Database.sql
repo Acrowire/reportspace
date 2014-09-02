@@ -1,3 +1,5 @@
+--OLD
+
 USE [master]
 GO
 
@@ -591,6 +593,7 @@ ALTER TABLE [dbo].[UserRoles] CHECK CONSTRAINT [FK_UserRoles_Users]
 GO
 
 
+
 ----------------------------------------------------------------------
 -- CREATE ROLES 
 ----------------------------------------------------------------------
@@ -628,7 +631,5 @@ EXECUTE [dbo].[sp_UserRoles_Insert]
   ,@UserID
   ,1
 GO
-
-
 
 

@@ -73,5 +73,27 @@ namespace ReportSpace.Bll {
 
             return user;
         }
+
+        public static Users GetById(int id)
+        {
+            Users user = new Users();
+
+            try
+            {
+                var results = Users.GetAll()
+                            .Where(u => u.Id == id && u.Active == true);
+
+                if (results.Any())
+                {
+                    user = results.First();
+                }
+            }
+            catch (Exception x)
+            {
+                throw x;
+            }
+
+            return user;
+        }
     }
 }

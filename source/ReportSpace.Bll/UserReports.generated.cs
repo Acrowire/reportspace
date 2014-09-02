@@ -1,4 +1,6 @@
-﻿namespace ReportSpace.Bll {
+﻿using System.Collections.Generic;
+
+namespace ReportSpace.Bll {
     
     
     public partial class Userreports {
@@ -169,6 +171,26 @@
                 if ((dbo != null)) {
                     dbo.Dispose();
                 }
+            }
+        }
+
+
+        public static void AddUpdateReports(int idUser, List<int> idReports)
+        {
+            var user = Users.Load(idUser);
+
+            var list =  ReportSpace.Bll.Userreports.Select_UserReportss_By_UserId(idUser);
+            foreach (var uReport in list)
+            {
+                uReport.Delete();
+            }
+
+            foreach (var idReport in idReports)
+            {
+                var report = Reports.Load(idReport);
+
+                Bll.Userreports uReport = new Userreports();
+                uReport.Create(report, user);
             }
         }
         

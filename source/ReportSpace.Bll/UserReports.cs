@@ -65,6 +65,5 @@ namespace ReportSpace.Bll
             get { return this._reportid.Value; }
         }
 
-
     }
 }

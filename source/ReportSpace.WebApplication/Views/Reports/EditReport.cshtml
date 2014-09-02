@@ -12,7 +12,7 @@
     selectedItem.Selected = true;
 }
 
-<h2>EditReport</h2>
+<h2>Edit Report</h2>
 
 
 @using (Html.BeginForm()) 
@@ -20,7 +20,6 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>New Report View Model</h4>
         <hr />
         @Html.ValidationSummary(true)
 
@@ -58,16 +57,23 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Edit" class="btn btn-default" />
+                <input id="cancel" type="button" name="cancel" value="Cancel" class="btn btn-default"/>
             </div>
         </div>
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "ReportsList")
-</div>
-
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
+
 }
+<script type="text/javascript">
+    $("#cancel").on("click", function (event) {
+        var url = '@Url.Action("ReportsList", "Reports", new { })';
+         window.location.href = url;
+     });
+</script>
+
+

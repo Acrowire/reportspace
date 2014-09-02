@@ -89,3 +89,27 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
     float: left;
     width: 50%;
 }
+
+
+.treediv {
+    width: 20%; /*SET your width here*/
+    margin: 0 auto;
+    text-align: left;
+    /*border: 1px solid;*/
+}
+
+.divcenter {
+    margin: 0 auto;
+    text-align: left;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.div150px {
+    width: 150px
+}
+
+.div250px {
+    width: 250px
+}
+

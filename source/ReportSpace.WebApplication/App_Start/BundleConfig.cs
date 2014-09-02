@@ -9,7 +9,9 @@ namespace ReportSpace.WebApplication
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js",
+                        "~/Scripts/jquery-{version}.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/jquerydatatables").Include(
                         "~/Scripts/jquery.dataTables.js",
                         "~/Scripts/dataTables.tableTools.js",
                         "~/Scripts/dataTables.rowGrouping.js"
@@ -41,11 +43,17 @@ namespace ReportSpace.WebApplication
             bundles.Add(new ScriptBundle("~/bundles/app").Include(
                        "~/Scripts/app/report.js"));
 
+            /// JavaScript Application Files (Modules)
+            bundles.Add(new ScriptBundle("~/bundles/jsTree3").Include(
+                       "~/Scripts/jsTree3/jstree.js"));
+
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/jquery.dataTables.css",
                       "~/Content/font-awesome.css",
                       "~/Content/site.css"));
+
 
 
         }
