@@ -168,7 +168,6 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdminViewModels.cs" />
-    <Compile Include="Models\jsTree3Node.cs" />
     <Compile Include="Models\OrganizationViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />

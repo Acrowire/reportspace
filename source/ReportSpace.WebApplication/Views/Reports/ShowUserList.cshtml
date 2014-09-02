@@ -12,6 +12,7 @@ Select the user you want to assign reports
     <thead>
         <tr>
             <td>Name</td>
+            <td>Organizations </td>
             <td>Email</td>
             <td>Edit</td>
         </tr>
@@ -22,6 +23,9 @@ Select the user you want to assign reports
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Username)
+            </td>
+            <td>
+                @string.Join(", ", item.OrganizationusersCollection.Select( x => x.Organizations.Name)) 
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Email)
