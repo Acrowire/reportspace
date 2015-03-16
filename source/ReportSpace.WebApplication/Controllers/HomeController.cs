@@ -52,6 +52,11 @@ namespace ReportSpace.WebApplication.Controllers
             return View(dic);
         }
 
+        /// <summary>
+        /// Fixed to allow for proper Year to Date Logic
+        /// </summary>
+        /// <param name="ClientName"></param>
+        /// <returns></returns>
         [HttpGet]
         [Authorize]
         public JsonResult Report_ClientHoursData(String ClientName)
