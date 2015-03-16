@@ -60,7 +60,7 @@ namespace ReportSpace.WebApplication.Controllers
 
             List<Hashtable> report_data = reports.ClientHoursReport(new PMP.OrganizationReportParameters()
             {
-                StartDate = DateTime.Parse("01/01/2014"),
+                StartDate = DateTime.Parse(String.Format("01/01/{0}", DateTime.Now.Year)),
                 EndDate = DateTime.Now,
                 OrganizationName = ClientName
             });
