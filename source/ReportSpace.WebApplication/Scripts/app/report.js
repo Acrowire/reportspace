@@ -162,7 +162,7 @@
             ordering: false,
             TableTools: {
                 "sSwfPath": "swf/copy_csv_xls.swf",
-                "sSwfPath": "http://localhost:21775/Content/swf/copy_csv_xls_pdf.swf"
+                "sSwfPath": "Content/swf/copy_csv_xls_pdf.swf"
             }
         });
 
@@ -172,7 +172,7 @@
         myChart.setBounds("10%,10", "10%,1", 320, 320);
         var x = myChart.addCategoryAxis("x", "month");
         x.lineMarkers = true;
-        x.addOrderRule(["January", "Febuary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]);
+        x.addOrderRule(["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]);
         myChart.addMeasureAxis("y", "hours");
         var s = myChart.addSeries(null, dimple.plot.line);
         myChart.draw();

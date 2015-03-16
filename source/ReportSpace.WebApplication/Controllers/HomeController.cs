@@ -9,6 +9,7 @@ using ReportSpace.WebApplication;
 using ReportSpace.Application;
 using Newtonsoft.Json;
 using System.Collections;
+using ReportSpace.Application.Security;
 
 namespace ReportSpace.WebApplication.Controllers
 {
@@ -16,8 +17,7 @@ namespace ReportSpace.WebApplication.Controllers
     {
         public ActionResult Index()
         {
-            Nullable<int> id = 12;
-            Bll.UserreportsCollection useReports = Bll.Userreports.Select_UserReportss_By_UserId(id);
+            Bll.UserreportsCollection useReports = Bll.Userreports.Select_UserReportss_By_UserId(Bll.Users.GetByUserName(User.Identity.Name).Id);
 
             var list = useReports.Select(x => x.Reports).ToList();
 
